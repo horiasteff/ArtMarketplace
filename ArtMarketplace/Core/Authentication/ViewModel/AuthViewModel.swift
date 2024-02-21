@@ -9,6 +9,10 @@ import Foundation
 import Firebase
 import FirebaseFirestoreSwift
 
+protocol AuthenticationFormProtocol {
+    var formIsValid: Bool {get}
+}
+
 class AuthViewModel: ObservableObject {
     
     @Published var userSession: FirebaseAuth.User?
@@ -51,6 +55,7 @@ class AuthViewModel: ObservableObject {
             try Auth.auth().signOut()
             self.userSession = nil
             self.currentUser = nil
+            print("I just signed out")
         } catch {
             print ("DEBUG: Failed to sign out with error \(error.localizedDescription)")
         }
