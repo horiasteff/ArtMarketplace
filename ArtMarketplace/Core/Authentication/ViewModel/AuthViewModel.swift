@@ -31,8 +31,7 @@ class AuthViewModel: ObservableObject {
             let result = try await Auth.auth().signIn(withEmail: email, password: password)
             self.userSession = result.user
             await fetchUser()
-            
-        }catch {
+        } catch {
             print("DEBUG: Failed to log in with error \(error.localizedDescription)")
         }
     }
@@ -66,12 +65,29 @@ class AuthViewModel: ObservableObject {
     }
     
     func fetchUser() async{
-        guard let uid = Auth.auth().currentUser?.uid else { return }
+//        guard let uid = Auth.auth().currentUser?.uid else { return }
+//        
+//        guard let snapshot = try? await Firestore.firestore().collection("users").document(uid).getDocument() else { return }
+//        self.currentUser = try? snapshot.data(as: User.self)
+//        
+//        print("Debug the current user is \(String(describing: self.currentUser))")
         
-        guard let snapshot = try? await Firestore.firestore().collection("users").document(uid).getDocument() else { return }
-        self.currentUser = try? snapshot.data(as: User.self)
         
-        print("Debug the current usier is \(String(describing: self.currentUser))")
+        guard let uid = Auth.auth().currentUser?.uid else {
+                    self.currentUser = nil // Set currentUser to nil when there's no active user
+                    return
+                }
+                
+                do {
+                    let snapshot = try await Firestore.firestore().collection("users").document(uid).getDocument()
+                    if let user = try? snapshot.data(as: User.self) {
+                        self.currentUser = user
+                        print("Debug the current user is \(String(describing: self.currentUser))")
+                    }
+                } catch {
+                    print("Failed to fetch user with error \(error.localizedDescription)")
+                }
+        
     }
     
 }

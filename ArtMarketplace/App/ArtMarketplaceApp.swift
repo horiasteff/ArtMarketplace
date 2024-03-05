@@ -11,14 +11,14 @@ import Firebase
 @main
 struct ArtMarketplaceApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    @StateObject var viewModel = AuthViewModel()
+   // @StateObject var viewModel = AuthViewModel()
     
     
     var body: some Scene {
         WindowGroup {
            
             ContentView()
-                .environmentObject(viewModel)
+                .environmentObject(AuthViewModel())
         }
     }
 }
