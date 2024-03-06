@@ -21,13 +21,10 @@ struct ContentView: View {
     
     var body: some View {
         Group{
-            if viewModel.userSession != nil {
+           // if viewModel.userSession != nil {
                 //ProfileView()
                 TabView(selection: $currentTab){
-                    Text("Home View")
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .background()
-                        .tag(Tab.Home)
+                    HomePageView()
                     
                     Text("Search View")
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -46,6 +43,7 @@ struct ContentView: View {
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .background()
                         .tag(Tab.Profile)
+                    //ProfileView()
                 }
                 .overlay(
                     HStack(spacing:0){
@@ -59,9 +57,9 @@ struct ContentView: View {
                     , alignment: .bottom
                 )
                 .ignoresSafeArea(.all, edges: .bottom)
-            }else {
-                LoginView()
-            }
+//            }else {
+//                LoginView()
+//            }
         }
     }
     
