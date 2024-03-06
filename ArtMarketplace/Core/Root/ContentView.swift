@@ -27,10 +27,12 @@ struct ContentView: View {
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .background()
                         .tag(Tab.Home)
+                    
                     Text("Search View")
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .background()
                         .tag(Tab.Search)
+                    
                     Text("Notifications View")
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .background()
