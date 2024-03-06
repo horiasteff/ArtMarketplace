@@ -12,6 +12,10 @@
 		01FCD7942B98C6C200AEAB76 /* CartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FCD7932B98C6C200AEAB76 /* CartManager.swift */; };
 		01FCD7962B98CB2F00AEAB76 /* CartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FCD7952B98CB2F00AEAB76 /* CartButton.swift */; };
 		01FCD7992B98D99B00AEAB76 /* HomePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FCD7982B98D99B00AEAB76 /* HomePageView.swift */; };
+		01FCD79B2B99175100AEAB76 /* CartProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FCD79A2B99175100AEAB76 /* CartProductView.swift */; };
+		01FCD79D2B9919C000AEAB76 /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FCD79C2B9919C000AEAB76 /* CartView.swift */; };
+		01FCD79F2B991D7600AEAB76 /* PaymentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FCD79E2B991D7600AEAB76 /* PaymentButton.swift */; };
+		01FCD7A12B9921AE00AEAB76 /* ProductDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FCD7A02B9921AE00AEAB76 /* ProductDetailsView.swift */; };
 		A71278862AFE650D001B9A76 /* ArtMarketplaceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71278852AFE650D001B9A76 /* ArtMarketplaceApp.swift */; };
 		A71278882AFE650D001B9A76 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71278872AFE650D001B9A76 /* ContentView.swift */; };
 		A712788A2AFE650E001B9A76 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A71278892AFE650E001B9A76 /* Assets.xcassets */; };
@@ -66,6 +70,10 @@
 		01FCD7932B98C6C200AEAB76 /* CartManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartManager.swift; sourceTree = "<group>"; };
 		01FCD7952B98CB2F00AEAB76 /* CartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartButton.swift; sourceTree = "<group>"; };
 		01FCD7982B98D99B00AEAB76 /* HomePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageView.swift; sourceTree = "<group>"; };
+		01FCD79A2B99175100AEAB76 /* CartProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartProductView.swift; sourceTree = "<group>"; };
+		01FCD79C2B9919C000AEAB76 /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
+		01FCD79E2B991D7600AEAB76 /* PaymentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentButton.swift; sourceTree = "<group>"; };
+		01FCD7A02B9921AE00AEAB76 /* ProductDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsView.swift; sourceTree = "<group>"; };
 		A71278822AFE650D001B9A76 /* ArtMarketplace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArtMarketplace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A71278852AFE650D001B9A76 /* ArtMarketplaceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtMarketplaceApp.swift; sourceTree = "<group>"; };
 		A71278872AFE650D001B9A76 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -130,6 +138,8 @@
 			isa = PBXGroup;
 			children = (
 				01FCD7982B98D99B00AEAB76 /* HomePageView.swift */,
+				01FCD79C2B9919C000AEAB76 /* CartView.swift */,
+				01FCD7A02B9921AE00AEAB76 /* ProductDetailsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -208,6 +218,8 @@
 				01FCD78F2B98C50200AEAB76 /* ProductCardView.swift */,
 				01FCD7912B98C51D00AEAB76 /* SearchView.swift */,
 				01FCD7952B98CB2F00AEAB76 /* CartButton.swift */,
+				01FCD79A2B99175100AEAB76 /* CartProductView.swift */,
+				01FCD79E2B991D7600AEAB76 /* PaymentButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -364,6 +376,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01FCD79D2B9919C000AEAB76 /* CartView.swift in Sources */,
 				A7E6A2382AFF8D26002F54E2 /* LoginView.swift in Sources */,
 				A7E6A23A2B022FE5002F54E2 /* InputView.swift in Sources */,
 				A71278882AFE650D001B9A76 /* ContentView.swift in Sources */,
@@ -372,6 +385,9 @@
 				A7F9F83D2B97B25C005F9EE3 /* ImageSliderView.swift in Sources */,
 				01FCD7902B98C50200AEAB76 /* ProductCardView.swift in Sources */,
 				A7E6A23E2B0243CB002F54E2 /* ProfileView.swift in Sources */,
+				01FCD7A12B9921AE00AEAB76 /* ProductDetailsView.swift in Sources */,
+				01FCD79F2B991D7600AEAB76 /* PaymentButton.swift in Sources */,
+				01FCD79B2B99175100AEAB76 /* CartProductView.swift in Sources */,
 				01FCD7922B98C51D00AEAB76 /* SearchView.swift in Sources */,
 				01FCD7942B98C6C200AEAB76 /* CartManager.swift in Sources */,
 				A7E6A23C2B023C01002F54E2 /* RegistrationView.swift in Sources */,
