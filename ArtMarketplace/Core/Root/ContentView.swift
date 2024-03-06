@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     
     @EnvironmentObject var viewModel: AuthViewModel
+    @StateObject var cartManager = CartManager()
     @State var currentTab: Tab = .Home
     
     init(){
@@ -153,4 +154,5 @@ struct MaterialEffect: UIViewRepresentable{
 
 #Preview {
     ContentView()
+        .environmentObject(CartManager())
 }

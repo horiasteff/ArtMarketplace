@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01FCD7902B98C50200AEAB76 /* ProductCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FCD78F2B98C50200AEAB76 /* ProductCardView.swift */; };
+		01FCD7922B98C51D00AEAB76 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FCD7912B98C51D00AEAB76 /* SearchView.swift */; };
+		01FCD7942B98C6C200AEAB76 /* CartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FCD7932B98C6C200AEAB76 /* CartManager.swift */; };
+		01FCD7962B98CB2F00AEAB76 /* CartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FCD7952B98CB2F00AEAB76 /* CartButton.swift */; };
 		A71278862AFE650D001B9A76 /* ArtMarketplaceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71278852AFE650D001B9A76 /* ArtMarketplaceApp.swift */; };
 		A71278882AFE650D001B9A76 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71278872AFE650D001B9A76 /* ContentView.swift */; };
 		A712788A2AFE650E001B9A76 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A71278892AFE650E001B9A76 /* Assets.xcassets */; };
@@ -56,6 +60,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		01FCD78F2B98C50200AEAB76 /* ProductCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCardView.swift; sourceTree = "<group>"; };
+		01FCD7912B98C51D00AEAB76 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		01FCD7932B98C6C200AEAB76 /* CartManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartManager.swift; sourceTree = "<group>"; };
+		01FCD7952B98CB2F00AEAB76 /* CartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartButton.swift; sourceTree = "<group>"; };
 		A71278822AFE650D001B9A76 /* ArtMarketplace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArtMarketplace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A71278852AFE650D001B9A76 /* ArtMarketplaceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtMarketplaceApp.swift; sourceTree = "<group>"; };
 		A71278872AFE650D001B9A76 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -142,6 +150,7 @@
 				A71278892AFE650E001B9A76 /* Assets.xcassets */,
 				A7687C6A2B09436F00794E64 /* GoogleService-Info.plist */,
 				A712788B2AFE650E001B9A76 /* Preview Content */,
+				01FCD7932B98C6C200AEAB76 /* CartManager.swift */,
 			);
 			path = ArtMarketplace;
 			sourceTree = "<group>";
@@ -185,6 +194,9 @@
 				A7E6A2392B022FE5002F54E2 /* InputView.swift */,
 				A7E6A23F2B024651002F54E2 /* SettingsRowView.swift */,
 				A7F9F83C2B97B25C005F9EE3 /* ImageSliderView.swift */,
+				01FCD78F2B98C50200AEAB76 /* ProductCardView.swift */,
+				01FCD7912B98C51D00AEAB76 /* SearchView.swift */,
+				01FCD7952B98CB2F00AEAB76 /* CartButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -347,11 +359,15 @@
 				A71278862AFE650D001B9A76 /* ArtMarketplaceApp.swift in Sources */,
 				A7E6A2422B02488E002F54E2 /* User.swift in Sources */,
 				A7F9F83D2B97B25C005F9EE3 /* ImageSliderView.swift in Sources */,
+				01FCD7902B98C50200AEAB76 /* ProductCardView.swift in Sources */,
 				A7E6A23E2B0243CB002F54E2 /* ProfileView.swift in Sources */,
+				01FCD7922B98C51D00AEAB76 /* SearchView.swift in Sources */,
+				01FCD7942B98C6C200AEAB76 /* CartManager.swift in Sources */,
 				A7E6A23C2B023C01002F54E2 /* RegistrationView.swift in Sources */,
 				A7F9F83B2B97AC20005F9EE3 /* Product.swift in Sources */,
 				A7E6A2402B024651002F54E2 /* SettingsRowView.swift in Sources */,
 				A75EC30A2B4B052100D6F0F4 /* AuthViewModel.swift in Sources */,
+				01FCD7962B98CB2F00AEAB76 /* CartButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
