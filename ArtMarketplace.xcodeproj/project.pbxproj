@@ -16,6 +16,7 @@
 		01FCD79D2B9919C000AEAB76 /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FCD79C2B9919C000AEAB76 /* CartView.swift */; };
 		01FCD79F2B991D7600AEAB76 /* PaymentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FCD79E2B991D7600AEAB76 /* PaymentButton.swift */; };
 		01FCD7A12B9921AE00AEAB76 /* ProductDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FCD7A02B9921AE00AEAB76 /* ProductDetailsView.swift */; };
+		01FCD7A32B99CC7500AEAB76 /* ProductsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FCD7A22B99CC7500AEAB76 /* ProductsView.swift */; };
 		A71278862AFE650D001B9A76 /* ArtMarketplaceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71278852AFE650D001B9A76 /* ArtMarketplaceApp.swift */; };
 		A71278882AFE650D001B9A76 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71278872AFE650D001B9A76 /* ContentView.swift */; };
 		A712788A2AFE650E001B9A76 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A71278892AFE650E001B9A76 /* Assets.xcassets */; };
@@ -74,6 +75,7 @@
 		01FCD79C2B9919C000AEAB76 /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
 		01FCD79E2B991D7600AEAB76 /* PaymentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentButton.swift; sourceTree = "<group>"; };
 		01FCD7A02B9921AE00AEAB76 /* ProductDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsView.swift; sourceTree = "<group>"; };
+		01FCD7A22B99CC7500AEAB76 /* ProductsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsView.swift; sourceTree = "<group>"; };
 		A71278822AFE650D001B9A76 /* ArtMarketplace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArtMarketplace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A71278852AFE650D001B9A76 /* ArtMarketplaceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtMarketplaceApp.swift; sourceTree = "<group>"; };
 		A71278872AFE650D001B9A76 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				01FCD7982B98D99B00AEAB76 /* HomePageView.swift */,
 				01FCD79C2B9919C000AEAB76 /* CartView.swift */,
 				01FCD7A02B9921AE00AEAB76 /* ProductDetailsView.swift */,
+				01FCD7A22B99CC7500AEAB76 /* ProductsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -390,6 +393,7 @@
 				01FCD79B2B99175100AEAB76 /* CartProductView.swift in Sources */,
 				01FCD7922B98C51D00AEAB76 /* SearchView.swift in Sources */,
 				01FCD7942B98C6C200AEAB76 /* CartManager.swift in Sources */,
+				01FCD7A32B99CC7500AEAB76 /* ProductsView.swift in Sources */,
 				A7E6A23C2B023C01002F54E2 /* RegistrationView.swift in Sources */,
 				A7F9F83B2B97AC20005F9EE3 /* Product.swift in Sources */,
 				A7E6A2402B024651002F54E2 /* SettingsRowView.swift in Sources */,

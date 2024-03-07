@@ -46,22 +46,74 @@ struct ProductDetailsView: View {
                         }
                         .padding(.vertical)
                         
-                        HStack(spacing: 10){
-                            ForEach(0..<5){index in
-                                Image(systemName: "star.fill")
-                                    .resizable()
-                                    .frame(width: 20, height: 20)
-                                    .foregroundColor(.yellow)
+                        HStack {
+                            HStack(spacing: 10){
+                                ForEach(0..<5){index in
+                                    Image(systemName: "star.fill")
+                                        .resizable()
+                                        .frame(width: 20, height: 20)
+                                        .foregroundColor(.yellow)
+                                }
+                                Text("(4.5)")
+                                    .foregroundColor(.gray)
                             }
-                            Text("(4.5)")
-                                .foregroundColor(.gray)
+                            .padding(.vertical)
+                            Spacer()
+                            
+                            HStack{
+                                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                                    Image(systemName: "minus.square")
+                                })
+                                Text("1")
+                                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                                    Image(systemName: "plus.square.fill")
+                                        .foregroundColor(Color("kPrimary"))
+                                })
+                            }
                         }
-                        .padding(.vertical)
                         
                         Text("Description")
                             .font(.title3)
                             .fontWeight(.medium)
+                        
+                        Text(product.description)
+                        Spacer()
+                        HStack(alignment: .top){
+                            VStack(alignment: .leading){
+                                Text("Size-add the size of the painting")
+                                    .font(.system(size: 18))
+                                    .fontWeight(.semibold)
+                                
+                                Text("Height - add height")
+                                    .foregroundColor(.gray)
+                                Text("Width - add width")
+                                    .foregroundColor(.gray)
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            
+                            Spacer()
+
+                            VStack(alignment: .trailing){
+                                Text("Colors")
+                                    .font(.system(size: 18))
+                                    .fontWeight(.semibold)
+                                
+                                HStack{
+                                    ColorDotView(color: .blue)
+                                    ColorDotView(color: .black)
+                                }
+                            }
+                            .frame(maxWidth: .infinity, alignment: .trailing)
+                        }
+                        .padding(.vertical)
+                        
+                        PaymentButton(action: {})
+                            .frame(width: .infinity, height: 35)
                     }
+                    .padding()
+                    .background(.white)
+                    .cornerRadius(20)
+                    .offset(y: -30)
                 }
             }
         }
@@ -71,4 +123,13 @@ struct ProductDetailsView: View {
 
 #Preview {
     ProductDetailsView(product: productList[1])
+}
+
+struct ColorDotView: View {
+    let color: Color
+    var body: some View {
+        
+        color.frame(width: 25, height: 25)
+            .clipShape(Circle())
+    }
 }
