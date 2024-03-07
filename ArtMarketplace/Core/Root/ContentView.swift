@@ -21,10 +21,11 @@ struct ContentView: View {
     
     var body: some View {
         Group{
-           // if viewModel.userSession != nil {
+            if viewModel.userSession != nil {
                 //ProfileView()
                 TabView(selection: $currentTab){
                     HomePageView()
+                        .tag(Tab.Home)
                     
                     Text("Search View")
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -39,11 +40,9 @@ struct ContentView: View {
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .background()
                         .tag(Tab.Cart)
-                    Text("Profile View")
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .background()
+                    ProfileView()
+                        .environmentObject(CartManager())
                         .tag(Tab.Profile)
-                    //ProfileView()
                 }
                 .overlay(
                     HStack(spacing:0){
@@ -57,9 +56,9 @@ struct ContentView: View {
                     , alignment: .bottom
                 )
                 .ignoresSafeArea(.all, edges: .bottom)
-//            }else {
-//                LoginView()
-//            }
+            } else {
+                LoginView()
+            }
         }
     }
     

@@ -139,6 +139,7 @@
 		01FCD7972B98D98500AEAB76 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A7E6A23D2B0243CB002F54E2 /* ProfileView.swift */,
 				01FCD7982B98D99B00AEAB76 /* HomePageView.swift */,
 				01FCD79C2B9919C000AEAB76 /* CartView.swift */,
 				01FCD7A02B9921AE00AEAB76 /* ProductDetailsView.swift */,
@@ -266,7 +267,6 @@
 		A7E6A2362AFF8C97002F54E2 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				A7E6A23D2B0243CB002F54E2 /* ProfileView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
