@@ -33,7 +33,7 @@ class ProductManager: ObservableObject {
                 let name = data["name"] as? String ?? ""
                 let description = data["description"] as? String ?? ""
                 let imageUrlString = data["image"] as? String ?? ""
-                let image = URL(string: imageUrlString) as? URL ?? URL(string: "https://placeholder-url.com")!
+                let image = URL(string: imageUrlString) ?? URL(string: "https://placeholder-url.com")!
                 let painter = data["painter"] as? String ?? ""
                 let price = data["price"] as? Int ?? 0
                 
