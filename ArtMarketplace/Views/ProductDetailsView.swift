@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import URLImage
 
 struct ProductDetailsView: View {
     var product: Product
@@ -16,10 +17,13 @@ struct ProductDetailsView: View {
                 
                 VStack(alignment: .leading){
                     ZStack(alignment: .topTrailing){
-                        Image(product.image)
-                            .resizable()
-                            .ignoresSafeArea(edges: .top)
-                            .frame(height: 300)
+                        
+                        URLImage(product.image) { image in
+                                               image
+                                                   .resizable()
+                                                   .frame(width: .infinity, height: 300)
+                                                   .cornerRadius(12)
+                                           }
                         
                         Image(systemName: "heart.fill")
                             .resizable()

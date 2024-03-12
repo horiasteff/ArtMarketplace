@@ -11,20 +11,21 @@ struct ContentView: View {
     
     @EnvironmentObject var viewModel: AuthViewModel
     @StateObject var cartManager = CartManager()
+    @StateObject var productManager = ProductManager()
     @State var currentTab: Tab = .Home
+    @Namespace var animation
     
     init(){
         UITabBar.appearance().isHidden = true
     }
     
-    @Namespace var animation
-    
     var body: some View {
         Group{
             if viewModel.userSession != nil {
-                //ProfileView()
+
                 TabView(selection: $currentTab){
                     HomePageView()
+                        .environmentObject(productManager)
                         .tag(Tab.Home)
                     
                     Text("Search View")
@@ -36,11 +37,14 @@ struct ContentView: View {
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .background()
                         .tag(Tab.Notifications)
-                    Text("Cart View")
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .background()
+                    
+                    CartView()
+                        .environmentObject(productManager)
                         .tag(Tab.Cart)
+
                     ProfileView()
+                        .environmentObject(productManager)
+
                         .environmentObject(CartManager())
                         .tag(Tab.Profile)
                 }
@@ -63,12 +67,14 @@ struct ContentView: View {
     }
     
     func TabButton(tab: Tab) -> some View {
+       
         GeometryReader{proxy in
             Button(action: {
                 withAnimation(.spring()){
                     currentTab = tab
                 }
             }, label: {
+                var numberOfProducts = tab.numberOfProducts
                 VStack(spacing: 0){
                     Image(systemName: currentTab == tab ? tab.rawValue + ".fill" : tab.rawValue)
                         .resizable()
@@ -88,6 +94,23 @@ struct ContentView: View {
                                         .font(.footnote)
                                         .padding(.top, 50)
                                 }
+                                
+                                if tab == .Cart {
+                                    ZStack(alignment: .topTrailing){
+                                        Image("bag")
+                                            .foregroundColor(.black)
+                                            .padding(5)
+                                        if numberOfProducts > 0 {
+                                            Text("\(numberOfProducts)")
+                                                .font(.caption2)
+                                                .foregroundColor(.white)
+                                                .frame(width: 15, height: 15)
+                                                .background(.green)
+                                                .cornerRadius(50)
+                                        }
+                                    }
+
+                                }
                             }
                         ).contentShape(Rectangle())
                         .offset(y: currentTab == tab ? -15 : 0)
@@ -105,6 +128,15 @@ enum Tab: String, CaseIterable{
     case Notifications = "bell"
     case Cart = "bag"
     case Profile = "person"
+    
+    var numberOfProducts: Int {
+           switch self {
+           case .Home, .Search, .Notifications, .Profile:
+               return 0
+           case .Cart:
+               return CartManager().products.count
+           }
+       }
     
     var TabName: String {
         switch self {
@@ -152,4 +184,6 @@ struct MaterialEffect: UIViewRepresentable{
 #Preview {
     ContentView()
         .environmentObject(CartManager())
+        .environmentObject(ProductManager())
+
 }

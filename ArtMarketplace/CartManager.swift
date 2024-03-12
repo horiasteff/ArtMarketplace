@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import SwiftUI
+import FirebaseFirestore
 
 class CartManager: ObservableObject {
     @Published private(set) var products: [Product] = []

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomePageView: View {
     @EnvironmentObject var cartManager: CartManager
+    @ObservedObject private var productManager = ProductManager()
     var body: some View {
         NavigationStack {
             ZStack(alignment: .top){
@@ -39,7 +40,7 @@ struct HomePageView: View {
                     
                     ScrollView(.horizontal, showsIndicators: false){
                         HStack(spacing: 10){
-                            ForEach(productList, id: \.id){ product in
+                            ForEach(productManager.productList, id: \.id){ product in
                                 NavigationLink{
                                     ProductDetailsView(product: product)
                                 } label: {

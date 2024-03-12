@@ -17,6 +17,9 @@
 		01FCD79F2B991D7600AEAB76 /* PaymentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FCD79E2B991D7600AEAB76 /* PaymentButton.swift */; };
 		01FCD7A12B9921AE00AEAB76 /* ProductDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FCD7A02B9921AE00AEAB76 /* ProductDetailsView.swift */; };
 		01FCD7A32B99CC7500AEAB76 /* ProductsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FCD7A22B99CC7500AEAB76 /* ProductsView.swift */; };
+		01FCD7A52BA07B1000AEAB76 /* ProductManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FCD7A42BA07B1000AEAB76 /* ProductManager.swift */; };
+		01FCD7A82BA07D7400AEAB76 /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = 01FCD7A72BA07D7400AEAB76 /* URLImage */; };
+		01FCD7AA2BA07D7400AEAB76 /* URLImageStore in Frameworks */ = {isa = PBXBuildFile; productRef = 01FCD7A92BA07D7400AEAB76 /* URLImageStore */; };
 		A71278862AFE650D001B9A76 /* ArtMarketplaceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71278852AFE650D001B9A76 /* ArtMarketplaceApp.swift */; };
 		A71278882AFE650D001B9A76 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71278872AFE650D001B9A76 /* ContentView.swift */; };
 		A712788A2AFE650E001B9A76 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A71278892AFE650E001B9A76 /* Assets.xcassets */; };
@@ -76,6 +79,7 @@
 		01FCD79E2B991D7600AEAB76 /* PaymentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentButton.swift; sourceTree = "<group>"; };
 		01FCD7A02B9921AE00AEAB76 /* ProductDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsView.swift; sourceTree = "<group>"; };
 		01FCD7A22B99CC7500AEAB76 /* ProductsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsView.swift; sourceTree = "<group>"; };
+		01FCD7A42BA07B1000AEAB76 /* ProductManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductManager.swift; sourceTree = "<group>"; };
 		A71278822AFE650D001B9A76 /* ArtMarketplace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArtMarketplace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A71278852AFE650D001B9A76 /* ArtMarketplaceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtMarketplaceApp.swift; sourceTree = "<group>"; };
 		A71278872AFE650D001B9A76 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -117,10 +121,12 @@
 				A7687CA42B09455B00794E64 /* FirebasePerformance in Frameworks */,
 				A7687C862B09455B00794E64 /* FirebaseAuthCombine-Community in Frameworks */,
 				A7687C7C2B09455B00794E64 /* FirebaseAnalyticsSwift in Frameworks */,
+				01FCD7A82BA07D7400AEAB76 /* URLImage in Frameworks */,
 				A7687C8C2B09455B00794E64 /* FirebaseDatabaseSwift in Frameworks */,
 				A7687C702B09448B00794E64 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 				A7687CA62B09455B00794E64 /* FirebaseRemoteConfig in Frameworks */,
 				A7687C762B09448B00794E64 /* FirebaseAppCheck in Frameworks */,
+				01FCD7AA2BA07D7400AEAB76 /* URLImageStore in Frameworks */,
 				A7687C842B09455B00794E64 /* FirebaseAuth in Frameworks */,
 				A7687C962B09455B00794E64 /* FirebaseFunctions in Frameworks */,
 				A7687C9E2B09455B00794E64 /* FirebaseInstallations in Frameworks */,
@@ -224,6 +230,7 @@
 				01FCD7952B98CB2F00AEAB76 /* CartButton.swift */,
 				01FCD79A2B99175100AEAB76 /* CartProductView.swift */,
 				01FCD79E2B991D7600AEAB76 /* PaymentButton.swift */,
+				01FCD7A42BA07B1000AEAB76 /* ProductManager.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -320,6 +327,8 @@
 				A7687CA72B09455B00794E64 /* FirebaseRemoteConfigSwift */,
 				A7687CA92B09455B00794E64 /* FirebaseStorage */,
 				A7687CAB2B09455B00794E64 /* FirebaseStorageCombine-Community */,
+				01FCD7A72BA07D7400AEAB76 /* URLImage */,
+				01FCD7A92BA07D7400AEAB76 /* URLImageStore */,
 			);
 			productName = ArtMarketplace;
 			productReference = A71278822AFE650D001B9A76 /* ArtMarketplace.app */;
@@ -351,6 +360,7 @@
 			mainGroup = A71278792AFE650D001B9A76;
 			packageReferences = (
 				A7687C6C2B09448B00794E64 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				01FCD7A62BA07D7400AEAB76 /* XCRemoteSwiftPackageReference "url-image" */,
 			);
 			productRefGroup = A71278832AFE650D001B9A76 /* Products */;
 			projectDirPath = "";
@@ -400,6 +410,7 @@
 				A75EC30A2B4B052100D6F0F4 /* AuthViewModel.swift in Sources */,
 				01FCD7992B98D99B00AEAB76 /* HomePageView.swift in Sources */,
 				01FCD7962B98CB2F00AEAB76 /* CartButton.swift in Sources */,
+				01FCD7A52BA07B1000AEAB76 /* ProductManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -605,6 +616,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		01FCD7A62BA07D7400AEAB76 /* XCRemoteSwiftPackageReference "url-image" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dmytro-anokhin/url-image.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.1;
+			};
+		};
 		A7687C6C2B09448B00794E64 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -616,6 +635,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		01FCD7A72BA07D7400AEAB76 /* URLImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 01FCD7A62BA07D7400AEAB76 /* XCRemoteSwiftPackageReference "url-image" */;
+			productName = URLImage;
+		};
+		01FCD7A92BA07D7400AEAB76 /* URLImageStore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 01FCD7A62BA07D7400AEAB76 /* XCRemoteSwiftPackageReference "url-image" */;
+			productName = URLImageStore;
+		};
 		A7687C6D2B09448B00794E64 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A7687C6C2B09448B00794E64 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import URLImage
 
 struct ProductCardView: View {
     @EnvironmentObject var cartManager: CartManager
@@ -16,11 +17,12 @@ struct ProductCardView: View {
             
             ZStack(alignment: .bottomTrailing){
                 VStack(alignment: .leading){
-                    Image(product.image)
-                        .resizable()
-                        .frame(width: 155, height: 120)
-                        .cornerRadius(12)
-                    
+                    URLImage(product.image) { image in
+                        image
+                            .resizable()
+                            .frame(width: 155, height: 120)
+                            .cornerRadius(12)
+                        }
                     Text(product.name)
                         .font(.headline)
                         .foregroundColor(.black)
