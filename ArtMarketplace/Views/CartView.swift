@@ -9,26 +9,34 @@ import SwiftUI
 
 struct CartView: View {
     @EnvironmentObject var cartManager: CartManager
-    var body: some View {
-        ScrollView{
-            if cartManager.products.count > 0 {
-                ForEach(cartManager.products, id: \.id){product in
-                        CartProductView(product: product)
+    @ObservedObject private var productManager = ProductManager()
+    @EnvironmentObject var viewModel: AuthViewModel
+
+    var body: some View {        
+        ScrollView {
+            if let currentUser = viewModel.currentUser {
+                if let userCart = productManager.userCarts[currentUser.id] {
+                    if userCart.count > 0 {
+                        ForEach(userCart) { product in
+                            CartProductView(product: product)
+                        }
+                        HStack {
+                            Text("Your total is ")
+                            Spacer()
+                            Text("RON \(cartManager.total)")
+                                .bold()
+                        }
+                        .padding()
+                        PaymentButton(action: {})
+                            .padding()
+                    } else {
+                        Text("The cart is empty")
+                    }
+                } else {
+                    Text("The cart is empty")
                 }
-                HStack{
-                    Text("You total is ")
-                    Spacer()
-                    Text("RON \(cartManager.total)")
-                        .bold()
-                    
-                    
-                }
-                .padding()
-                
-                PaymentButton(action: {})
-                    .padding()
             } else {
-                Text("The cart is empty")
+                Text("Please log in to view your cart")
             }
         }
         .navigationTitle(Text("My Cart"))
@@ -39,4 +47,5 @@ struct CartView: View {
 #Preview {
     CartView()
         .environmentObject(CartManager())
+        .environmentObject(ProductManager())
 }

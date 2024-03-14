@@ -10,6 +10,7 @@ import URLImage
 
 struct CartProductView: View {
     @EnvironmentObject var cartManager: CartManager
+    @ObservedObject private var productManager = ProductManager()
     var product: Product
     var body: some View {
         HStack(spacing: 20){
@@ -35,7 +36,8 @@ struct CartProductView: View {
             Image(systemName: "trash")
                 .foregroundColor(.red)
                 .onTapGesture {
-                    cartManager.removeFromCart(product: product)
+                    // cartManager.removeFromCart(product: product)
+                    productManager.removeFromCart(product: product)
                 }
             
         }

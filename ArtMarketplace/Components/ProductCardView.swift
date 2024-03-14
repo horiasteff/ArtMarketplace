@@ -10,6 +10,7 @@ import URLImage
 
 struct ProductCardView: View {
     @EnvironmentObject var cartManager: CartManager
+    @ObservedObject private var productManager = ProductManager()
     var product: Product
     var body: some View {
         ZStack{
@@ -37,7 +38,8 @@ struct ProductCardView: View {
                     
                 }
                 Button{
-                    cartManager.addToCart(product: product)
+                    //cartManager.addToCart(product: product)
+                    productManager.addToCart(product: product)
                 } label:{
                     Image(systemName: "plus.circle.fill")
                         .resizable()
@@ -55,4 +57,5 @@ struct ProductCardView: View {
 #Preview {
     ProductCardView(product: productList[0])
         .environmentObject(CartManager())
+        .environmentObject(ProductManager())
 }
