@@ -9,7 +9,6 @@ import SwiftUI
 import URLImage
 
 struct CartProductView: View {
-    @EnvironmentObject var cartManager: CartManager
     @ObservedObject private var productManager = ProductManager()
     var product: Product
     var body: some View {
@@ -33,12 +32,15 @@ struct CartProductView: View {
             
             Spacer()
             
-            Image(systemName: "trash")
-                .foregroundColor(.red)
-                .onTapGesture {
-                    // cartManager.removeFromCart(product: product)
-                    productManager.removeFromCart(product: product)
-                }
+            Button{
+                productManager.removeFromCart(product: product)
+            } label:{
+                Image(systemName: "trash")
+                    .resizable()
+                    .foregroundColor(.red)
+                    .frame(width: 25, height: 25)
+                    .padding(.trailing)
+            }
             
         }
         .padding(.horizontal)
@@ -50,6 +52,6 @@ struct CartProductView: View {
 }
 
 #Preview {
-    CartProductView(product: productList[2])
-        .environmentObject(CartManager())
+    CartProductView(product: productList[1])
+        .environmentObject(ProductManager())
 }

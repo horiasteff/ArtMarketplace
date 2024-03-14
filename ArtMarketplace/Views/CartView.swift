@@ -23,7 +23,7 @@ struct CartView: View {
                         HStack {
                             Text("Your total is ")
                             Spacer()
-                            Text("RON \(cartManager.total)")
+                            Text("RON \(productManager.total)")
                                 .bold()
                         }
                         .padding()
@@ -46,6 +46,5 @@ struct CartView: View {
 
 #Preview {
     CartView()
-        .environmentObject(CartManager())
         .environmentObject(ProductManager())
 }

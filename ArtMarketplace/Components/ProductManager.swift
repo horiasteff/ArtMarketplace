@@ -34,6 +34,7 @@ class ProductManager: ObservableObject {
             self.productList = documents.map{ (queryDocumentSnapshot) -> Product in
                 let data = queryDocumentSnapshot.data()
                 
+                let id = queryDocumentSnapshot.documentID
                 let name = data["name"] as? String ?? ""
                 let description = data["description"] as? String ?? ""
                 let imageUrlString = data["image"] as? String ?? ""
@@ -41,14 +42,13 @@ class ProductManager: ObservableObject {
                 let painter = data["painter"] as? String ?? ""
                 let price = data["price"] as? Int ?? 0
                 
-                return Product(id: UUID().uuidString, name: name, image: image, description: description, painter: painter, price: price)
-                
+                return Product(id: id, name: name, image: image, description: description, painter: painter, price: price)
             }
             
         }
     }
     
-    func addToCart(product: Product) {
+    func addToCart(product: Product, documentID: String) {
         guard let currentUser = Auth.auth().currentUser else {
             print("User is not logged in")
             return
@@ -56,26 +56,28 @@ class ProductManager: ObservableObject {
 
         let db = Firestore.firestore()
         let userCartRef = db.collection("users").document(currentUser.uid).collection("cart")
-        let cartItemRef = userCartRef.document(product.id)
+        let cartItemRef = userCartRef.document(documentID)
         let imageURLString = product.image.absoluteString
+        
+        print("document id ul este: " + documentID)
 
         // Example of product data you might want to store
         let data: [String: Any] = [
+            "id": documentID,
             "name": product.name,
             "description": product.description,
             "price": product.price,
             "painter": product.painter,
             "image" : imageURLString,
-            "id" : product.id
-            // Add more product details as needed
+            
         ]
 
-        cartItemRef.setData(data) { error in
+        cartItemRef.setData(data) {  error in
             if let error = error {
                 print("Error adding product to cart: \(error)")
             } else {
                 print("Product added to cart successfully")
-                self.total += product.price
+               // total += product.price
             }
         }
     }
@@ -86,22 +88,32 @@ class ProductManager: ObservableObject {
             return
         }
 
-        let db = Firestore.firestore()
-        let userCartRef = db.collection("users").document(currentUser.uid).collection("cart")
-        let cartItemRef = userCartRef.document(product.id)
+        // Check if the user's cart exists
+        guard var userCart = self.userCarts[currentUser.uid] else {
+            print("User's cart is empty or not loaded")
+            return
+        }
 
-        cartItemRef.delete { error in
-            if let error = error {
-                print("Error removing product from cart: \(error)")
-            } else {
-                print("Product removed from cart successfully")
-                // Optionally, update local cart data or UI after removal
-                if let index = self.userCarts[currentUser.uid]?.firstIndex(where: { $0.id == product.id }) {
-                               self.userCarts[currentUser.uid]?.remove(at: index)
-                           }
-                self.fetchUserCarts()
-                self.total -= product.price
+        if let index = userCart.firstIndex(where: { $0.id == product.id }) {
+            userCart.remove(at: index)
+            
+            self.userCarts[currentUser.uid] = userCart
+
+            let db = Firestore.firestore()
+            let userCartRef = db.collection("users").document(currentUser.uid).collection("cart")
+            let cartItemRef = userCartRef.document(product.id)
+
+            cartItemRef.delete { error in
+                if let error = error {
+                    print("Error removing product from cart: \(error)")
+                } else {
+                    print("Product removed from cart successfully")
+                    self.fetchUserCarts()
+                    self.total -= product.price
+                }
             }
+        } else {
+            print("Product not found in user's cart")
         }
     }
     
@@ -120,22 +132,19 @@ class ProductManager: ObservableObject {
 
             var userCart: [Product] = []
             for document in snapshot.documents {
+                let documentID = document.documentID
                 if let product = document.data() as? [String: Any] {
-                    // Convert Firestore data to Product object
-                    // Assuming you have a method to convert Firestore data to Product
-                    let convertedProduct = self.convertFirestoreDataToProduct(product)
+                    let convertedProduct = self.convertFirestoreDataToProduct(documentID, product)
                     userCart.append(convertedProduct)
                 }
             }
-            // Update userCarts dictionary with user-specific cart data
             self.userCarts[currentUser.uid] = userCart
         }
     }
 
-    // Function to convert Firestore data to Product object
-    func convertFirestoreDataToProduct(_ data: [String: Any]) -> Product {
-        // Extract product data from Firestore document
-        guard let name = data["name"] as? String,
+    func convertFirestoreDataToProduct(_ documentID: String, _ data: [String: Any]) -> Product {
+        guard
+            let name = data["name"] as? String,
               let description = data["description"] as? String,
               let price = data["price"] as? Int,
               let imageURLString = data["image"] as? String,
@@ -145,7 +154,6 @@ class ProductManager: ObservableObject {
             fatalError("Failed to extract product data from Firestore document")
         }
 
-        // Initialize and return Product instance
-        return Product(id: UUID().uuidString, name: name, image: imageURL, description: description, painter: painter, price: price)
+        return Product(id: documentID, name: name, image: imageURL, description: description, painter: painter, price: price)
     }
 }
