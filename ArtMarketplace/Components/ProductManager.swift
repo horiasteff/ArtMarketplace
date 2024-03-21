@@ -21,6 +21,11 @@ class ProductManager: ObservableObject {
     init() {
         fetchData()
         fetchUserCarts()
+        self.$userCarts
+                    .map { carts in
+                        return carts.values.flatMap { $0 }.reduce(0) { $0 + $1.price }
+                    }
+                    .assign(to: &$total)
     }
 
     func fetchData() {
@@ -77,7 +82,6 @@ class ProductManager: ObservableObject {
                 print("Error adding product to cart: \(error)")
             } else {
                 print("Product added to cart successfully")
-               // total += product.price
             }
         }
     }
@@ -109,7 +113,6 @@ class ProductManager: ObservableObject {
                 } else {
                     print("Product removed from cart successfully")
                     self.fetchUserCarts()
-                    self.total -= product.price
                 }
             }
         } else {

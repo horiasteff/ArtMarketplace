@@ -46,6 +46,9 @@ struct ProfileView: View {
                         }
                     }
                     Section("Account"){
+                        NavigationLink(destination: VirtualWalletView()) {
+                            SettingsRowView(imageName: "wallet.pass", title: "Virtual Wallet", tintColor: .blue)
+                        }
                         Button {
                             viewModel.signOut()
                         } label: {

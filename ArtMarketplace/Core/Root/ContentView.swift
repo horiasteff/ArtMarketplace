@@ -97,9 +97,9 @@ struct ContentView: View {
                                 
                                 if tab == .Cart {
                                     ZStack(alignment: .topTrailing){
-                                        Image(systemName: "bag")
-                                            .foregroundColor(.black)
-                                            .padding(5)
+//                                        Image(systemName: "bag")
+//                                            .foregroundColor(.black)
+//                                            .padding(5)
                                         if numberOfProducts > 0 {
                                             Text("\(numberOfProducts)")
                                                 .font(.caption2)
