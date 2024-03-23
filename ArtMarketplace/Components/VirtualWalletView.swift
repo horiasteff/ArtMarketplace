@@ -20,6 +20,9 @@ struct VirtualWalletView: View {
             VStack {
                 Spacer()
                 VStack{
+//                    HStack{
+//                        Image("wallet")
+//                    }
                 Text("Wallet Balance")
                         .font(.title)
                         .foregroundColor(.white)
