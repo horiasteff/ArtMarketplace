@@ -37,18 +37,13 @@ struct VirtualWalletView: View {
                         .frame(maxWidth: .infinity)
                     
                     HStack{
-                        Button(action: {
-                                    isShowingAddMoneyForm = true// Example amount
-                                    }) {
+                        NavigationLink(destination: AddMoneyFormView(isPresented: $isShowingAddMoneyForm)) {
                                         Image(systemName: "plus.circle.fill")
                                             .imageScale(.medium)
-                                            .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-                                            
+                                            .font(.title)
                                         Text("Add Money")
                                     }
-                                    .popover(isPresented: $isShowingAddMoneyForm) {
-                                        AddMoneyFormView(isPresented: $isShowingAddMoneyForm)
-                                    }
+                                    .padding()
                                     
                         Spacer()
                         Text("Withdraw money")
@@ -58,7 +53,6 @@ struct VirtualWalletView: View {
                         
                     }
                     .offset(y: +45)
-
             }
             .onAppear {
                 userWalletManager.fetchWalletBalance(for: viewModel.currentUser?.id ?? "")
@@ -92,8 +86,6 @@ struct VirtualWalletView: View {
 
 
 class UserWalletManager: ObservableObject {
-    //@EnvironmentObject var viewModel: AuthViewModel
-    //@StateObject var userWalletManager = UserWalletManager()
     private let db = Firestore.firestore()
     @Published var walletBalance: Double = 0.0
 

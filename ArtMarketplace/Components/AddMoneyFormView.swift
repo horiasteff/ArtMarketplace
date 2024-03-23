@@ -10,7 +10,10 @@ import SwiftUI
 struct AddMoneyFormView: View {
     @Binding var isPresented: Bool
     @State private var amount: String = ""
+    @State private var showToast = false
+    @State private var toastMessage = ""
     @StateObject private var userWalletManager = UserWalletManager()
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         VStack {
@@ -19,17 +22,35 @@ struct AddMoneyFormView: View {
                 .padding()
 
             Button("Add Money") {
-                // Validate amount and add money
-                guard let amount = Double(amount) else {
-                    // Handle invalid amount
+                guard let amount = Double(amount), amount > 0 else {
+                    showToast = true
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        withAnimation {
+                            showToast = false
+                        }
+                    }
                     return
                 }
                 userWalletManager.updateWalletBalanceInFirestore(withAmount: amount)
-                isPresented = false // Close the form
+                presentationMode.wrappedValue.dismiss() // Close the form
             }
             .padding()
         }
         .padding()
+        .overlay(
+                    VStack {
+                        if showToast {
+                            Text("Please enter a valid amount")
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(Color.red)
+                                .cornerRadius(10)
+                                .padding(.horizontal)
+                        }
+                        Spacer()
+                    }
+                    , alignment: .top
+                )
     }
 }
 
