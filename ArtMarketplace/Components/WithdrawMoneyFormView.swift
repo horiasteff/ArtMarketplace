@@ -1,27 +1,33 @@
 //
-//  AddMoneyFormView.swift
+//  WithdrawMoneyFormView.swift
 //  ArtMarketplace
 //
-//  Created by Horia Stefan Munteanu on 21.03.2024.
+//  Created by Horia Munteanu on 24.03.2024.
 //
 
 import SwiftUI
 
-struct AddMoneyFormView: View {
+struct WithdrawMoneyFormView: View {
     @Binding var isPresented: Bool
     @State private var amount: String = ""
     @State private var showToast = false
     @StateObject private var userWalletManager = UserWalletManager()
     @Environment(\.presentationMode) var presentationMode
     
+//    init(isPresented: Binding<Bool>, userWalletManager: UserWalletManager) {
+//            _isPresented = isPresented
+//            self.userWalletManager = userWalletManager
+//        }
+    
     var body: some View {
         VStack {
             TextField("Enter amount", text: $amount)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
-
-            Button("Add Money") {
-                guard let amount = Double(amount), amount > 0 else {
+            
+            Button("Withdraw Money") {
+                // Validate amount and withdraw money
+                guard let withdrawAmount = Double(amount), withdrawAmount > 0 else {
                     showToast = true
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                         withAnimation {
@@ -30,7 +36,19 @@ struct AddMoneyFormView: View {
                     }
                     return
                 }
-                userWalletManager.updateWalletBalanceInFirestore(withAmount: amount)
+
+                guard withdrawAmount <= userWalletManager.walletBalance else {
+                    print(" Balance is thisss: \(userWalletManager.walletBalance)")
+                        showToast = true
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                            withAnimation {
+                                showToast = false
+                            }
+                        }
+                        return
+                    }
+
+                userWalletManager.withdrawWalletBalanceInFirestore(withAmount: withdrawAmount)
                 presentationMode.wrappedValue.dismiss() // Close the form
             }
             .padding()
@@ -54,5 +72,6 @@ struct AddMoneyFormView: View {
 }
 
 #Preview {
-    AddMoneyFormView(isPresented: .constant(false))
+    WithdrawMoneyFormView(isPresented: .constant(false))
 }
+
