@@ -64,7 +64,6 @@ class ProductManager: ObservableObject {
         let cartItemRef = userCartRef.document(documentID)
         let imageURLString = product.image.absoluteString
         
-        print("document id ul este: " + documentID)
 
         // Example of product data you might want to store
         let data: [String: Any] = [

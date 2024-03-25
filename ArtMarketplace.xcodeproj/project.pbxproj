@@ -22,6 +22,8 @@
 		01FCD7AA2BA07D7400AEAB76 /* URLImageStore in Frameworks */ = {isa = PBXBuildFile; productRef = 01FCD7A92BA07D7400AEAB76 /* URLImageStore */; };
 		01FCD7AC2BAC626C00AEAB76 /* VirtualWalletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FCD7AB2BAC626C00AEAB76 /* VirtualWalletView.swift */; };
 		01FCD7B02BAC7BE000AEAB76 /* AddMoneyFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FCD7AF2BAC7BE000AEAB76 /* AddMoneyFormView.swift */; };
+		01FCD7B22BB1ABBB00AEAB76 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FCD7B12BB1ABBB00AEAB76 /* Transaction.swift */; };
+		01FCD7B42BB1AC2000AEAB76 /* TransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FCD7B32BB1AC2000AEAB76 /* TransactionView.swift */; };
 		A70534CD2BB02CA300139EE6 /* WithdrawMoneyFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70534CC2BB02CA300139EE6 /* WithdrawMoneyFormView.swift */; };
 		A71278862AFE650D001B9A76 /* ArtMarketplaceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71278852AFE650D001B9A76 /* ArtMarketplaceApp.swift */; };
 		A71278882AFE650D001B9A76 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71278872AFE650D001B9A76 /* ContentView.swift */; };
@@ -85,6 +87,8 @@
 		01FCD7A42BA07B1000AEAB76 /* ProductManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductManager.swift; sourceTree = "<group>"; };
 		01FCD7AB2BAC626C00AEAB76 /* VirtualWalletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualWalletView.swift; sourceTree = "<group>"; };
 		01FCD7AF2BAC7BE000AEAB76 /* AddMoneyFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMoneyFormView.swift; sourceTree = "<group>"; };
+		01FCD7B12BB1ABBB00AEAB76 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
+		01FCD7B32BB1AC2000AEAB76 /* TransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionView.swift; sourceTree = "<group>"; };
 		A70534CC2BB02CA300139EE6 /* WithdrawMoneyFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawMoneyFormView.swift; sourceTree = "<group>"; };
 		A71278822AFE650D001B9A76 /* ArtMarketplace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArtMarketplace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A71278852AFE650D001B9A76 /* ArtMarketplaceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtMarketplaceApp.swift; sourceTree = "<group>"; };
@@ -240,6 +244,7 @@
 				01FCD7AB2BAC626C00AEAB76 /* VirtualWalletView.swift */,
 				01FCD7AF2BAC7BE000AEAB76 /* AddMoneyFormView.swift */,
 				A70534CC2BB02CA300139EE6 /* WithdrawMoneyFormView.swift */,
+				01FCD7B32BB1AC2000AEAB76 /* TransactionView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -258,6 +263,7 @@
 			children = (
 				A7E6A2412B02488E002F54E2 /* User.swift */,
 				A7F9F83A2B97AC20005F9EE3 /* Product.swift */,
+				01FCD7B12BB1ABBB00AEAB76 /* Transaction.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -398,6 +404,7 @@
 				A71278862AFE650D001B9A76 /* ArtMarketplaceApp.swift in Sources */,
 				A7E6A2422B02488E002F54E2 /* User.swift in Sources */,
 				A7F9F83D2B97B25C005F9EE3 /* ImageSliderView.swift in Sources */,
+				01FCD7B42BB1AC2000AEAB76 /* TransactionView.swift in Sources */,
 				A70534CD2BB02CA300139EE6 /* WithdrawMoneyFormView.swift in Sources */,
 				01FCD7902B98C50200AEAB76 /* ProductCardView.swift in Sources */,
 				01FCD7B02BAC7BE000AEAB76 /* AddMoneyFormView.swift in Sources */,
@@ -408,6 +415,7 @@
 				01FCD7922B98C51D00AEAB76 /* SearchView.swift in Sources */,
 				01FCD7942B98C6C200AEAB76 /* CartManager.swift in Sources */,
 				01FCD7A32B99CC7500AEAB76 /* ProductsView.swift in Sources */,
+				01FCD7B22BB1ABBB00AEAB76 /* Transaction.swift in Sources */,
 				A7E6A23C2B023C01002F54E2 /* RegistrationView.swift in Sources */,
 				A7F9F83B2B97AC20005F9EE3 /* Product.swift in Sources */,
 				A7E6A2402B024651002F54E2 /* SettingsRowView.swift in Sources */,

@@ -31,6 +31,7 @@ struct AddMoneyFormView: View {
                     return
                 }
                 userWalletManager.updateWalletBalanceInFirestore(withAmount: amount)
+                userWalletManager.recordTransaction(type: "Money Added", amount: amount)
                 presentationMode.wrappedValue.dismiss() // Close the form
             }
             .padding()
