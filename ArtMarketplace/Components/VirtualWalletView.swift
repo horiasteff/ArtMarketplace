@@ -11,12 +11,11 @@ import Combine
 
 struct VirtualWalletView: View {
     @EnvironmentObject var viewModel: AuthViewModel
-    @StateObject var userWalletManager = UserWalletManager()
+    @ObservedObject var userWalletManager: UserWalletManager
     @State private var isShowingAddMoneyForm = false
     @State private var isShowingWithdrawMoneyForm = false
 
     var body: some View {
-                
         VStack {
             VStack {
                 Spacer()
@@ -51,18 +50,13 @@ struct VirtualWalletView: View {
                                     
                         Spacer()
                         
-                        NavigationLink(destination: WithdrawMoneyFormView(isPresented: $isShowingWithdrawMoneyForm)) {
+                        NavigationLink(destination: WithdrawMoneyFormView(isPresented: $isShowingWithdrawMoneyForm, userWalletManager: userWalletManager)) {
                                         Image(systemName: "arrow.up.circle.fill")
                                             .imageScale(.medium)
                                             .font(.title)
                                         Text("Withdraw Money")
                                     }
                                     .padding()
-                        
-//                        Text("Withdraw money")
-//                        Image(systemName: "arrow.up.circle.fill")
-//                            .imageScale(.medium)
-//                            .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                         
                     }
                     .offset(y: +45)
@@ -97,12 +91,10 @@ struct VirtualWalletView: View {
         }
     }
 
-
-
 #Preview {
-    VirtualWalletView()
+    
+    VirtualWalletView(userWalletManager: UserWalletManager())
         .environmentObject(AuthViewModel())
-        //.environmentObject(UserWalletManager())
 }
    
 
@@ -176,31 +168,6 @@ class UserWalletManager: ObservableObject {
                 print("Wallet balance updated successfully in Firestore")
             }
         }
-        
-//        userDocRef.getDocument { document, error in
-//            if let document = document, document.exists {
-//                if let walletBalance = document.data()?["wallet"] as? Double {
-//                    // Check if withdrawal amount is less than or equal to wallet balance
-//                    if withAmount <= walletBalance {
-//                        // Perform withdrawal operation
-//                        userDocRef.setData(["wallet": FieldValue.increment(-withAmount)], merge: true) { error in
-//                            if let error = error {
-//                                print("Error updating wallet balance in Firestore: \(error.localizedDescription)")
-//                            } else {
-//                                print("Wallet balance updated successfully in Firestore")
-//                            }
-//                        }
-//                    } else {
-//                        print("Withdrawal amount exceeds wallet balance")
-//                    }
-//                } else {
-//                    print("Wallet balance not found or invalid")
-//                }
-//            } else {
-//                print("Document does not exist")
-//            }
-//        }
-        
     }
 }
 

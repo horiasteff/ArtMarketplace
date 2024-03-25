@@ -46,7 +46,7 @@ struct ProfileView: View {
                         }
                     }
                     Section("Account"){
-                        NavigationLink(destination: VirtualWalletView()) {
+                        NavigationLink(destination: VirtualWalletView(userWalletManager: UserWalletManager())) {
                             SettingsRowView(imageName: "wallet.pass", title: "Virtual Wallet", tintColor: .blue)
                         }
                         Button {

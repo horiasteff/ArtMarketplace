@@ -11,13 +11,9 @@ struct WithdrawMoneyFormView: View {
     @Binding var isPresented: Bool
     @State private var amount: String = ""
     @State private var showToast = false
-    @StateObject private var userWalletManager = UserWalletManager()
+    @State private var showToast2 = false
+    @ObservedObject var userWalletManager: UserWalletManager
     @Environment(\.presentationMode) var presentationMode
-    
-//    init(isPresented: Binding<Bool>, userWalletManager: UserWalletManager) {
-//            _isPresented = isPresented
-//            self.userWalletManager = userWalletManager
-//        }
     
     var body: some View {
         VStack {
@@ -39,10 +35,10 @@ struct WithdrawMoneyFormView: View {
 
                 guard withdrawAmount <= userWalletManager.walletBalance else {
                     print(" Balance is thisss: \(userWalletManager.walletBalance)")
-                        showToast = true
+                        showToast2 = true
                         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                             withAnimation {
-                                showToast = false
+                                showToast2 = false
                             }
                         }
                         return
@@ -64,6 +60,15 @@ struct WithdrawMoneyFormView: View {
                                 .cornerRadius(10)
                                 .padding(.horizontal)
                         }
+                        if showToast2 {
+                            Text("There is no enough money to withdraw")
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(Color.red)
+                                .cornerRadius(10)
+                                .padding(.horizontal)
+                        }
+                        
                         Spacer()
                     }
                     , alignment: .top
@@ -72,6 +77,6 @@ struct WithdrawMoneyFormView: View {
 }
 
 #Preview {
-    WithdrawMoneyFormView(isPresented: .constant(false))
+    WithdrawMoneyFormView(isPresented: .constant(false), userWalletManager: UserWalletManager())
 }
 
