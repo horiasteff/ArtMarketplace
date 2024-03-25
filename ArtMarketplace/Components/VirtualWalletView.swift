@@ -14,7 +14,6 @@ struct VirtualWalletView: View {
     @ObservedObject var userWalletManager: UserWalletManager
     @State private var isShowingAddMoneyForm = false
     @State private var isShowingWithdrawMoneyForm = false
-    //@Published  var transactions: [Transaction] = []
 
     var body: some View {
         VStack {
@@ -130,22 +129,18 @@ class UserWalletManager: ObservableObject {
     }
     
     func addMoney(amount: Double) {
-        // Add the given amount to the wallet balance
         walletBalance += amount
         
         recordTransaction(type: "Money added", amount: amount)
         
-        // Update the wallet balance in Firestore (assuming you have a function to update Firestore)
         updateWalletBalanceInFirestore(withAmount: amount)
     }
     
     func withdrawMoney(amount: Double) {
-        // Add the given amount to the wallet balance
         walletBalance -= amount
         
         recordTransaction(type: "Money withdrawed", amount: amount)
         
-        // Update the wallet balance in Firestore (assuming you have a function to update Firestore)
         withdrawWalletBalanceInFirestore(withAmount: amount)
     }
     
@@ -170,8 +165,6 @@ class UserWalletManager: ObservableObject {
             } else {
                 print("Transaction added successfully")
             }
-            
-            
         }
          let transactionID = documentRef.documentID
          transactionData["id"] = transactionID

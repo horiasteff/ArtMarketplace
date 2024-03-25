@@ -31,16 +31,34 @@ struct CartProductView: View {
             .padding()
             
             Spacer()
-            
-            Button{
-                productManager.removeFromCart(product: product)
-            } label:{
-                Image(systemName: "trash")
-                    .resizable()
-                    .foregroundColor(.red)
-                    .frame(width: 25, height: 25)
-                    .padding(.trailing)
+           
+            VStack{
+                Button{
+                    productManager.deleteProductFromCart(product: product)
+                } label:{
+                    Image(systemName: "trash")
+                        .resizable()
+                        .foregroundColor(.red)
+                        .frame(width: 25, height: 25)
+                       
+                }
+                
+                HStack{
+                    Button{
+                        productManager.removeFromCart(product: product)
+                    } label:{
+                        Image(systemName: "minus.circle")
+                    }
+                    Text("\(product.quantity)")
+                    Button{
+                        productManager.addToCart(product: product, documentID: product.id)
+                    } label:{
+                        Image(systemName: "plus.circle")
+                    }
+                }
             }
+            
+            
             
         }
         .padding(.horizontal)

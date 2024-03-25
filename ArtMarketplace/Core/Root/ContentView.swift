@@ -98,7 +98,7 @@ struct ContentView: View {
                                 if tab == .Cart {
                                     ZStack(alignment: .topTrailing){
                                         if let currentUser = viewModel.currentUser {
-                                            if let userCart = productManager.userCarts[currentUser.id] {
+                                            if let userCart = productManager.userCarts[currentUser.id], userCart.count > 0 {
                                                 Text("\(userCart.count)")
                                                     .font(.caption2)
                                                     .foregroundColor(.white)

@@ -16,7 +16,14 @@ struct HomePageView: View {
                 Color.white
                     .edgesIgnoringSafeArea(.all)
                 VStack{
-                    AppBar()
+                    VStack(alignment: .leading) {
+                        Text("    Find the most \nLuxurious")
+                            .font(.largeTitle .bold())
+                        
+                        + Text(" Pictures")
+                            .font(.largeTitle .bold())
+                            .foregroundColor(Color("kPrimary"))
+                    }
                     
                     SearchView()
                     
@@ -60,40 +67,4 @@ struct HomePageView: View {
 #Preview {
     HomePageView()
         .environmentObject(CartManager())
-}
-
-struct AppBar: View {
-    @EnvironmentObject var cartManager: CartManager
-    var body: some View {
-        NavigationStack {
-            VStack(alignment: .leading) {
-                HStack{
-                    Image(systemName: "location.north.fill")
-                        .resizable()
-                        .frame(width: 20, height: 20)
-                        .padding(.trailing)
-                    
-                    Text("Bucharest, Romania")
-                        .font(.title2)
-                        .foregroundColor(.gray)
-                    
-                    Spacer()
-                    
-                    NavigationLink(destination: CartView()
-                        .environmentObject(cartManager)
-                    ){
-                        CartButton(numberOfProducts: cartManager.products.count)
-                    }
-                }
-                Text("Find the most \nLuxurious")
-                    .font(.largeTitle .bold())
-                
-                + Text(" Pictures")
-                    .font(.largeTitle .bold())
-                    .foregroundColor(Color("kPrimary"))
-            }
-        }
-        .padding()
-        .environmentObject(CartManager())
-    }
 }

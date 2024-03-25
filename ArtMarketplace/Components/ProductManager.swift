@@ -22,10 +22,18 @@ class ProductManager: ObservableObject {
         fetchData()
         fetchUserCarts()
         self.$userCarts
-                    .map { carts in
-                        return carts.values.flatMap { $0 }.reduce(0) { $0 + $1.price }
+            .map { carts in
+                var totalPrice = 0
+                
+                for cart in carts.values {
+                    for item in cart {
+                        totalPrice += item.price * Int(item.quantity)
                     }
-                    .assign(to: &$total)
+                }
+                
+                return totalPrice
+            }
+            .assign(to: &$total)
     }
 
     func fetchData() {
@@ -46,8 +54,9 @@ class ProductManager: ObservableObject {
                 let image = URL(string: imageUrlString) ?? URL(string: "https://placeholder-url.com")!
                 let painter = data["painter"] as? String ?? ""
                 let price = data["price"] as? Int ?? 0
+                let quantity = data["quantity"] as? Int ?? 0
                 
-                return Product(id: id, name: name, image: image, description: description, painter: painter, price: price)
+                return Product(id: id, name: name, image: image, description: description, painter: painter, price: price, quantity: quantity)
             }
             
         }
@@ -63,29 +72,92 @@ class ProductManager: ObservableObject {
         let userCartRef = db.collection("users").document(currentUser.uid).collection("cart")
         let cartItemRef = userCartRef.document(documentID)
         let imageURLString = product.image.absoluteString
-        
 
-        // Example of product data you might want to store
-        let data: [String: Any] = [
-            "id": documentID,
-            "name": product.name,
-            "description": product.description,
-            "price": product.price,
-            "painter": product.painter,
-            "image" : imageURLString,
-            
-        ]
-
-        cartItemRef.setData(data) {  error in
-            if let error = error {
-                print("Error adding product to cart: \(error)")
+        cartItemRef.getDocument { document, error in
+            if let document = document, document.exists {
+                let existingQuantity = document.data()?["quantity"] as? Int ?? 0
+                let newQuantity = existingQuantity + 1
+                cartItemRef.setData(["quantity": newQuantity], merge: true) { error in
+                    if let error = error {
+                        print("Error updating quantity in cart: \(error)")
+                    } else {
+                        print("Quantity updated in cart successfully")
+                    }
+                }
             } else {
-                print("Product added to cart successfully")
+                let data: [String: Any] = [
+                    "id": documentID,
+                    "name": product.name,
+                    "description": product.description,
+                    "price": product.price,
+                    "painter": product.painter,
+                    "image": imageURLString,
+                    "quantity": 1
+                ]
+
+                cartItemRef.setData(data) { error in
+                    if let error = error {
+                        print("Error adding product to cart: \(error)")
+                    } else {
+                        print("Product added to cart successfully")
+                    }
+                }
             }
         }
     }
     
+    
     func removeFromCart(product: Product) {
+        guard let currentUser = Auth.auth().currentUser else {
+            print("User is not logged in")
+            return
+        }
+
+        guard var userCart = self.userCarts[currentUser.uid] else {
+            print("User's cart is empty or not loaded")
+            return
+        }
+
+        if let index = userCart.firstIndex(where: { $0.id == product.id }) {
+            let quantity = userCart[index].quantity
+
+            if quantity > 1 {
+                userCart[index].quantity -= 1
+            } else {
+                userCart.remove(at: index)
+            }
+            
+            self.userCarts[currentUser.uid] = userCart
+
+            let db = Firestore.firestore()
+            let userCartRef = db.collection("users").document(currentUser.uid).collection("cart")
+            let cartItemRef = userCartRef.document(product.id)
+
+            if quantity > 1 {
+                cartItemRef.setData(["quantity": userCart[index].quantity], merge: true) { error in
+                    if let error = error {
+                        print("Error updating quantity in cart: \(error)")
+                    } else {
+                        print("Quantity updated in cart successfully")
+                    }
+                }
+            } else {
+                cartItemRef.delete { error in
+                    if let error = error {
+                        print("Error removing product from cart: \(error)")
+                    } else {
+                        print("Product removed from cart successfully")
+                        self.fetchUserCarts()
+                    }
+                }
+            }
+        } else {
+            print("Product not found in user's cart")
+        }
+    }
+    
+    
+    func deleteProductFromCart(product: Product) {
         guard let currentUser = Auth.auth().currentUser else {
             print("User is not logged in")
             return
@@ -151,11 +223,12 @@ class ProductManager: ObservableObject {
               let price = data["price"] as? Int,
               let imageURLString = data["image"] as? String,
               let imageURL = URL(string: imageURLString),
-              let painter = data["painter"] as? String
+              let painter = data["painter"] as? String,
+              let quantity = data["quantity"] as? Int
         else {
             fatalError("Failed to extract product data from Firestore document")
         }
 
-        return Product(id: documentID, name: name, image: imageURL, description: description, painter: painter, price: price)
+        return Product(id: documentID, name: name, image: imageURL, description: description, painter: painter, price: price, quantity: quantity)
     }
 }
