@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ProductsView: View {
-    @EnvironmentObject var cartManager: CartManager
     @ObservedObject private var productManager = ProductManager()
     var column = [GridItem(.adaptive(minimum: 160), spacing: 20)]
     var body: some View {
@@ -31,6 +30,5 @@ struct ProductsView: View {
 
 #Preview {
     ProductsView()
-        .environmentObject(CartManager())
         .environmentObject(ProductManager())
 }

@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct CartView: View {
-    @EnvironmentObject var cartManager: CartManager
     @ObservedObject private var productManager = ProductManager()
     @EnvironmentObject var viewModel: AuthViewModel
 
@@ -27,8 +26,13 @@ struct CartView: View {
                                 .bold()
                         }
                         .padding()
-                        PaymentButton(action: {})
-                            .padding()
+                        HStack{
+                            Text("Continue to payment ")
+                            Image(systemName: "arrowshape.right")
+                        }
+                        .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
+                        .frame(width: 200,height: 45)
+                        
                     } else {
                         Text("The cart is empty")
                     }

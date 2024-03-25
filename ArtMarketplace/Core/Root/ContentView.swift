@@ -10,7 +10,6 @@ import SwiftUI
 struct ContentView: View {
     
     @EnvironmentObject var viewModel: AuthViewModel
-    @StateObject var cartManager = CartManager()
     @StateObject var productManager = ProductManager()
     @State var currentTab: Tab = .Home
     @Namespace var animation
@@ -44,8 +43,6 @@ struct ContentView: View {
 
                     ProfileView()
                         .environmentObject(productManager)
-
-                        .environmentObject(CartManager())
                         .tag(Tab.Profile)
                 }
                 .overlay(
@@ -74,7 +71,6 @@ struct ContentView: View {
                     currentTab = tab
                 }
             }, label: {
-                var numberOfProducts = tab.numberOfProducts
                 VStack(spacing: 0){
                     Image(systemName: currentTab == tab ? tab.rawValue + ".fill" : tab.rawValue)
                         .resizable()
@@ -130,15 +126,6 @@ enum Tab: String, CaseIterable{
     case Cart = "bag"
     case Profile = "person"
     
-    var numberOfProducts: Int {
-           switch self {
-           case .Home, .Search, .Notifications, .Profile:
-               return 0
-           case .Cart:
-               return CartManager().products.count
-           }
-       }
-    
     var TabName: String {
         switch self {
         case .Home:
@@ -184,7 +171,6 @@ struct MaterialEffect: UIViewRepresentable{
 
 #Preview {
     ContentView()
-        .environmentObject(CartManager())
         .environmentObject(ProductManager())
 
 }

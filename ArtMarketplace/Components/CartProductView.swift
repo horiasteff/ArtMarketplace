@@ -57,9 +57,6 @@ struct CartProductView: View {
                     }
                 }
             }
-            
-            
-            
         }
         .padding(.horizontal)
         .background(Color("kSecondary"))

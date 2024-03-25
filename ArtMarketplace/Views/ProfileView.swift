@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ProfileView: View {
     @EnvironmentObject var viewModel: AuthViewModel
-    @EnvironmentObject var cartManager: CartManager
     var body: some View {
         NavigationStack{
             if let user  = viewModel.currentUser {
@@ -64,12 +63,9 @@ struct ProfileView: View {
                 .navigationBarTitle("Profile", displayMode: .inline)
             }
         }
-        .environmentObject(CartManager())
     }
 }
 
 #Preview {
     ProfileView()
-        .environmentObject(CartManager())
-    
 }

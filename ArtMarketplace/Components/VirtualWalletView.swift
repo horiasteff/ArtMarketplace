@@ -101,7 +101,6 @@ struct VirtualWalletView: View {
     }
 
 #Preview {
-    
     VirtualWalletView(userWalletManager: UserWalletManager())
         .environmentObject(AuthViewModel())
 }

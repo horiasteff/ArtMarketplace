@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct HomePageView: View {
-    @EnvironmentObject var cartManager: CartManager
     @ObservedObject private var productManager = ProductManager()
     var body: some View {
         NavigationStack {
@@ -52,7 +51,7 @@ struct HomePageView: View {
                                     ProductDetailsView(product: product)
                                 } label: {
                                     ProductCardView(product: product)
-                                        .environmentObject(cartManager)
+                                       //.environmentObject(cartManager)
                                 }
                             }
                         }
@@ -66,5 +65,4 @@ struct HomePageView: View {
 
 #Preview {
     HomePageView()
-        .environmentObject(CartManager())
 }

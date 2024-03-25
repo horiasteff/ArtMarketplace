@@ -12,7 +12,6 @@ import Firebase
 struct ArtMarketplaceApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @StateObject var viewModel = AuthViewModel()
-    @StateObject var cartManager = CartManager()
     
     
     var body: some Scene {
@@ -20,7 +19,6 @@ struct ArtMarketplaceApp: App {
            
             ContentView()
                 .environmentObject(AuthViewModel())
-                .environmentObject(CartManager())
         }
     }
 }

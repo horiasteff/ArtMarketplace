@@ -30,7 +30,6 @@ class ProductManager: ObservableObject {
                         totalPrice += item.price * Int(item.quantity)
                     }
                 }
-                
                 return totalPrice
             }
             .assign(to: &$total)
@@ -163,7 +162,6 @@ class ProductManager: ObservableObject {
             return
         }
 
-        // Check if the user's cart exists
         guard var userCart = self.userCarts[currentUser.uid] else {
             print("User's cart is empty or not loaded")
             return
@@ -207,10 +205,10 @@ class ProductManager: ObservableObject {
             var userCart: [Product] = []
             for document in snapshot.documents {
                 let documentID = document.documentID
-                if let product = document.data() as? [String: Any] {
-                    let convertedProduct = self.convertFirestoreDataToProduct(documentID, product)
-                    userCart.append(convertedProduct)
-                }
+                let product = document.data()
+                let convertedProduct = self.convertFirestoreDataToProduct(documentID, product)
+                userCart.append(convertedProduct)
+                
             }
             self.userCarts[currentUser.uid] = userCart
         }

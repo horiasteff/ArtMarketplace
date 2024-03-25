@@ -10,6 +10,7 @@ import URLImage
 
 struct ProductDetailsView: View {
     var product: Product
+    @ObservedObject private var productManager = ProductManager()
     var body: some View {
         ScrollView{
             ZStack{
@@ -63,17 +64,7 @@ struct ProductDetailsView: View {
                             }
                             .padding(.vertical)
                             Spacer()
-                            
-                            HStack{
-                                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                                    Image(systemName: "minus.square")
-                                })
-                                Text("1")
-                                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                                    Image(systemName: "plus.square.fill")
-                                        .foregroundColor(Color("kPrimary"))
-                                })
-                            }
+                            Spacer()
                         }
                         
                         Text("Description")
@@ -111,8 +102,20 @@ struct ProductDetailsView: View {
                         }
                         .padding(.vertical)
                         
-                        PaymentButton(action: {})
-                            .frame(width: .infinity, height: 35)
+                        
+                        Button{
+                            productManager.addToCart(product: product, documentID: product.id)
+                        } label:{
+                            
+                            HStack{
+                                Spacer()
+                                Text("Add to cart ")
+                                Image(systemName: "plus.circle.fill")
+                                Spacer()
+                            }
+                            .foregroundColor(Color("kPrimary"))
+                        }
+                        
                     }
                     .padding()
                     .background(.white)
@@ -127,6 +130,7 @@ struct ProductDetailsView: View {
 
 #Preview {
     ProductDetailsView(product: productList[1])
+        .environmentObject(ProductManager())
 }
 
 struct ColorDotView: View {

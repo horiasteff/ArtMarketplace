@@ -46,7 +46,7 @@ struct WithdrawMoneyFormView: View {
 
                 userWalletManager.withdrawWalletBalanceInFirestore(withAmount: withdrawAmount)
                 userWalletManager.recordTransaction(type: "Money Withdrawed", amount: withdrawAmount)
-                presentationMode.wrappedValue.dismiss() // Close the form
+                presentationMode.wrappedValue.dismiss()
             }
             .padding()
         }
