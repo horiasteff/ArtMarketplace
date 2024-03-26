@@ -14,6 +14,7 @@ struct PaymentFormView: View {
     @State private var address = ""
     @State private var paymentType = "Cash" 
     let productManager: ProductManager
+    private let userWalletManager = UserWalletManager.shared
     
     init(viewModel: AuthViewModel, productManager: ProductManager) {
         _viewModel = StateObject(wrappedValue: viewModel)

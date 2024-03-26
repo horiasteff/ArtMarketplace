@@ -32,10 +32,10 @@ struct ContentView: View {
                         .background()
                         .tag(Tab.Search)
                     
-                    Text("Notifications View")
+                    Text("Orders History View")
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .background()
-                        .tag(Tab.Notifications)
+                        .tag(Tab.Orders)
                     
                     CartView()
                         .environmentObject(productManager)
@@ -123,7 +123,7 @@ struct ContentView: View {
 enum Tab: String, CaseIterable{
     case Home = "house"
     case Search = "magnifyingglass.circle"
-    case Notifications = "bell"
+    case Orders = "book.pages"
     case Cart = "bag"
     case Profile = "person"
     
@@ -133,8 +133,8 @@ enum Tab: String, CaseIterable{
             return "Home"
         case .Search:
             return "Search"
-        case .Notifications:
-            return "Notifications"
+        case .Orders:
+            return "Orders"
         case .Cart:
             return "Cart"
         case .Profile:

@@ -17,9 +17,7 @@ class ProductManager: ObservableObject {
     @Published var total: Double = 0
     private let userWalletManager = UserWalletManager.shared
 
-
     init() {
-       
         fetchData()
         fetchUserCarts()
         self.$userCarts
@@ -238,6 +236,9 @@ class ProductManager: ObservableObject {
             // Example balance, replace this with the actual balance
             if userWalletManager.walletBalance >= totalAmount {
                 // Perform the payment processing logic here
+                userWalletManager.recordTransaction(type: "Order", amount: total)
+                userWalletManager.walletBalance -= totalAmount
+                userWalletManager.withdrawWalletBalanceInFirestore(withAmount: totalAmount)
                 print("Payment successful!")
             } else {
                 // Not enough balance, show an alert or handle the error appropriately
