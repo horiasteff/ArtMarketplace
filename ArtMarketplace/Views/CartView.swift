@@ -23,7 +23,8 @@ struct CartView: View {
                         HStack {
                             Text("Your total is ")
                             Spacer()
-                            Text("RON \(productManager.total)")
+                            Text("RON \(String(format: "%.2f", productManager.total))")
+                            
                                 .bold()
                         }
                         .padding()

@@ -41,9 +41,10 @@ struct PaymentFormView: View {
                 }
                 Section {
                     HStack{
-                        Text("Total de plata:")
+                        Text("Total amount:")
                         Spacer()
-                        Text("RON \(productManager.total)")
+                        Text("RON \(String(format: "%.2f", productManager.total))")
+                        
                     }
                     Button(action: {
                         productManager.processPayment(paymentType: "Order", totalAmount: productManager.total)
