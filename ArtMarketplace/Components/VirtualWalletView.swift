@@ -107,6 +107,7 @@ struct VirtualWalletView: View {
    
 
 class UserWalletManager: ObservableObject {
+    static let shared = UserWalletManager()
     private let db = Firestore.firestore()
     @Published var walletBalance: Double = 0.0
     @Published var transactions: [Transaction] = []

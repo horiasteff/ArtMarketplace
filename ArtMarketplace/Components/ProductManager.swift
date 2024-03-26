@@ -12,13 +12,14 @@ import Combine
 
 class ProductManager: ObservableObject {
     private var db = Firestore.firestore()
-
     @Published var productList =  [Product]()
     @Published var userCarts: [String: [Product]] = [:]
-    @Published var total: Int = 0
-    
+    @Published var total: Double = 0
+    private let userWalletManager = UserWalletManager.shared
+
 
     init() {
+       
         fetchData()
         fetchUserCarts()
         self.$userCarts
@@ -27,10 +28,10 @@ class ProductManager: ObservableObject {
                 
                 for cart in carts.values {
                     for item in cart {
-                        totalPrice += item.price * Int(item.quantity)
+                        totalPrice += item.price * (item.quantity)
                     }
                 }
-                return totalPrice
+                return Double(totalPrice)
             }
             .assign(to: &$total)
     }
@@ -229,4 +230,23 @@ class ProductManager: ObservableObject {
 
         return Product(id: documentID, name: name, image: imageURL, description: description, painter: painter, price: price, quantity: quantity)
     }
+    
+    func processPayment(paymentType: String, totalAmount: Double) {
+        // Check payment type
+        if paymentType == "Card" {
+            // Assuming you have a property `walletBalance` in your `ProductManager` to store the user's wallet balance
+            // Example balance, replace this with the actual balance
+            if userWalletManager.walletBalance >= totalAmount {
+                // Perform the payment processing logic here
+                print("Payment successful!")
+            } else {
+                // Not enough balance, show an alert or handle the error appropriately
+                print("Insufficient balance.")
+            }
+        } else {
+            // Handle other payment types if necessary
+            print("Payment type: \(paymentType)")
+        }
+    }
+    
 }

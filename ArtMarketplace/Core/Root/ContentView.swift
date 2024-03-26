@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @EnvironmentObject var viewModel: AuthViewModel
+    @StateObject var viewModel = AuthViewModel()
     @StateObject var productManager = ProductManager()
     @State var currentTab: Tab = .Home
     @Namespace var animation
@@ -39,6 +39,7 @@ struct ContentView: View {
                     
                     CartView()
                         .environmentObject(productManager)
+                        .environmentObject(viewModel)
                         .tag(Tab.Cart)
 
                     ProfileView()
@@ -172,5 +173,6 @@ struct MaterialEffect: UIViewRepresentable{
 #Preview {
     ContentView()
         .environmentObject(ProductManager())
+        .environmentObject(AuthViewModel())
 
 }

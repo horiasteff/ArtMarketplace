@@ -11,7 +11,8 @@ struct CartView: View {
     @ObservedObject private var productManager = ProductManager()
     @EnvironmentObject var viewModel: AuthViewModel
 
-    var body: some View {        
+    var body: some View {
+        NavigationView{
         ScrollView {
             if let currentUser = viewModel.currentUser {
                 if let userCart = productManager.userCarts[currentUser.id] {
@@ -26,12 +27,17 @@ struct CartView: View {
                                 .bold()
                         }
                         .padding()
-                        HStack{
-                            Text("Continue to payment ")
-                            Image(systemName: "arrowshape.right")
+                        NavigationLink(destination: PaymentFormView(viewModel: viewModel, productManager: productManager)) {
+                            HStack{
+                                Text("Continue to payment ")
+                                Image(systemName: "arrowshape.right")
+                            }
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color.blue)
+                            .cornerRadius(10)
                         }
-                        .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
-                        .frame(width: 200,height: 45)
                         
                     } else {
                         Text("The cart is empty")
@@ -46,9 +52,11 @@ struct CartView: View {
         .navigationTitle(Text("My Cart"))
         .padding(.top)
     }
+    }
 }
 
 #Preview {
     CartView()
         .environmentObject(ProductManager())
+        .environmentObject(AuthViewModel())
 }
