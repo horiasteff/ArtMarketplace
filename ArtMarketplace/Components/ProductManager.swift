@@ -228,26 +228,4 @@ class ProductManager: ObservableObject {
 
         return Product(id: documentID, name: name, image: imageURL, description: description, painter: painter, price: price, quantity: quantity)
     }
-    
-    func processPayment(paymentType: String, totalAmount: Double) {
-        // Check payment type
-        if paymentType == "Card" {
-            // Assuming you have a property `walletBalance` in your `ProductManager` to store the user's wallet balance
-            // Example balance, replace this with the actual balance
-            if userWalletManager.walletBalance >= totalAmount {
-                // Perform the payment processing logic here
-                userWalletManager.recordTransaction(type: "Order", amount: total)
-                userWalletManager.walletBalance -= totalAmount
-                userWalletManager.withdrawWalletBalanceInFirestore(withAmount: totalAmount)
-                print("Payment successful!")
-            } else {
-                // Not enough balance, show an alert or handle the error appropriately
-                print("Insufficient balance.")
-            }
-        } else {
-            // Handle other payment types if necessary
-            print("Payment type: \(paymentType)")
-        }
-    }
-    
 }

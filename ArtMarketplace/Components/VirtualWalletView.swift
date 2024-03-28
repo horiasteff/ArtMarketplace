@@ -107,6 +107,7 @@ struct VirtualWalletView: View {
    
 
 class UserWalletManager: ObservableObject {
+    @EnvironmentObject var viewModel: AuthViewModel
     static let shared = UserWalletManager()
     private let db = Firestore.firestore()
     @Published var walletBalance: Double = 0.0
@@ -237,6 +238,21 @@ class UserWalletManager: ObservableObject {
                     return nil
                 }
             }
+        }
+    }
+    
+    func processPayment(paymentType: String, totalAmount: Double, userWalletBalance: Double) {
+        if paymentType == "Card" {
+            if userWalletBalance >= totalAmount {
+                recordTransaction(type: "Order", amount: totalAmount)
+                withdrawWalletBalanceInFirestore(withAmount: totalAmount)
+                print("Payment successful!")
+            } else {
+                print("Atata am: \(userWalletBalance)")
+                print("Insufficient balance.")
+            }
+        } else {
+            print("Payment type: \(paymentType)")
         }
     }
 }

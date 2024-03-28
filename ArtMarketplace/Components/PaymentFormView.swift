@@ -14,7 +14,7 @@ struct PaymentFormView: View {
     @State private var address = ""
     @State private var paymentType = "Cash" 
     let productManager: ProductManager
-    private let userWalletManager = UserWalletManager.shared
+    @ObservedObject private var userWalletManager = UserWalletManager.shared
     
     init(viewModel: AuthViewModel, productManager: ProductManager) {
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -22,6 +22,9 @@ struct PaymentFormView: View {
          let currentUser = viewModel.currentUser
         _name = State(initialValue: currentUser?.fullname ?? "")
         _email = State(initialValue: currentUser?.email ?? "")
+        
+        userWalletManager.fetchWalletBalance(for: viewModel.currentUser?.id ?? "")
+
     }
     
     var body: some View {
@@ -47,7 +50,9 @@ struct PaymentFormView: View {
                         
                     }
                     Button(action: {
-                        productManager.processPayment(paymentType: "Order", totalAmount: productManager.total)
+                        print("Am in cont: \(userWalletManager.walletBalance)")
+                        userWalletManager.processPayment(paymentType: paymentType, totalAmount: productManager.total, userWalletBalance: userWalletManager.walletBalance)
+                        print("Am terminat cu successs")
                     }) {
                         Text("Proceed to Payment")
                             .foregroundColor(.white)
