@@ -50,9 +50,7 @@ struct PaymentFormView: View {
                         
                     }
                     Button(action: {
-                        print("Am in cont: \(userWalletManager.walletBalance)")
                         userWalletManager.processPayment(paymentType: paymentType, totalAmount: productManager.total, userWalletBalance: userWalletManager.walletBalance)
-                        print("Am terminat cu successs")
                     }) {
                         Text("Proceed to Payment")
                             .foregroundColor(.white)

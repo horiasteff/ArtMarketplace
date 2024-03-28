@@ -10,7 +10,7 @@ import Firebase
 
 struct ContentView: View {
     
-    @StateObject var viewModel = AuthViewModel()
+    @EnvironmentObject var viewModel: AuthViewModel
     @StateObject var productManager = ProductManager()
     @State var currentTab: Tab = .Home
     @State private var isActive = true
