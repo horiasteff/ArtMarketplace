@@ -51,7 +51,6 @@ struct HomePageView: View {
                                     ProductDetailsView(product: product)
                                 } label: {
                                     ProductCardView(product: product)
-                                       //.environmentObject(cartManager)
                                 }
                             }
                         }

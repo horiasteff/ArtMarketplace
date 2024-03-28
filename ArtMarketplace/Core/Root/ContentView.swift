@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct ContentView: View {
     
     @StateObject var viewModel = AuthViewModel()
     @StateObject var productManager = ProductManager()
     @State var currentTab: Tab = .Home
+    @State private var isActive = true
     @Namespace var animation
     
     init(){

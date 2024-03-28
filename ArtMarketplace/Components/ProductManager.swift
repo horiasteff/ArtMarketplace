@@ -228,4 +228,40 @@ class ProductManager: ObservableObject {
 
         return Product(id: documentID, name: name, image: imageURL, description: description, painter: painter, price: price, quantity: quantity)
     }
+    
+    func clearCart() {
+           guard let currentUser = Auth.auth().currentUser else {
+               print("User is not logged in")
+               return
+           }
+
+           let db = Firestore.firestore()
+           let userCartRef = db.collection("users").document(currentUser.uid).collection("cart")
+
+           userCartRef.getDocuments { snapshot, error in
+               if let error = error {
+                   print("Error clearing cart: \(error.localizedDescription)")
+                   return
+               }
+
+               guard let documents = snapshot?.documents else {
+                   print("No documents found in user's cart")
+                   return
+               }
+
+               let batch = db.batch()
+               for document in documents {
+                   batch.deleteDocument(document.reference)
+               }
+
+               batch.commit { error in
+                   if let error = error {
+                       print("Error committing batch delete: \(error.localizedDescription)")
+                   } else {
+                       print("Cart cleared successfully")
+                       self.fetchUserCarts() // Refresh the user's cart after clearing
+                   }
+               }
+           }
+       }
 }

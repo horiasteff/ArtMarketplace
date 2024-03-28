@@ -246,6 +246,7 @@ class UserWalletManager: ObservableObject {
             if userWalletBalance >= totalAmount {
                 recordTransaction(type: "Order", amount: totalAmount)
                 withdrawWalletBalanceInFirestore(withAmount: totalAmount)
+                ProductManager().clearCart()
                 print("Payment successful!")
             } else {
                 print("Atata am: \(userWalletBalance)")
