@@ -22,7 +22,6 @@ struct PaymentFormView: View {
          let currentUser = viewModel.currentUser
         _name = State(initialValue: currentUser?.fullname ?? "")
         _email = State(initialValue: currentUser?.email ?? "")
-        
         userWalletManager.fetchWalletBalance(for: viewModel.currentUser?.id ?? "")
 
     }
@@ -42,15 +41,29 @@ struct PaymentFormView: View {
                     }
                     .pickerStyle(SegmentedPickerStyle())
                 }
+                
+                Section(header: Text("Cart Items")) {
+                    ForEach(productManager.userCarts.values.first ?? [], id: \.id) { product in
+                        HStack{
+                            Text("\(product.name)")
+                            Spacer()
+                            Text("\(product.price) RON")
+                            Spacer()
+                            Text("\(product.quantity)")
+                        }
+                    }
+                }
+                
                 Section {
                     HStack{
                         Text("Total amount:")
                         Spacer()
-                        Text("RON \(String(format: "%.2f", productManager.total))")
-                        
+                        Text("\(String(format: "%.2f", productManager.total)) RON")
                     }
+                    
                     Button(action: {
-                        userWalletManager.processPayment(paymentType: paymentType, totalAmount: productManager.total, userWalletBalance: userWalletManager.walletBalance)
+                        let products = productManager.userCarts.values.flatMap { $0 }
+                        userWalletManager.processPayment(paymentType: paymentType, totalAmount: productManager.total, userWalletBalance: userWalletManager.walletBalance, products: products)
                     }) {
                         Text("Proceed to Payment")
                             .foregroundColor(.white)

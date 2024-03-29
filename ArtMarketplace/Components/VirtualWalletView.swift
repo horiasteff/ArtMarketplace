@@ -112,7 +112,6 @@ class UserWalletManager: ObservableObject {
     private let db = Firestore.firestore()
     @Published var walletBalance: Double = 0.0
     @Published var transactions: [Transaction] = []
-
     
     func fetchWalletBalance(for userId: String) {
         let userDocRef = db.collection("users").document(userId)
@@ -231,7 +230,7 @@ class UserWalletManager: ObservableObject {
             
             self.transactions = documents.compactMap { document in
                 do {
-                    var transaction = try document.data(as: Transaction.self)
+                    let transaction = try document.data(as: Transaction.self)
                     return transaction
                 } catch {
                     print("Error decoding transaction: \(error.localizedDescription)")
@@ -241,20 +240,56 @@ class UserWalletManager: ObservableObject {
         }
     }
     
-    func processPayment(paymentType: String, totalAmount: Double, userWalletBalance: Double) {
+    func processPayment(paymentType: String, totalAmount: Double, userWalletBalance: Double, products: [Product]) {
         if paymentType == "Card" {
             if userWalletBalance >= totalAmount {
                 recordTransaction(type: "Order", amount: totalAmount)
                 withdrawWalletBalanceInFirestore(withAmount: totalAmount)
+                recordOrder(totalPrice: totalAmount, products: products)
                 ProductManager().clearCart()
                 print("Payment successful!")
             } else {
-                print("Atata am: \(userWalletBalance)")
                 print("Insufficient balance.")
             }
         } else {
             print("Payment type: \(paymentType)")
         }
+    }
+    
+    func recordOrder(totalPrice: Double, products: [Product]) {
+        guard let currentUser = Auth.auth().currentUser else {
+            print("User is not logged in")
+            return
+        }
+   
+        let ordersCollectionRef = db.collection("users").document(currentUser.uid).collection("orders")
+        
+        var orderData: [String: Any] = [
+            "id": "",
+            "totalPrice": totalPrice,
+            "date": Timestamp(date: Date()),
+            "products": products.map { product in
+                return [
+                    "id": product.id,
+                    "name": product.name,
+                    "price": product.price,
+                    "quantity": product.quantity
+                ]
+            }
+        ]
+        
+        let documentRef = ordersCollectionRef.addDocument(data: orderData) { error in
+            if let error = error {
+                print("Error adding order: \(error.localizedDescription)")
+            } else {
+                print("Order added successfully")
+            }
+        }
+        
+        let orderID = documentRef.documentID
+        orderData["id"] = orderID
+        
+        documentRef.setData(orderData, merge: true)
     }
 }
 

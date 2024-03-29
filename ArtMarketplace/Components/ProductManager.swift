@@ -16,7 +16,7 @@ class ProductManager: ObservableObject {
     @Published var userCarts: [String: [Product]] = [:]
     @Published var total: Double = 0
     private let userWalletManager = UserWalletManager.shared
-
+    
     init() {
         fetchData()
         fetchUserCarts()
@@ -33,7 +33,7 @@ class ProductManager: ObservableObject {
             }
             .assign(to: &$total)
     }
-
+    
     func fetchData() {
         
         db.collection("pictures").addSnapshotListener{(querySnapshot, error) in
@@ -65,12 +65,12 @@ class ProductManager: ObservableObject {
             print("User is not logged in")
             return
         }
-
+        
         let db = Firestore.firestore()
         let userCartRef = db.collection("users").document(currentUser.uid).collection("cart")
         let cartItemRef = userCartRef.document(documentID)
         let imageURLString = product.image.absoluteString
-
+        
         cartItemRef.getDocument { document, error in
             if let document = document, document.exists {
                 let existingQuantity = document.data()?["quantity"] as? Int ?? 0
@@ -92,7 +92,7 @@ class ProductManager: ObservableObject {
                     "image": imageURLString,
                     "quantity": 1
                 ]
-
+                
                 cartItemRef.setData(data) { error in
                     if let error = error {
                         print("Error adding product to cart: \(error)")
@@ -110,15 +110,15 @@ class ProductManager: ObservableObject {
             print("User is not logged in")
             return
         }
-
+        
         guard var userCart = self.userCarts[currentUser.uid] else {
             print("User's cart is empty or not loaded")
             return
         }
-
+        
         if let index = userCart.firstIndex(where: { $0.id == product.id }) {
             let quantity = userCart[index].quantity
-
+            
             if quantity > 1 {
                 userCart[index].quantity -= 1
             } else {
@@ -126,11 +126,11 @@ class ProductManager: ObservableObject {
             }
             
             self.userCarts[currentUser.uid] = userCart
-
+            
             let db = Firestore.firestore()
             let userCartRef = db.collection("users").document(currentUser.uid).collection("cart")
             let cartItemRef = userCartRef.document(product.id)
-
+            
             if quantity > 1 {
                 cartItemRef.setData(["quantity": userCart[index].quantity], merge: true) { error in
                     if let error = error {
@@ -160,21 +160,21 @@ class ProductManager: ObservableObject {
             print("User is not logged in")
             return
         }
-
+        
         guard var userCart = self.userCarts[currentUser.uid] else {
             print("User's cart is empty or not loaded")
             return
         }
-
+        
         if let index = userCart.firstIndex(where: { $0.id == product.id }) {
             userCart.remove(at: index)
             
             self.userCarts[currentUser.uid] = userCart
-
+            
             let db = Firestore.firestore()
             let userCartRef = db.collection("users").document(currentUser.uid).collection("cart")
             let cartItemRef = userCartRef.document(product.id)
-
+            
             cartItemRef.delete { error in
                 if let error = error {
                     print("Error removing product from cart: \(error)")
@@ -193,14 +193,14 @@ class ProductManager: ObservableObject {
             print("User is not logged in")
             return
         }
-
+        
         let userCartRef = db.collection("users").document(currentUser.uid).collection("cart")
         userCartRef.addSnapshotListener { snapshot, error in
             guard let snapshot = snapshot else {
                 print("Error fetching user cart data: \(error?.localizedDescription ?? "Unknown error")")
                 return
             }
-
+            
             var userCart: [Product] = []
             for document in snapshot.documents {
                 let documentID = document.documentID
@@ -212,56 +212,56 @@ class ProductManager: ObservableObject {
             self.userCarts[currentUser.uid] = userCart
         }
     }
-
+    
     func convertFirestoreDataToProduct(_ documentID: String, _ data: [String: Any]) -> Product {
         guard
             let name = data["name"] as? String,
-              let description = data["description"] as? String,
-              let price = data["price"] as? Int,
-              let imageURLString = data["image"] as? String,
-              let imageURL = URL(string: imageURLString),
-              let painter = data["painter"] as? String,
-              let quantity = data["quantity"] as? Int
+            let description = data["description"] as? String,
+            let price = data["price"] as? Int,
+            let imageURLString = data["image"] as? String,
+            let imageURL = URL(string: imageURLString),
+            let painter = data["painter"] as? String,
+            let quantity = data["quantity"] as? Int
         else {
             fatalError("Failed to extract product data from Firestore document")
         }
-
+        
         return Product(id: documentID, name: name, image: imageURL, description: description, painter: painter, price: price, quantity: quantity)
     }
     
     func clearCart() {
-           guard let currentUser = Auth.auth().currentUser else {
-               print("User is not logged in")
-               return
-           }
-
-           let db = Firestore.firestore()
-           let userCartRef = db.collection("users").document(currentUser.uid).collection("cart")
-
-           userCartRef.getDocuments { snapshot, error in
-               if let error = error {
-                   print("Error clearing cart: \(error.localizedDescription)")
-                   return
-               }
-
-               guard let documents = snapshot?.documents else {
-                   print("No documents found in user's cart")
-                   return
-               }
-
-               let batch = db.batch()
-               for document in documents {
-                   batch.deleteDocument(document.reference)
-               }
-
-               batch.commit { error in
-                   if let error = error {
-                       print("Error committing batch delete: \(error.localizedDescription)")
-                   } else {
-                       print("Cart cleared successfully")
-                       self.fetchUserCarts() // Refresh the user's cart after clearing
-                   }
-               }
-           }
-       }
+        guard let currentUser = Auth.auth().currentUser else {
+            print("User is not logged in")
+            return
+        }
+        
+        let db = Firestore.firestore()
+        let userCartRef = db.collection("users").document(currentUser.uid).collection("cart")
+        
+        userCartRef.getDocuments { snapshot, error in
+            if let error = error {
+                print("Error clearing cart: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let documents = snapshot?.documents else {
+                print("No documents found in user's cart")
+                return
+            }
+            
+            let batch = db.batch()
+            for document in documents {
+                batch.deleteDocument(document.reference)
+            }
+            
+            batch.commit { error in
+                if let error = error {
+                    print("Error committing batch delete: \(error.localizedDescription)")
+                } else {
+                    print("Cart cleared successfully")
+                    self.fetchUserCarts()
+                }
+            }
+        }
+    }
 }
