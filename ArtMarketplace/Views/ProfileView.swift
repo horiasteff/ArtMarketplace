@@ -36,22 +36,28 @@ struct ProfileView: View {
                     }
                     Section("General"){
                         HStack {
-                            SettingsRowView(imageName: "gear", title: "Version", tintColor: Color(.systemGray))
-                            
-                            Spacer()
-                            Text("1.0.0")
-                                .font(.subheadline)
-                                .foregroundColor(.gray)
+//                            SettingsRowView(imageName: "gear", title: "Version", tintColor: Color(.systemGray))
+//                            
+//                            Spacer()
+//                            Text("1.0.0")
+//                                .font(.subheadline)
+//                                .foregroundColor(.gray)
+                            NavigationLink(destination: VirtualWalletView(userWalletManager: UserWalletManager())) {
+                                SettingsRowView(imageName: "wallet.pass", title: "Virtual Wallet", tintColor: Color("kPrimary"))
+                            }
                         }
                     }
                     Section("Account"){
-                        NavigationLink(destination: VirtualWalletView(userWalletManager: UserWalletManager())) {
-                            SettingsRowView(imageName: "wallet.pass", title: "Virtual Wallet", tintColor: .blue)
-                        }
+
                         Button {
                             viewModel.signOut()
                         } label: {
                             SettingsRowView(imageName: "arrow.left.circle.fill", title: "Sign out", tintColor: .red)
+                        }
+                        Button {
+                            print("Reset password")
+                        } label: {
+                            SettingsRowView(imageName: "gear", title: "Reset password", tintColor: Color("kPrimary"))
                         }
                         Button {
                             print("Delete account")
