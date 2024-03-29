@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		013054AD2BB6C2ED00199EA3 /* OrdersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013054AC2BB6C2ED00199EA3 /* OrdersView.swift */; };
+		013054AF2BB6C67C00199EA3 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013054AE2BB6C67C00199EA3 /* Order.swift */; };
 		01FCD7902B98C50200AEAB76 /* ProductCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FCD78F2B98C50200AEAB76 /* ProductCardView.swift */; };
 		01FCD7922B98C51D00AEAB76 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FCD7912B98C51D00AEAB76 /* SearchView.swift */; };
 		01FCD7992B98D99B00AEAB76 /* HomePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FCD7982B98D99B00AEAB76 /* HomePageView.swift */; };
@@ -72,6 +74,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		013054AC2BB6C2ED00199EA3 /* OrdersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersView.swift; sourceTree = "<group>"; };
+		013054AE2BB6C67C00199EA3 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		01FCD78F2B98C50200AEAB76 /* ProductCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCardView.swift; sourceTree = "<group>"; };
 		01FCD7912B98C51D00AEAB76 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		01FCD7982B98D99B00AEAB76 /* HomePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageView.swift; sourceTree = "<group>"; };
@@ -151,11 +155,13 @@
 		01FCD7972B98D98500AEAB76 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				01FCD7912B98C51D00AEAB76 /* SearchView.swift */,
 				A7E6A23D2B0243CB002F54E2 /* ProfileView.swift */,
 				01FCD7982B98D99B00AEAB76 /* HomePageView.swift */,
 				01FCD79C2B9919C000AEAB76 /* CartView.swift */,
 				01FCD7A02B9921AE00AEAB76 /* ProductDetailsView.swift */,
 				01FCD7A22B99CC7500AEAB76 /* ProductsView.swift */,
+				013054AC2BB6C2ED00199EA3 /* OrdersView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -231,7 +237,6 @@
 				A7E6A23F2B024651002F54E2 /* SettingsRowView.swift */,
 				A7F9F83C2B97B25C005F9EE3 /* ImageSliderView.swift */,
 				01FCD78F2B98C50200AEAB76 /* ProductCardView.swift */,
-				01FCD7912B98C51D00AEAB76 /* SearchView.swift */,
 				01FCD79A2B99175100AEAB76 /* CartProductView.swift */,
 				01FCD7A42BA07B1000AEAB76 /* ProductManager.swift */,
 				01FCD7AB2BAC626C00AEAB76 /* VirtualWalletView.swift */,
@@ -258,6 +263,7 @@
 				A7E6A2412B02488E002F54E2 /* User.swift */,
 				A7F9F83A2B97AC20005F9EE3 /* Product.swift */,
 				01FCD7B12BB1ABBB00AEAB76 /* Transaction.swift */,
+				013054AE2BB6C67C00199EA3 /* Order.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -402,6 +408,7 @@
 				A70534CD2BB02CA300139EE6 /* WithdrawMoneyFormView.swift in Sources */,
 				01FCD7902B98C50200AEAB76 /* ProductCardView.swift in Sources */,
 				01FCD7B02BAC7BE000AEAB76 /* AddMoneyFormView.swift in Sources */,
+				013054AF2BB6C67C00199EA3 /* Order.swift in Sources */,
 				A7E6A23E2B0243CB002F54E2 /* ProfileView.swift in Sources */,
 				01FCD7A12B9921AE00AEAB76 /* ProductDetailsView.swift in Sources */,
 				01FCD79B2B99175100AEAB76 /* CartProductView.swift in Sources */,
@@ -411,6 +418,7 @@
 				A7E6A23C2B023C01002F54E2 /* RegistrationView.swift in Sources */,
 				A7F9F83B2B97AC20005F9EE3 /* Product.swift in Sources */,
 				A7E6A2402B024651002F54E2 /* SettingsRowView.swift in Sources */,
+				013054AD2BB6C2ED00199EA3 /* OrdersView.swift in Sources */,
 				A75EC30A2B4B052100D6F0F4 /* AuthViewModel.swift in Sources */,
 				01FCD7992B98D99B00AEAB76 /* HomePageView.swift in Sources */,
 				01FCD7B62BB2CADB00AEAB76 /* PaymentFormView.swift in Sources */,

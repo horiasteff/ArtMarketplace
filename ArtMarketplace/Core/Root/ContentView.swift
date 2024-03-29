@@ -34,10 +34,14 @@ struct ContentView: View {
                         .background()
                         .tag(Tab.Search)
                     
-                    Text("Orders History View")
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .background()
+                    OrdersView()
+                        .environmentObject(viewModel)
                         .tag(Tab.Orders)
+                    
+//                    Text("Orders History View")
+//                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+//                        .background()
+//                        .tag(Tab.Orders)
                     
                     CartView()
                         .environmentObject(productManager)
@@ -105,7 +109,6 @@ struct ContentView: View {
                                                     .background(Color("kPrimary"))
                                                     .cornerRadius(50)
                                                     .offset(x: 10, y:-9)
-                                                    
                                             }
                                         }
                                     }
@@ -119,7 +122,6 @@ struct ContentView: View {
         }
         .frame(height: 25)
     }
-    
 }
 
 enum Tab: String, CaseIterable{
