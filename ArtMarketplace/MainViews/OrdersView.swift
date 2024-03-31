@@ -15,27 +15,18 @@ struct OrdersView: View {
     private let db = Firestore.firestore()
     
     var body: some View {
+        
         VStack {
             if orders.isEmpty {
                 Text("No orders found")
             } else {
+                VStack(alignment: .leading) {
+                    Text("Orders")
+                        .font(.largeTitle .bold())
+                        .foregroundColor(Color("kPrimary"))
+                }
                 List(orders, id: \.id) { order in
-                    VStack(alignment: .leading) {
-                        Text("Order ID: \(order.id)")
-                            .font(.headline)
-                        Text("Total Price: \(order.totalPrice)")
-                        Text("Type: \(order.type)")
-                        Text("Date: \(order.date)")
-                        ForEach(order.products, id: \.id) { product in
-                            VStack(alignment: .leading) {
-                                Text("Product ID: \(product.id)")
-                                Text("Name: \(product.name)")
-                                Text("Price: \(product.price)")
-                                Text("Quantity: \(product.quantity)")
-                                Text("Description: \(product.description)")
-                            }
-                        }
-                    }
+                    OrderListView(order: order)
                 }
             }
         }

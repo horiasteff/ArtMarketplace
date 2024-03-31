@@ -38,11 +38,6 @@ struct ContentView: View {
                         .environmentObject(viewModel)
                         .tag(Tab.Orders)
                     
-//                    Text("Orders History View")
-//                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-//                        .background()
-//                        .tag(Tab.Orders)
-                    
                     CartView()
                         .environmentObject(productManager)
                         .environmentObject(viewModel)
