@@ -14,3 +14,7 @@ struct Order: Decodable {
     var products: [Product]
     var totalPrice: Double
 }
+
+extension Order {
+    static var MOCK_ORDER = Order(id: NSUUID().uuidString, type: "Kobe Bryant", date: Date(), products: [productList[0]], totalPrice: 5000.0)
+}

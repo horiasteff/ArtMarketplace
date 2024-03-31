@@ -268,12 +268,16 @@ class UserWalletManager: ObservableObject {
             "id": "",
             "totalPrice": totalPrice,
             "date": Timestamp(date: Date()),
+            "type": "Card",
             "products": products.map { product in
                 return [
                     "id": product.id,
                     "name": product.name,
                     "price": product.price,
-                    "quantity": product.quantity
+                    "quantity": product.quantity,
+                    "image": product.image.absoluteString,
+                    "painter": product.painter,
+                    "description": product.description
                 ]
             }
         ]
