@@ -23,7 +23,6 @@ struct ProductListItemView: View {
             VStack(alignment: .leading) {
                 Text(product.name)
                     .font(.headline)
-               //Text("Price: \(product.price)")
                 Text("Quantity: \(product.quantity)")
             }
             Spacer()
@@ -33,5 +32,5 @@ struct ProductListItemView: View {
 }
 
 #Preview {
-    ProductListItemView(product: productList[1])
+    ProductListItemView(product: Product.MOCK_PRODUCT)
 }

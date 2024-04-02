@@ -24,8 +24,6 @@ struct HomePageView: View {
                             .foregroundColor(Color("kPrimary"))
                     }
                     
-                    SearchBarView()
-                    
                     ImageSliderView()
                     
                     HStack{

@@ -20,18 +20,11 @@ struct ProductDetailsView: View {
                     ZStack(alignment: .topTrailing){
                         
                         URLImage(product.image) { image in
-                                               image
-                                                   .resizable()
-                                                   .frame(width: .infinity, height: 300)
-                                                   .cornerRadius(12)
-                                           }
-                        
-                        Image(systemName: "heart.fill")
-                            .resizable()
-                            .frame(width: 25, height: 25)
-                            .padding(.top, 63)
-                            .padding(.trailing, 20)
-                        
+                            image
+                                .resizable()
+                                .frame(width: .infinity, height: 300)
+                                .cornerRadius(12)
+                        }
                         
                     }
                     VStack(alignment: .leading){
@@ -73,36 +66,6 @@ struct ProductDetailsView: View {
                         
                         Text(product.description)
                         Spacer()
-                        HStack(alignment: .top){
-                            VStack(alignment: .leading){
-                                Text("Size-add the size of the painting")
-                                    .font(.system(size: 18))
-                                    .fontWeight(.semibold)
-                                
-                                Text("Height - add height")
-                                    .foregroundColor(.gray)
-                                Text("Width - add width")
-                                    .foregroundColor(.gray)
-                            }
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            
-                            Spacer()
-
-                            VStack(alignment: .trailing){
-                                Text("Colors")
-                                    .font(.system(size: 18))
-                                    .fontWeight(.semibold)
-                                
-                                HStack{
-                                    ColorDotView(color: .blue)
-                                    ColorDotView(color: .black)
-                                }
-                            }
-                            .frame(maxWidth: .infinity, alignment: .trailing)
-                        }
-                        .padding(.vertical)
-                        
-                        
                         Button{
                             productManager.addToCart(product: product, documentID: product.id)
                         } label:{
@@ -129,7 +92,7 @@ struct ProductDetailsView: View {
 }
 
 #Preview {
-    ProductDetailsView(product: productList[1])
+    ProductDetailsView(product: Product.MOCK_PRODUCT)
         .environmentObject(ProductManager())
 }
 

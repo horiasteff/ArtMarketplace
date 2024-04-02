@@ -16,5 +16,5 @@ struct Order: Decodable {
 }
 
 extension Order {
-    static var MOCK_ORDER = Order(id: NSUUID().uuidString, type: "Kobe Bryant", date: Date(), products: [productList[0]], totalPrice: 5000.0)
+    static var MOCK_ORDER = Order(id: NSUUID().uuidString, type: "Kobe Bryant", date: Date(), products: [Product.MOCK_PRODUCT], totalPrice: 5000.0)
 }

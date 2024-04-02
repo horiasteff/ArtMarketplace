@@ -13,7 +13,6 @@ struct CartProductView: View {
     var product: Product
     var body: some View {
         HStack(spacing: 20){
-            
             URLImage(product.image) { image in
                                    image
                                        .resizable()
@@ -67,6 +66,6 @@ struct CartProductView: View {
 }
 
 #Preview {
-    CartProductView(product: productList[1])
+    CartProductView(product: Product.MOCK_PRODUCT)
         .environmentObject(ProductManager())
 }

@@ -10,12 +10,60 @@ import SwiftUI
 struct ProductsView: View {
     @ObservedObject private var productManager = ProductManager()
     var column = [GridItem(.adaptive(minimum: 160), spacing: 20)]
+    @State private var search: String = ""
+    
+    var filteredProducts: [Product] {
+        if search.isEmpty {
+            return productManager.productList
+        } else {
+            return productManager.productList.filter { $0.name.lowercased().contains(search.lowercased()) }
+        }
+    }
+
     var body: some View {
+
+        VStack(alignment: .leading) {
+            Text("   Entire collection \nLuxurious")
+                .font(.largeTitle .bold())
+            
+            + Text(" Pictures")
+                .font(.largeTitle .bold())
+                .foregroundColor(Color("kPrimary"))
+        }
+        
+        SearchBarView(search: $search)
+        
+//        HStack{
+//            HStack{
+//                Image(systemName: "magnifyingglass")
+//                    .padding(.leading)
+//                TextField("Search for picture", text: $search)
+//                    .padding()
+//            }
+//            .background(Color("kSecondary"))
+//            .frame(height: 40)
+//            .cornerRadius(12)
+//            
+//            Image(systemName: "camera")
+//                .padding()
+//                .foregroundColor(.white)
+//                .background(Color("kPrimary"))
+//                .frame(height: 40)
+//                .cornerRadius(12)
+//                
+//            
+//        }
+//        .padding(.horizontal)
+        
         NavigationView{
             ScrollView{
                 LazyVGrid(columns: column, spacing: 20){
-                    ForEach(productManager.productList, id: \.id){product in
+                    ForEach(filteredProducts, id: \.id){ product in
+                        NavigationLink{
+                            ProductDetailsView(product: product)
+                        } label: {
                             ProductCardView(product: product)
+                        }
                     }
                 }
                 .padding()

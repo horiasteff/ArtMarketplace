@@ -23,7 +23,7 @@ struct ExhibitionView: View {
                                     image
                                         .resizable()
                                         .cornerRadius(15)
-                                        .frame(width: 200, height: 200)
+                                        .aspectRatio(contentMode: .fit)
                                         .shadow(radius: 10, y: 10)
                                         .scrollTransition(topLeading: .interactive,
                                                           bottomTrailing: .interactive,
@@ -34,6 +34,7 @@ struct ExhibitionView: View {
                                                 .rotation3DEffect(.degrees(phase.value * 90), axis: (x: 0, y: -1, z: 0))
                                         }
                                 }
+                                .frame(width: 300, height: 300)
                                 Text(product.name)
                                     .font(.headline)
                                     .padding(.horizontal, 40)
@@ -43,12 +44,10 @@ struct ExhibitionView: View {
                     .scrollTargetLayout()
                 }
                 .frame(height: 200)
-                .safeAreaPadding(.horizontal, 32)
+                .safeAreaPadding(.horizontal, 52)
                 .scrollClipDisabled()
                 .scrollTargetBehavior(.viewAligned)
             }
-//            .background(Color("kPrimary"))
-//            .ignoresSafeArea(.all)
         }
     }
 }

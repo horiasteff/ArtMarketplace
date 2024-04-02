@@ -53,6 +53,6 @@ struct ProductCardView: View {
 }
 
 #Preview {
-    ProductCardView(product: productList[0])
+    ProductCardView(product: Product.MOCK_PRODUCT)
         .environmentObject(ProductManager())
 }
