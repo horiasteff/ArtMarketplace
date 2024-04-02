@@ -77,6 +77,9 @@ struct ProductDetailsView: View {
                                 Spacer()
                             }
                             .foregroundColor(Color("kPrimary"))
+                            .background(Color("kSecondary"))
+                            .cornerRadius(40)
+                            
                         }
                         
                     }

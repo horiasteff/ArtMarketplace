@@ -20,15 +20,6 @@ struct SearchBarView: View {
             .background(Color("kSecondary"))
             .frame(height: 40)
             .cornerRadius(12)
-            
-            Image(systemName: "camera")
-                .padding()
-                .foregroundColor(.white)
-                .background(Color("kPrimary"))
-                .frame(height: 40)
-                .cornerRadius(12)
-                
-            
         }
         .padding(.horizontal)
         
