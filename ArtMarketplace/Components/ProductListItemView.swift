@@ -13,10 +13,6 @@ struct ProductListItemView: View {
     
     var body: some View {
         HStack {
-//            Image(systemName: "photo") // Placeholder image
-//                .resizable()
-//                .frame(width: 50, height: 50)
-            
             URLImage(product.image) { image in
                 image
                     .resizable()
@@ -27,7 +23,7 @@ struct ProductListItemView: View {
             VStack(alignment: .leading) {
                 Text(product.name)
                     .font(.headline)
-                Text("Price: \(product.price)")
+               //Text("Price: \(product.price)")
                 Text("Quantity: \(product.quantity)")
             }
             Spacer()

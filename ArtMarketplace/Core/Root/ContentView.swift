@@ -29,10 +29,8 @@ struct ContentView: View {
                         .environmentObject(productManager)
                         .tag(Tab.Home)
                     
-                    Text("Search View")
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .background()
-                        .tag(Tab.Search)
+                    ExhibitionView()
+                        .tag(Tab.Exhibition)
                     
                     OrdersView()
                         .environmentObject(viewModel)
@@ -121,7 +119,7 @@ struct ContentView: View {
 
 enum Tab: String, CaseIterable{
     case Home = "house"
-    case Search = "magnifyingglass.circle"
+    case Exhibition = "photo.stack"
     case Orders = "book.pages"
     case Cart = "bag"
     case Profile = "person"
@@ -130,8 +128,8 @@ enum Tab: String, CaseIterable{
         switch self {
         case .Home:
             return "Home"
-        case .Search:
-            return "Search"
+        case .Exhibition:
+            return "Exhibition"
         case .Orders:
             return "Orders"
         case .Cart:

@@ -24,7 +24,7 @@ struct HomePageView: View {
                             .foregroundColor(Color("kPrimary"))
                     }
                     
-                    SearchView()
+                    SearchBarView()
                     
                     ImageSliderView()
                     

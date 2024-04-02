@@ -1,13 +1,13 @@
 //
-//  SearchView.swift
+//  SearchBarView.swift
 //  ArtMarketplace
 //
-//  Created by Horia Stefan Munteanu on 06.03.2024.
+//  Created by Horia Stefan Munteanu on 02.04.2024.
 //
 
 import SwiftUI
 
-struct SearchView: View {
+struct SearchBarView: View {
     @State private var search: String = ""
     var body: some View {
         HStack{
@@ -36,5 +36,5 @@ struct SearchView: View {
 }
 
 #Preview {
-    SearchView()
+    SearchBarView()
 }

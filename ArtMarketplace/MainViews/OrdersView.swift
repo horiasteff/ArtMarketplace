@@ -26,7 +26,7 @@ struct OrdersView: View {
                         .foregroundColor(Color("kPrimary"))
                 }
                 List(orders, id: \.id) { order in
-                    OrderListView(order: order)
+                    OrderListView(order: order, formattedDate: DateFormatter())
                 }
             }
         }

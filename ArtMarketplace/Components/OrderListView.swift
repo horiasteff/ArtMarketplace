@@ -9,14 +9,17 @@ import SwiftUI
 
 struct OrderListView: View {
     var order: Order
+    var formattedDate: DateFormatter
        
        var body: some View {
            VStack(alignment: .leading, spacing: 8) {
-//               Text("Order ID: \(order.id)")
-//                   .font(.headline)
-               Text("Total Price: \(order.totalPrice)")
+               
+               let formattedDate = DateFormatter.localizedString(from: order.date, dateStyle: .short, timeStyle: .none)
+               Text("Total Price: \(String(format: "%.2f", order.totalPrice)) RON")
                Text("Type: \(order.type)")
-               Text("Date: \(order.date)")
+               Text("Date: \(formattedDate)")
+                   .bold()
+                   .foregroundColor(.black)
                ForEach(order.products, id: \.id) { product in
                    ProductListItemView(product: product)
                }
@@ -30,5 +33,5 @@ struct OrderListView: View {
 }
 
 #Preview {
-    OrderListView(order: Order.MOCK_ORDER)
+    OrderListView(order: Order.MOCK_ORDER, formattedDate: DateFormatter())
 }
