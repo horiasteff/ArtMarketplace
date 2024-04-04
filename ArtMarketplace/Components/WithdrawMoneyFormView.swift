@@ -34,7 +34,6 @@ struct WithdrawMoneyFormView: View {
                 }
 
                 guard withdrawAmount <= userWalletManager.walletBalance else {
-                    print(" Balance is thisss: \(userWalletManager.walletBalance)")
                         showToast2 = true
                         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                             withAnimation {

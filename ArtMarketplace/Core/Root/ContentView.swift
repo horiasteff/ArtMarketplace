@@ -12,6 +12,7 @@ struct ContentView: View {
     
     @EnvironmentObject var viewModel: AuthViewModel
     @StateObject var productManager = ProductManager()
+    @ObservedObject var userWalletManager = UserWalletManager()
     @State var currentTab: Tab = .Home
     @State private var isActive = true
     @Namespace var animation
@@ -28,7 +29,8 @@ struct ContentView: View {
                         .environmentObject(productManager)
                         .tag(Tab.Home)
                     
-                    ExhibitionView()
+                    ExhibitionView(userWalletManager: UserWalletManager())
+                        .environmentObject(viewModel)
                         .tag(Tab.Exhibition)
                     
                     OrdersView()
