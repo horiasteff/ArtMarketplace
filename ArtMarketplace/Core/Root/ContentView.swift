@@ -23,7 +23,6 @@ struct ContentView: View {
     var body: some View {
         Group{
             if viewModel.userSession != nil {
-
                 TabView(selection: $currentTab){
                     HomePageView()
                         .environmentObject(productManager)
@@ -57,6 +56,7 @@ struct ContentView: View {
                     , alignment: .bottom
                 )
                 .ignoresSafeArea(.all, edges: .bottom)
+               // LoginView()
             } else {
                 LoginView()
             }

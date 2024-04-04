@@ -63,13 +63,44 @@ class AuthViewModel: ObservableObject {
         }
     }
     
-    func deleteAccount(){
+    func deleteAccount() {
+        guard let userId = Auth.auth().currentUser?.uid else {
+            print("Error: User not logged in.")
+            return
+        }
         
+        deleteUserDataFromFirestore(userId: userId)
+        signOut()
+    }
+
+    private func deleteUserDataFromFirestore(userId: String) {
+        let db = Firestore.firestore()
+        let userRef = db.collection("users").document(userId)
+        
+        userRef.delete { error in
+            if let error = error {
+                print("Error deleting user data from Firestore: \(error.localizedDescription)")
+            } else {
+                print("User data deleted from Firestore.")
+                self.deleteAccountFromAuthentication(userId: userId)
+            }
+        }
+    }
+
+    private func deleteAccountFromAuthentication(userId: String) {
+        let user = Auth.auth().currentUser
+        user?.delete { error in
+            if let error = error {
+                print("Error deleting user: \(error.localizedDescription)")
+            } else {
+                print("User deleted successfully from Authentication.")
+            }
+        }
     }
     
     func fetchUser() async{
         guard let uid = Auth.auth().currentUser?.uid else {
-                    self.currentUser = nil // Set currentUser to nil when there's no active user
+                    self.currentUser = nil 
                     return
                 }
                 
@@ -83,4 +114,15 @@ class AuthViewModel: ObservableObject {
                     print("Failed to fetch user with error \(error.localizedDescription)")
                 }
        }
+    
+     func resetPassword(email: String) {
+        Auth.auth().sendPasswordReset(withEmail: email) { error in
+            if let error = error {
+                print("Error resetting password: \(error.localizedDescription)")
+            } else {
+                print("Password reset email sent. Please check your email.")
+            }
+           // self.showAlert = true
+        }
+    }
 }

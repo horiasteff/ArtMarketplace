@@ -15,6 +15,11 @@ struct CartView: View {
         NavigationView{
         ScrollView {
             if let currentUser = viewModel.currentUser {
+                VStack(alignment: .leading) {
+                    Text("My Cart")
+                        .font(.largeTitle .bold())
+                        .foregroundColor(Color("kPrimary"))
+                }
                 if let userCart = productManager.userCarts[currentUser.id] {
                     if userCart.count > 0 {
                         ForEach(userCart) { product in
@@ -50,7 +55,7 @@ struct CartView: View {
                 Text("Please log in to view your cart")
             }
         }
-        .navigationTitle(Text("My Cart"))
+        //.navigationTitle(Text("My Cart"))
         .padding(.top)
     }
     }

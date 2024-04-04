@@ -9,8 +9,14 @@ import SwiftUI
 
 struct ProfileView: View {
     @EnvironmentObject var viewModel: AuthViewModel
+    @State private var showAlert = false
     var body: some View {
         NavigationStack{
+            VStack(alignment: .leading) {
+                Text("Profile")
+                    .font(.largeTitle .bold())
+                    .foregroundColor(Color("kPrimary"))
+            }
             if let user  = viewModel.currentUser {
                 List{
                     Section{
@@ -36,12 +42,6 @@ struct ProfileView: View {
                     }
                     Section("General"){
                         HStack {
-//                            SettingsRowView(imageName: "gear", title: "Version", tintColor: Color(.systemGray))
-//                            
-//                            Spacer()
-//                            Text("1.0.0")
-//                                .font(.subheadline)
-//                                .foregroundColor(.gray)
                             NavigationLink(destination: VirtualWalletView(userWalletManager: UserWalletManager())) {
                                 SettingsRowView(imageName: "wallet.pass", title: "Virtual Wallet", tintColor: Color("kPrimary"))
                             }
@@ -55,18 +55,33 @@ struct ProfileView: View {
                             SettingsRowView(imageName: "arrow.left.circle.fill", title: "Sign out", tintColor: .red)
                         }
                         Button {
-                            print("Reset password")
+                            viewModel.resetPassword(email: viewModel.currentUser!.email)
                         } label: {
                             SettingsRowView(imageName: "gear", title: "Reset password", tintColor: Color("kPrimary"))
                         }
+//                        Button {
+//                            viewModel.deleteAccount()
+//                        } label: {
+//                            SettingsRowView(imageName: "xmark.circle.fill", title: "Delete account", tintColor: .red)
+//                        }
+                        
                         Button {
-                            print("Delete account")
+                            showAlert = true
                         } label: {
                             SettingsRowView(imageName: "xmark.circle.fill", title: "Delete account", tintColor: .red)
                         }
+                        .alert(isPresented: $showAlert) {
+                            Alert(
+                                title: Text("Delete Account"),
+                                message: Text("Are you sure you want to delete your account? This action cannot be undone."),
+                                primaryButton: .destructive(Text("Delete")) {
+                                    viewModel.deleteAccount()
+                                },
+                                secondaryButton: .cancel(Text("Cancel"))
+                            )
+                        }
                     }
                 }
-                .navigationBarTitle("Profile", displayMode: .inline)
             }
         }
     }
