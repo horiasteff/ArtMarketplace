@@ -57,7 +57,6 @@ class ProductManager: ObservableObject {
                 
                 return Product(id: id, name: name, image: image, description: description, painter: painter, price: price, quantity: quantity, label: label)
             }
-            
         }
     }
     

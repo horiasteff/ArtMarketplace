@@ -44,7 +44,7 @@ struct HomePageView: View {
                     
                     ScrollView(.horizontal, showsIndicators: false){
                         HStack(spacing: 10){
-                            ForEach(productManager.productList, id: \.id){ product in
+                            ForEach(productManager.productList.filter {$0.label == "standard"}, id: \.id){ product in
                                 NavigationLink{
                                     ProductDetailsView(product: product)
                                 } label: {

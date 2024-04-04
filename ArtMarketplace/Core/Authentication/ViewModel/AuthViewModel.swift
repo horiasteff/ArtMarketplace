@@ -68,7 +68,6 @@ class AuthViewModel: ObservableObject {
             print("Error: User not logged in.")
             return
         }
-        
         deleteUserDataFromFirestore(userId: userId)
         signOut()
     }
@@ -122,7 +121,6 @@ class AuthViewModel: ObservableObject {
             } else {
                 print("Password reset email sent. Please check your email.")
             }
-           // self.showAlert = true
         }
     }
 }

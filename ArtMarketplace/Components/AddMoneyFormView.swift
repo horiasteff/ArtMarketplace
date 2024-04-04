@@ -19,7 +19,7 @@ struct AddMoneyFormView: View {
             TextField("Enter amount", text: $amount)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
-
+            
             Button("Add Money") {
                 guard let amount = Double(amount), amount > 0 else {
                     showToast = true
@@ -38,19 +38,19 @@ struct AddMoneyFormView: View {
         }
         .padding()
         .overlay(
-                    VStack {
-                        if showToast {
-                            Text("Please enter a valid amount")
-                                .foregroundColor(.white)
-                                .padding()
-                                .background(Color.red)
-                                .cornerRadius(10)
-                                .padding(.horizontal)
-                        }
-                        Spacer()
-                    }
-                    , alignment: .top
-                )
+            VStack {
+                if showToast {
+                    Text("Please enter a valid amount")
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(Color.red)
+                        .cornerRadius(10)
+                        .padding(.horizontal)
+                }
+                Spacer()
+            }
+            , alignment: .top
+        )
     }
 }
 

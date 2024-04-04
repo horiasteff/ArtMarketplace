@@ -30,7 +30,6 @@ struct TransactionView: View {
             Text("\(formattedDate)")
                 .bold()
                 .foregroundColor(.white)
-
         }
         .padding(.horizontal)
         .background(Color("kPrimary"))

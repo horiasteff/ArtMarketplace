@@ -21,18 +21,16 @@ struct VirtualWalletView: View {
                 Spacer()
                 VStack{
                 Text("Wallet Balance")
-                        .font(.title)
+                        .font(.title .bold())
                         .foregroundColor(.white)
                         .padding()
-                        .background(Color("kPrimary"))
                         .cornerRadius(10)
                         .frame(maxWidth: .infinity)
                     
                 Text("\(String(format: "%.2f", userWalletManager.walletBalance)) RON")
-                        .font(.title)
+                        .font(.title .bold())
                         .foregroundColor(.white)
                         .padding()
-                        .background(Color("kPrimary"))
                         .cornerRadius(10)
                         .frame(maxWidth: .infinity)
                     
@@ -66,7 +64,7 @@ struct VirtualWalletView: View {
                        Spacer()
                    }
             }
-            .background(Color("kPrimary"))
+            .background(LinearGradient(gradient: Gradient(colors: [Color("kPrimary").opacity(1), Color("kPrimary").opacity(0.2)]), startPoint: .top, endPoint: .bottom).ignoresSafeArea())
 
             VStack {
                 Spacer()
@@ -169,7 +167,6 @@ class UserWalletManager: ObservableObject {
          let transactionID = documentRef.documentID
          transactionData["id"] = transactionID
          
-         // Update the document in Firestore with the generated ID
          documentRef.setData(transactionData, merge: true)
     }
     
@@ -277,7 +274,8 @@ class UserWalletManager: ObservableObject {
                     "quantity": product.quantity,
                     "image": product.image.absoluteString,
                     "painter": product.painter,
-                    "description": product.description
+                    "description": product.description,
+                    "label" : product.label
                 ]
             }
         ]

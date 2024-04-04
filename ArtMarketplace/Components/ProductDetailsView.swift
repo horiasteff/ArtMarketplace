@@ -12,9 +12,9 @@ struct ProductDetailsView: View {
     var product: Product
     @ObservedObject private var productManager = ProductManager()
     var body: some View {
-        ScrollView{
+        ScrollView(showsIndicators: false){
             ZStack{
-                Color.white
+                Color("kSecondary")
                 
                 VStack(alignment: .leading){
                     ZStack(alignment: .topTrailing){
@@ -27,73 +27,75 @@ struct ProductDetailsView: View {
                         }
                         
                     }
-                    VStack(alignment: .leading){
-                        HStack{
-                            Text(product.name)
-                                .font(.title2 .bold())
-                            
-                            Spacer()
-                            
-                            Text("RON \(product.price)")
-                                .font(.title2)
-                                .fontWeight(.semibold)
-                                .padding(.horizontal)
-                                .background(Color("kSecondary"))
-                                .cornerRadius(12)
-                            
-                        }
-                        .padding(.vertical)
-                        
-                        Text(product.label)
-                        
-                        HStack {
-                            HStack(spacing: 10){
-                                ForEach(0..<5){index in
-                                    Image(systemName: "star.fill")
-                                        .resizable()
-                                        .frame(width: 20, height: 20)
-                                        .foregroundColor(.yellow)
-                                }
-                                Text("(4.5)")
-                                    .foregroundColor(.gray)
+                                                
+                        VStack(alignment: .leading){
+                            HStack{
+                                Text(product.name)
+                                    .font(.title2 .bold())
+                                
+                                Spacer()
+                                
+                                Text("RON \(product.price)")
+                                    .font(.title2)
+                                    .fontWeight(.semibold)
+                                    .padding(.horizontal)
+                                    .background(Color("kSecondary"))
+                                    .cornerRadius(12)
+                                
                             }
                             .padding(.vertical)
-                            Spacer()
-                            Spacer()
-                        }
-                        
-                        Text("Description")
-                            .font(.title2)
-                            .fontWeight(.medium)
-                        Spacer()
-                        
-                        Text(product.description)
-                        Spacer()
-                        Spacer()
-                        Button{
-                            productManager.addToCart(product: product, documentID: product.id)
-                        } label:{
-                            HStack{
+                            
+                            Text(product.label)
+                            
+                            HStack {
+                                HStack(spacing: 10){
+                                    ForEach(0..<5){index in
+                                        Image(systemName: "star.fill")
+                                            .resizable()
+                                            .frame(width: 20, height: 20)
+                                            .foregroundColor(.yellow)
+                                    }
+                                    Text("(4.5)")
+                                        .foregroundColor(.gray)
+                                }
+                                .padding(.vertical)
                                 Spacer()
-                                Text("Add to cart ")
-                                Image(systemName: "plus.circle.fill")
                                 Spacer()
                             }
-                            .foregroundColor(Color("kPrimary"))
-                            .background(Color("kSecondary"))
-                            .cornerRadius(40)
+                            
+                            Text("Description")
+                                .font(.title2)
+                                .fontWeight(.medium)
+                            Spacer()
+                            
+                            Text(product.description)
+                            Spacer()
+                            Spacer()
+                            Button{
+                                productManager.addToCart(product: product, documentID: product.id)
+                            } label:{
+                                HStack{
+                                    Spacer()
+                                    Text("Add to cart ")
+                                    Image(systemName: "plus.circle.fill")
+                                    Spacer()
+                                }
+                                .foregroundColor(Color("kPrimary"))
+                                .background(Color("kSecondary"))
+                                .cornerRadius(40)
+                                
+                            }
                             
                         }
-                        
-                    }
-                    .padding()
-                    .background(.white)
-                    .cornerRadius(20)
-                    .offset(y: -30)
+                        .padding()
+                        .background(LinearGradient(gradient: Gradient(colors: [Color("kSecondary").opacity(1), Color("kSecondary").opacity(0)]), startPoint: .top, endPoint: .bottom).ignoresSafeArea())
+                        .cornerRadius(20)
+                        .offset(y: -30)
                 }
             }
         }
-        .ignoresSafeArea(edges: .top)
+        .edgesIgnoringSafeArea(.all)
+        .background(Color("kSecondary"))
     }
 }
 

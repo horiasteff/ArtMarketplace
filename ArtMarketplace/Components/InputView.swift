@@ -28,7 +28,6 @@ struct InputView: View {
             }
             
             Divider()
-            
         }
     }
 }

@@ -13,51 +13,50 @@ struct CartView: View {
 
     var body: some View {
         NavigationView{
-        ScrollView {
-            if let currentUser = viewModel.currentUser {
-                VStack(alignment: .leading) {
-                    Text("My Cart")
-                        .font(.largeTitle .bold())
-                        .foregroundColor(Color("kPrimary"))
-                }
-                if let userCart = productManager.userCarts[currentUser.id] {
-                    if userCart.count > 0 {
-                        ForEach(userCart) { product in
-                            CartProductView(product: product)
-                        }
-                        HStack {
-                            Text("Your total is ")
-                            Spacer()
-                            Text("RON \(String(format: "%.2f", productManager.total))")
-                            
-                                .bold()
-                        }
-                        .padding()
-                        NavigationLink(destination: PaymentFormView(viewModel: viewModel, productManager: productManager)) {
-                            HStack{
-                                Text("Continue to payment ")
-                                Image(systemName: "arrowshape.right")
+            ScrollView {
+                if let currentUser = viewModel.currentUser {
+                    VStack(alignment: .leading) {
+                        Text("My Cart")
+                            .font(.largeTitle .bold())
+                            .foregroundColor(Color("kPrimary"))
+                    }
+                    if let userCart = productManager.userCarts[currentUser.id] {
+                        if userCart.count > 0 {
+                            ForEach(userCart) { product in
+                                CartProductView(product: product)
                             }
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity)
+                            HStack {
+                                Text("Your total is ")
+                                Spacer()
+                                Text("RON \(String(format: "%.2f", productManager.total))")
+                                
+                                    .bold()
+                            }
                             .padding()
-                            .background(Color("kPrimary"))
-                            .cornerRadius(10)
+                            NavigationLink(destination: PaymentFormView(viewModel: viewModel, productManager: productManager)) {
+                                HStack{
+                                    Text("Continue to payment ")
+                                    Image(systemName: "arrowshape.right")
+                                }
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color("kPrimary"))
+                                .cornerRadius(10)
+                            }
+                            
+                        } else {
+                            Text("The cart is empty")
                         }
-                        
                     } else {
                         Text("The cart is empty")
                     }
                 } else {
-                    Text("The cart is empty")
+                    Text("Please log in to view your cart")
                 }
-            } else {
-                Text("Please log in to view your cart")
             }
+            .padding(.top)
         }
-        //.navigationTitle(Text("My Cart"))
-        .padding(.top)
-    }
     }
 }
 

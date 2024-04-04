@@ -22,7 +22,6 @@ struct SearchBarView: View {
             .cornerRadius(12)
         }
         .padding(.horizontal)
-        
     }
 }
 

@@ -56,26 +56,26 @@ struct OrdersView: View {
             }
             
             self.orders = documents.compactMap { document in
-                    // Decode the products array from Firestore
-                    let data = document.data()
-                    let productsData = data["products"] as? [[String: Any]] ?? []
-                    let products = productsData.compactMap { productData -> Product? in
-                        do {
-                            return try Firestore.Decoder().decode(Product.self, from: productData)
-                        } catch {
-                            print("Error decoding product: \(error.localizedDescription)")
-                            return nil
-                        }
+                // Decode the products array from Firestore
+                let data = document.data()
+                let productsData = data["products"] as? [[String: Any]] ?? []
+                let products = productsData.compactMap { productData -> Product? in
+                    do {
+                        return try Firestore.Decoder().decode(Product.self, from: productData)
+                    } catch {
+                        print("Error decoding product: \(error.localizedDescription)")
+                        return nil
                     }
-                    
-                    // Decode other properties of the order
-                    let id = document.documentID
-                    let type = data["type"] as? String ?? ""
-                    let dateTimestamp = data["date"] as? Timestamp ?? Timestamp()
-                    let date = dateTimestamp.dateValue()
-                    let totalPrice = data["totalPrice"] as? Double ?? 0.0
-                    
-                    return Order(id: id, type: type, date: date, products: products, totalPrice: totalPrice)
+                }
+                
+                // Decode other properties of the order
+                let id = document.documentID
+                let type = data["type"] as? String ?? ""
+                let dateTimestamp = data["date"] as? Timestamp ?? Timestamp()
+                let date = dateTimestamp.dateValue()
+                let totalPrice = data["totalPrice"] as? Double ?? 0.0
+                
+                return Order(id: id, type: type, date: date, products: products, totalPrice: totalPrice)
             }
         }
     }

@@ -14,9 +14,9 @@ struct ProductsView: View {
     
     var filteredProducts: [Product] {
         if search.isEmpty {
-            return productManager.productList
+            return productManager.productList.filter {$0.label == "standard"}
         } else {
-            return productManager.productList.filter { $0.name.lowercased().contains(search.lowercased()) }
+            return productManager.productList.filter { $0.name.lowercased().contains(search.lowercased()) && $0.label == "standard"}
         }
     }
 

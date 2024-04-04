@@ -27,55 +27,55 @@ struct PaymentFormView: View {
     }
     
     var body: some View {
-            Form {
-                Section(header: Text("Personal Information")) {
-                    TextField("Name", text: $name)
-                    TextField("Email", text: $email)
-                    TextField("Address", text: $address)
+        Form {
+            Section(header: Text("Personal Information")) {
+                TextField("Name", text: $name)
+                TextField("Email", text: $email)
+                TextField("Address", text: $address)
+            }
+            
+            Section(header: Text("Payment Details")) {
+                Picker(selection: $paymentType, label: Text("Payment Type")) {
+                    Text("Cash").tag("Cash")
+                    Text("Card").tag("Card")
                 }
-                
-                Section(header: Text("Payment Details")) {
-                    Picker(selection: $paymentType, label: Text("Payment Type")) {
-                        Text("Cash").tag("Cash")
-                        Text("Card").tag("Card")
-                    }
-                    .pickerStyle(SegmentedPickerStyle())
-                }
-                
-                Section(header: Text("Cart Items")) {
-                    ForEach(productManager.userCarts.values.first ?? [], id: \.id) { product in
-                        HStack{
-                            Text("\(product.name)")
-                            Spacer()
-                            Text("\(product.price) RON")
-                            Spacer()
-                            Text("\(product.quantity)")
-                        }
-                    }
-                }
-                
-                Section {
+                .pickerStyle(SegmentedPickerStyle())
+            }
+            
+            Section(header: Text("Cart Items")) {
+                ForEach(productManager.userCarts.values.first ?? [], id: \.id) { product in
                     HStack{
-                        Text("Total amount:")
+                        Text("\(product.name)")
                         Spacer()
-                        Text("\(String(format: "%.2f", productManager.total)) RON")
+                        Text("\(product.price) RON")
+                        Spacer()
+                        Text("\(product.quantity)")
                     }
-                    
-                    Button(action: {
-                        let products = productManager.userCarts.values.flatMap { $0 }
-                        userWalletManager.processPayment(paymentType: paymentType, totalAmount: productManager.total, userWalletBalance: userWalletManager.walletBalance, products: products)
-                    }) {
-                        Text("Proceed to Payment")
-                            .foregroundColor(.white)
-                    }
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.blue)
-                    .cornerRadius(10)
                 }
             }
-            .background(Color.clear)
-            .navigationBarTitle("Payment Details")
+            
+            Section {
+                HStack{
+                    Text("Total amount:")
+                    Spacer()
+                    Text("\(String(format: "%.2f", productManager.total)) RON")
+                }
+                
+                Button(action: {
+                    let products = productManager.userCarts.values.flatMap { $0 }
+                    userWalletManager.processPayment(paymentType: paymentType, totalAmount: productManager.total, userWalletBalance: userWalletManager.walletBalance, products: products)
+                }) {
+                    Text("Proceed to Payment")
+                        .foregroundColor(.white)
+                }
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(Color.blue)
+                .cornerRadius(10)
+            }
+        }
+        .background(Color.clear)
+        .navigationBarTitle("Payment Details")
     }
 }
 
