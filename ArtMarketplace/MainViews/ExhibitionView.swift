@@ -47,7 +47,7 @@ struct ExhibitionView: View {
                 if isPaid {
                     ScrollView(.horizontal, showsIndicators: false){
                         HStack{
-                            ForEach(productManager.productList) { product in
+                            ForEach(productManager.productList.filter { $0.label == "standard" }) { product in
                                 VStack{
                                     URLImage(product.image) { image in
                                         image

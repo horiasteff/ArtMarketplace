@@ -53,8 +53,9 @@ class ProductManager: ObservableObject {
                 let painter = data["painter"] as? String ?? ""
                 let price = data["price"] as? Int ?? 0
                 let quantity = data["quantity"] as? Int ?? 0
+                let label = data["label"] as? String ?? ""
                 
-                return Product(id: id, name: name, image: image, description: description, painter: painter, price: price, quantity: quantity)
+                return Product(id: id, name: name, image: image, description: description, painter: painter, price: price, quantity: quantity, label: label)
             }
             
         }
@@ -90,7 +91,8 @@ class ProductManager: ObservableObject {
                     "price": product.price,
                     "painter": product.painter,
                     "image": imageURLString,
-                    "quantity": 1
+                    "quantity": 1,
+                    "label": product.label
                 ]
                 
                 cartItemRef.setData(data) { error in
@@ -225,8 +227,10 @@ class ProductManager: ObservableObject {
         else {
             fatalError("Failed to extract product data from Firestore document")
         }
+        let label = data["label"] as? String ?? "No label"
         
-        return Product(id: documentID, name: name, image: imageURL, description: description, painter: painter, price: price, quantity: quantity)
+        
+        return Product(id: documentID, name: name, image: imageURL, description: description, painter: painter, price: price, quantity: quantity, label: label)
     }
     
     func clearCart() {

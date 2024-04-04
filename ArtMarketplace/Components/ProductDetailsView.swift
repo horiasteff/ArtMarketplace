@@ -44,6 +44,8 @@ struct ProductDetailsView: View {
                         }
                         .padding(.vertical)
                         
+                        Text(product.label)
+                        
                         HStack {
                             HStack(spacing: 10){
                                 ForEach(0..<5){index in

@@ -32,29 +32,7 @@ struct ProductsView: View {
         }
         
         SearchBarView(search: $search)
-        
-//        HStack{
-//            HStack{
-//                Image(systemName: "magnifyingglass")
-//                    .padding(.leading)
-//                TextField("Search for picture", text: $search)
-//                    .padding()
-//            }
-//            .background(Color("kSecondary"))
-//            .frame(height: 40)
-//            .cornerRadius(12)
-//            
-//            Image(systemName: "camera")
-//                .padding()
-//                .foregroundColor(.white)
-//                .background(Color("kPrimary"))
-//                .frame(height: 40)
-//                .cornerRadius(12)
-//                
-//            
-//        }
-//        .padding(.horizontal)
-        
+    
         NavigationView{
             ScrollView{
                 LazyVGrid(columns: column, spacing: 20){
