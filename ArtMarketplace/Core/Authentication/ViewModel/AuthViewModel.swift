@@ -17,6 +17,8 @@ class AuthViewModel: ObservableObject {
     
     @Published var userSession: FirebaseAuth.User?
     @Published var currentUser: User?
+    @Published var showToast: Bool = false
+    @Published var toastMessage: String = ""
     
     init(){
         self.userSession = Auth.auth().currentUser
@@ -32,6 +34,7 @@ class AuthViewModel: ObservableObject {
             self.userSession = result.user
             await fetchUser()
         } catch {
+            showToast = true
             print("DEBUG: Failed to log in with error \(error.localizedDescription)")
         }
     }

@@ -61,15 +61,16 @@ struct ProductDetailsView: View {
                         }
                         
                         Text("Description")
-                            .font(.title3)
+                            .font(.title2)
                             .fontWeight(.medium)
+                        Spacer()
                         
                         Text(product.description)
+                        Spacer()
                         Spacer()
                         Button{
                             productManager.addToCart(product: product, documentID: product.id)
                         } label:{
-                            
                             HStack{
                                 Spacer()
                                 Text("Add to cart ")

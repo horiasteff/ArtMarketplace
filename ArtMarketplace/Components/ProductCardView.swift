@@ -22,11 +22,13 @@ struct ProductCardView: View {
                             .resizable()
                             .frame(width: 155, height: 120)
                             .cornerRadius(12)
+                            .padding(.horizontal, 10)
                         }
                     Text(product.name)
                         .font(.headline)
                         .foregroundColor(.black)
                         .padding(.vertical, 1)
+                        .padding(.horizontal, 10)
                     Text(product.painter)
                         .foregroundColor(.gray)
                         .font(.caption)

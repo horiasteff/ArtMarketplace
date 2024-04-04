@@ -10,6 +10,7 @@ import SwiftUI
 struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
+    @State private var showToast = false
     @EnvironmentObject var viewModel: AuthViewModel
     
     var body: some View {
@@ -50,6 +51,15 @@ struct LoginView: View {
                     }
                     .foregroundColor(.white)
                     .frame(width: UIScreen.main.bounds.width - 32, height: 48)
+                    .onChange(of: viewModel.showToast) { showToast in
+                        if showToast {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                withAnimation {
+                                    viewModel.showToast = false
+                                }
+                            }
+                        }
+                    }
                 }
                 .background(Color(.systemBlue))
                 .disabled(!formIsValid)
@@ -73,6 +83,27 @@ struct LoginView: View {
                     .font(.system(size: 14))
                 }
             }
+            .padding()
+                    .overlay(
+                        VStack {
+                            if showToast {
+                                Text("Invalid email or password")
+                                    .foregroundColor(.white)
+                                    .padding()
+                                    .background(Color.red)
+                                    .cornerRadius(10)
+                                    .padding(.horizontal)
+                            }
+                            Spacer()
+                        },
+                        alignment: .top
+                    )
+                    .onChange(of: viewModel.showToast) { newValue in
+                        showToast = newValue
+                    }
+                    .onChange(of: viewModel.toastMessage) { newValue in
+                        // Optionally handle the toast message content
+                    }
         }
     }
 }
