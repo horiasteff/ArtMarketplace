@@ -15,25 +15,35 @@ struct OrdersView: View {
     private let db = Firestore.firestore()
     
     var body: some View {
-        
-        VStack {
-            if orders.isEmpty {
-                Text("No orders found")
-            } else {
-                VStack(alignment: .leading) {
-                    Text("Orders")
-                        .font(.largeTitle .bold())
-                        .foregroundColor(Color("kPrimary"))
-                }
-                List(orders, id: \.id) { order in
-                    OrderListView(order: order, formattedDate: DateFormatter())
+
+            VStack {
+                if orders.isEmpty {
+                    VStack(alignment: .leading) {
+                        Text("Orders")
+                            .font(.largeTitle .bold())
+                            .foregroundColor(Color("kPrimary"))
+                    }
+                    Text("No orders found")
+                } else {
+                    NavigationStack{
+                        VStack(alignment: .leading) {
+                            Text("Orders")
+                                .font(.largeTitle .bold())
+                                .foregroundColor(Color("kPrimary"))
+                        }
+                        Spacer()
+                        List(orders, id: \.id) { order in
+                            NavigationLink(destination: OrderDetailsView(order: order)) {
+                                OrderListView(order: order, formattedDate: DateFormatter())
+                            }
+                        }
+                    }
                 }
             }
-        }
-        .navigationBarTitle("Orders")
-        .onAppear {
-            fetchOrders()
-        }
+            .onAppear {
+                fetchOrders()
+            } 
+      
     }
     
     func fetchOrders() {

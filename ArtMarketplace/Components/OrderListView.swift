@@ -12,22 +12,17 @@ struct OrderListView: View {
     var formattedDate: DateFormatter
        
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            
+        VStack(alignment: .leading, spacing: 1) {
             let formattedDate = DateFormatter.localizedString(from: order.date, dateStyle: .short, timeStyle: .none)
             Text("Total Price: \(String(format: "%.2f", order.totalPrice)) RON")
             Text("Type: \(order.type)")
             Text("Date: \(formattedDate)")
                 .bold()
                 .foregroundColor(.black)
-            ForEach(order.products, id: \.id) { product in
-                ProductListItemView(product: product)
-            }
         }
         .padding()
-        .background(Color.gray.opacity(0.1))
+        .background(LinearGradient(gradient: Gradient(colors: [Color("kPrimary").opacity(0.9), Color("kPrimary").opacity(0.2)]), startPoint: .top, endPoint: .bottom))
         .cornerRadius(10)
-        .padding(.horizontal)
         .padding(.vertical, 4)
     }
 }

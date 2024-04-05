@@ -54,11 +54,12 @@ struct ContentView: View {
                         .padding(.vertical)
                         .padding(.bottom, getSafeArea().bottom == 0 ? 5 : (getSafeArea().bottom - 15))
                         .background(Color("kSecondary"))
+                        
                     }
                     , alignment: .bottom
+                    
                 )
                 .ignoresSafeArea(.all, edges: .bottom)
-               // LoginView()
             } else {
                 LoginView()
             }

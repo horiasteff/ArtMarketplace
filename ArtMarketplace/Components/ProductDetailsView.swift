@@ -25,7 +25,6 @@ struct ProductDetailsView: View {
                                 .frame(width: .infinity, height: 300)
                                 .cornerRadius(12)
                         }
-                        
                     }
                                                 
                         VStack(alignment: .leading){
@@ -44,8 +43,6 @@ struct ProductDetailsView: View {
                                 
                             }
                             .padding(.vertical)
-                            
-                            Text(product.label)
                             
                             HStack {
                                 HStack(spacing: 10){
@@ -71,20 +68,6 @@ struct ProductDetailsView: View {
                             Text(product.description)
                             Spacer()
                             Spacer()
-                            Button{
-                                productManager.addToCart(product: product, documentID: product.id)
-                            } label:{
-                                HStack{
-                                    Spacer()
-                                    Text("Add to cart ")
-                                    Image(systemName: "plus.circle.fill")
-                                    Spacer()
-                                }
-                                .foregroundColor(Color("kPrimary"))
-                                .background(Color("kSecondary"))
-                                .cornerRadius(40)
-                                
-                            }
                             
                         }
                         .padding()
