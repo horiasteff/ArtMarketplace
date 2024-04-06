@@ -80,12 +80,14 @@ struct OrdersView: View {
                 
                 // Decode other properties of the order
                 let id = document.documentID
+                let name = data["name"] as? String ?? ""
                 let type = data["type"] as? String ?? ""
                 let dateTimestamp = data["date"] as? Timestamp ?? Timestamp()
                 let date = dateTimestamp.dateValue()
                 let totalPrice = data["totalPrice"] as? Double ?? 0.0
+                let address = data["address"] as? String ?? ""
                 
-                return Order(id: id, type: type, date: date, products: products, totalPrice: totalPrice)
+                return Order(id: id, name: name, type: type, date: date, address: address, products: products, totalPrice: totalPrice)
             }
         }
     }

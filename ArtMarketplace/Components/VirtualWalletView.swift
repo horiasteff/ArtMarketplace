@@ -237,12 +237,12 @@ class UserWalletManager: ObservableObject {
         }
     }
     
-    func processPayment(paymentType: String, totalAmount: Double, userWalletBalance: Double, products: [Product]) {
+    func processPayment(paymentType: String, totalAmount: Double, userWalletBalance: Double, products: [Product], address: String, name: String) {
         if paymentType == "Card" {
             if userWalletBalance >= totalAmount {
                 recordTransaction(type: "Order", amount: totalAmount)
                 withdrawWalletBalanceInFirestore(withAmount: totalAmount)
-                recordOrder(totalPrice: totalAmount, products: products)
+                recordOrder(totalPrice: totalAmount, products: products, address: address, name: name)
                 ProductManager().clearCart()
                 print("Payment successful!")
             } else {
@@ -253,7 +253,7 @@ class UserWalletManager: ObservableObject {
         }
     }
     
-    func recordOrder(totalPrice: Double, products: [Product]) {
+    func recordOrder(totalPrice: Double, products: [Product], address: String, name: String) {
         guard let currentUser = Auth.auth().currentUser else {
             print("User is not logged in")
             return
@@ -263,9 +263,11 @@ class UserWalletManager: ObservableObject {
         
         var orderData: [String: Any] = [
             "id": "",
+            "name" : name,
             "totalPrice": totalPrice,
             "date": Timestamp(date: Date()),
             "type": "Card",
+            "address": address,
             "products": products.map { product in
                 return [
                     "id": product.id,

@@ -22,12 +22,14 @@ struct OrderDetailsView: View {
                 
                 Text("Total Price: \(String(format: "%.2f", order.totalPrice)) RON")
                 Text("Type: \(order.type)")
+                Text("Address: \(order.address)")
+                Text("Name: \(order.name)")
                 
                 Text("Products:")
                     .font(.headline)
                     .padding(.top, 16)
                 
-                List(order.products, id: \.id) { product in
+                ForEach(order.products, id: \.id) { product in
                     HStack{
                         URLImage(product.image) { image in
                             image
@@ -35,16 +37,20 @@ struct OrderDetailsView: View {
                                 .frame(width: 50, height: 50)
                                 .cornerRadius(12)
                         }
+                        .padding()
                         VStack(alignment: .leading) {
                             Text("Name: \(product.name)")
                             Text("Price: \(product.price) RON")
                             Text("Quantity: \(product.quantity)")
                         }
+                        Spacer()
                     }
+                    
+                    .frame(width: 300, height: 90)
                     
                 }
                 .listStyle(PlainListStyle())
-                .background( LinearGradient(gradient: Gradient(colors: [Color("kPrimary").opacity(1), Color("kPrimary").opacity(0.2)]), startPoint: .top, endPoint: .bottom))
+                .background(LinearGradient(gradient: Gradient(colors: [Color("kSecondary").opacity(1), Color("kSecondary").opacity(0.2)]), startPoint: .top, endPoint: .bottom))
                 .cornerRadius(20)
                 
                 Spacer()

@@ -63,7 +63,7 @@ struct PaymentFormView: View {
                 
                 Button(action: {
                     let products = productManager.userCarts.values.flatMap { $0 }
-                    userWalletManager.processPayment(paymentType: paymentType, totalAmount: productManager.total, userWalletBalance: userWalletManager.walletBalance, products: products)
+                    userWalletManager.processPayment(paymentType: paymentType, totalAmount: productManager.total, userWalletBalance: userWalletManager.walletBalance, products: products, address: address, name: name)
                 }) {
                     Text("Proceed to Payment")
                         .foregroundColor(.white)
