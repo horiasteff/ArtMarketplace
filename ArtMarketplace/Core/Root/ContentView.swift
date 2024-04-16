@@ -29,7 +29,8 @@ struct ContentView: View {
                         .environmentObject(productManager)
                         .tag(Tab.Home)
                     
-                    ExhibitionView(userWalletManager: UserWalletManager())
+                   // ExhibitionView(userWalletManager: UserWalletManager())
+                    ExhibitionListView()
                         .environmentObject(viewModel)
                         .tag(Tab.Exhibition)
                     

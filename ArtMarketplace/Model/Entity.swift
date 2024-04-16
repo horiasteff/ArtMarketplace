@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Entity: Decodable {
+struct Entity: Decodable, Identifiable {
     var id: String
     var entityName: String
     var startDate: String

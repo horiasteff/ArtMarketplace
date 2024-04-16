@@ -15,6 +15,7 @@ class ProductManager: ObservableObject {
     @Published var productList =  [Product]()
     @Published var userCarts: [String: [Product]] = [:]
     @Published var total: Double = 0
+    @Published var entities = [Entity]()
     private let userWalletManager = UserWalletManager.shared
     
     init() {
@@ -57,6 +58,27 @@ class ProductManager: ObservableObject {
                 let entity = data["entity"] as? String ?? ""
                 
                 return Product(id: id, name: name, image: image, description: description, painter: painter, price: price, quantity: quantity, label: label, entity: entity)
+            }
+        }
+    }
+    
+    func fetchEntities() {
+        db.collection("entities").addSnapshotListener{(querySnapshot, error) in
+            guard let documents = querySnapshot?.documents else {
+                print("No documents")
+                return
+            }
+            
+            self.entities = documents.map{ (queryDocumentSnapshot) -> Entity in
+                let data = queryDocumentSnapshot.data()
+                
+                let id = queryDocumentSnapshot.documentID
+                let name = data["entityName"] as? String ?? ""
+                let startDate = data["startDate"] as? String ?? ""
+                let endDate = data["endDate"] as? String ?? ""
+
+                
+                return Entity(id: id, entityName: name, startDate: startDate, endDate: endDate)
             }
         }
     }

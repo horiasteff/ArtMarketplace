@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0111F7332BCE964A00359C59 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0111F7322BCE964A00359C59 /* Entity.swift */; };
+		0111F7352BCEED8400359C59 /* ExhibitionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0111F7342BCEED8400359C59 /* ExhibitionListView.swift */; };
 		013054AD2BB6C2ED00199EA3 /* OrdersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013054AC2BB6C2ED00199EA3 /* OrdersView.swift */; };
 		013054AF2BB6C67C00199EA3 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013054AE2BB6C67C00199EA3 /* Order.swift */; };
 		013054B12BBA047E00199EA3 /* OrderListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013054B02BBA047E00199EA3 /* OrderListView.swift */; };
@@ -82,6 +83,7 @@
 
 /* Begin PBXFileReference section */
 		0111F7322BCE964A00359C59 /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
+		0111F7342BCEED8400359C59 /* ExhibitionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExhibitionListView.swift; sourceTree = "<group>"; };
 		013054AC2BB6C2ED00199EA3 /* OrdersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersView.swift; sourceTree = "<group>"; };
 		013054AE2BB6C67C00199EA3 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		013054B02BBA047E00199EA3 /* OrderListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderListView.swift; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 				013054B42BBBF65600199EA3 /* SearchBarView.swift */,
 				A70534CE2BBF46CA00139EE6 /* PremiumExhibitionView.swift */,
 				013054B92BC0866900199EA3 /* OrderDetailsView.swift */,
+				0111F7342BCEED8400359C59 /* ExhibitionListView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -441,6 +444,7 @@
 				013054B12BBA047E00199EA3 /* OrderListView.swift in Sources */,
 				01FCD7A32B99CC7500AEAB76 /* ProductsView.swift in Sources */,
 				013054B32BBA04CB00199EA3 /* ProductListItemView.swift in Sources */,
+				0111F7352BCEED8400359C59 /* ExhibitionListView.swift in Sources */,
 				01FCD7B22BB1ABBB00AEAB76 /* Transaction.swift in Sources */,
 				A7E6A23C2B023C01002F54E2 /* RegistrationView.swift in Sources */,
 				A7F9F83B2B97AC20005F9EE3 /* Product.swift in Sources */,
