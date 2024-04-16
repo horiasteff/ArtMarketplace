@@ -45,19 +45,18 @@ struct ProductDetailsView: View {
                             .padding(.vertical)
                             
                             HStack {
-                                HStack(spacing: 10){
-                                    ForEach(0..<5){index in
-                                        Image(systemName: "star.fill")
-                                            .resizable()
-                                            .frame(width: 20, height: 20)
-                                            .foregroundColor(.yellow)
-                                    }
-                                    Text("(4.5)")
-                                        .foregroundColor(.gray)
+                                Spacer()
+                                
+                                Button{
+                                    productManager.addToCart(product: product, documentID: product.id)
+                                } label:{
+                                    Image(systemName: "plus.circle.fill")
+                                        .resizable()
+                                        .foregroundColor(Color("kPrimary"))
+                                        .frame(width: 25, height: 25)
+                                        //.padding(.trailing)
+                                    Text("Add to cart")
                                 }
-                                .padding(.vertical)
-                                Spacer()
-                                Spacer()
                             }
                             
                             Text("Description")

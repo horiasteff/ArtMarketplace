@@ -13,9 +13,11 @@ struct ExhibitionListView: View {
     var body: some View {
         
         NavigationView {
-          
             List(productManager.entities) { entity in
-                NavigationLink(destination: ExhibitionView(userWalletManager: UserWalletManager(), entityName: entity.entityName)) {
+                NavigationLink{
+                    ExhibitionView(userWalletManager: UserWalletManager(), entityName: entity.entityName)
+                        .navigationBarBackButtonHidden(true)
+                }label: {
                     VStack(alignment: .leading) {
                         HStack{
                             Spacer()
@@ -28,21 +30,23 @@ struct ExhibitionListView: View {
                     }
                 }
                 .disabled(entity.startDate.isDateInFuture(withFormat: "MMMM dd, yyyy 'at' hh:mm:ss a 'UTC'Z") || entity.endDate.isDateInPast(withFormat: "MMMM dd, yyyy 'at' hh:mm:ss a 'UTC'Z"))
+                
             }
             .onAppear {
                 productManager.fetchEntities()
             }
         }
+        
     }
 }
 
 extension String {
     func formattedDate() -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMMM dd, yyyy 'at' hh:mm:ss a 'UTC'Z" // Adjust the format based on your date string
+        dateFormatter.dateFormat = "MMMM dd, yyyy 'at' hh:mm:ss a 'UTC'Z"
         
         if let date = dateFormatter.date(from: self) {
-            dateFormatter.dateFormat = "MMM dd, yyyy" // Adjust the desired output format
+            dateFormatter.dateFormat = "MMM dd, yyyy"
             return dateFormatter.string(from: date)
         } else {
             return "Invalid Date"
@@ -53,7 +57,7 @@ extension String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
         guard let startDate = dateFormatter.date(from: self) else {
-            return false // Return false if date conversion fails
+            return false
         }
         return startDate > Date()
     }
@@ -62,7 +66,7 @@ extension String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
         guard let endDate = dateFormatter.date(from: self) else {
-            return false // Return false if date conversion fails
+            return false
         }
         return endDate < Date()
     }

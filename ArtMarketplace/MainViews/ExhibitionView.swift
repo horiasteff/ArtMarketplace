@@ -47,42 +47,67 @@ struct ExhibitionView: View {
 //                            }
         
 //                            if isPaid {
-                                VStack{
-//                                    NavigationLink(destination: PremiumExhibitionView()){
-//                                        Text("Visit premium exhibition")
-//                                            .font(.headline)
-//                                            .foregroundColor(.white)
-//                                            .padding()
-//                                            .background(Color.red)
-//                                            .cornerRadius(8)
-//                                    }
-        
-                                    Spacer()
-                                    Spacer()
+                        VStack{
+                            //                                    NavigationLink(destination: PremiumExhibitionView()){
+                            //                                        Text("Visit premium exhibition")
+                            //                                            .font(.headline)
+                            //                                            .foregroundColor(.white)
+                            //                                            .padding()
+                            //                                            .background(Color.red)
+                            //                                            .cornerRadius(8)
+                            //                                    }
+                            
+                            
+                            
+                            //Spacer()
+                            Spacer()
+                            Button {
+                            } label: {
+                                NavigationLink {
+                                    ExhibitionListView()
+                                        .navigationBarBackButtonHidden(true)
+                                        .navigationBarHidden(true)
+                                }label: {
+                                    HStack{
+                                        Image(systemName: "arrowshape.backward.fill")
+                                            .resizable()
+                                            .foregroundColor(Color("kSecondary"))
+                                            .frame(width: 30, height: 30)
+                                            .padding(15)
+                                        Spacer()
+                                    }
+                                }
+                                .transition(.move(edge: .leading))
+                            }
+                            Spacer()
+                            Spacer()
+                            Spacer()
         
                                     ScrollView(.horizontal, showsIndicators: false){
                                         HStack{
                                             ForEach(productManager.productList.filter {$0.entity == entityName}) { product in
+                                                NavigationLink(destination: ProductDetailsView(product: product)) {
                                                 VStack{
-                                                    URLImage(product.image) { image in
-                                                        image
-                                                            .resizable()
-                                                            .cornerRadius(15)
-                                                            .aspectRatio(contentMode: .fit)
-                                                            .shadow(radius: 10, y: 10)
-                                                            .scrollTransition(topLeading: .interactive,
-                                                                              bottomTrailing: .interactive,
-                                                                              axis: .horizontal){ effect, phase in
-                                                                effect
-                                                                    .scaleEffect(1 - abs(phase.value))
-                                                                    .opacity(1 - abs(phase.value))
-                                                                    .rotation3DEffect(.degrees(phase.value * 90), axis: (x: 0, y: -1, z: 0))
-                                                            }
+                                                        URLImage(product.image) { image in
+                                                            image
+                                                                .resizable()
+                                                                .cornerRadius(15)
+                                                                .aspectRatio(contentMode: .fit)
+                                                                .shadow(radius: 10, y: 10)
+                                                                .scrollTransition(topLeading: .interactive,
+                                                                                  bottomTrailing: .interactive,
+                                                                                  axis: .horizontal){ effect, phase in
+                                                                    effect
+                                                                        .scaleEffect(1 - abs(phase.value))
+                                                                        .opacity(1 - abs(phase.value))
+                                                                        .rotation3DEffect(.degrees(phase.value * 90), axis: (x: 0, y: -1, z: 0))
+                                                                }
+                                                        }
+                                                        .frame(width: 300, height: 300)
+                                                        Text(product.name)
+                                                            .font(.headline)
+                                                            .padding(.horizontal, 40)
                                                     }
-                                                    .frame(width: 300, height: 300)
-                                                    Text(product.name)
-                                                        .font(.headline)
-                                                        .padding(.horizontal, 40)
                                                 }
                                             }
                                         }
@@ -92,6 +117,7 @@ struct ExhibitionView: View {
                                     .safeAreaPadding(.horizontal, 52)
                                     .scrollClipDisabled()
                                     .scrollTargetBehavior(.viewAligned)
+                                    Spacer()
                                     Spacer()
                                     Spacer()
                                     Spacer()

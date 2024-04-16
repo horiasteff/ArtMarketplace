@@ -29,9 +29,9 @@ struct ContentView: View {
                         .environmentObject(productManager)
                         .tag(Tab.Home)
                     
-                   // ExhibitionView(userWalletManager: UserWalletManager())
                     ExhibitionListView()
-                        .environmentObject(viewModel)
+                        //.environmentObject(productManager)
+                        //.environmentObject(viewModel)
                         .tag(Tab.Exhibition)
                     
                     OrdersView()
