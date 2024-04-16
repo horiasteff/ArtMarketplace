@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0111F7332BCE964A00359C59 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0111F7322BCE964A00359C59 /* Entity.swift */; };
 		013054AD2BB6C2ED00199EA3 /* OrdersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013054AC2BB6C2ED00199EA3 /* OrdersView.swift */; };
 		013054AF2BB6C67C00199EA3 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013054AE2BB6C67C00199EA3 /* Order.swift */; };
 		013054B12BBA047E00199EA3 /* OrderListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013054B02BBA047E00199EA3 /* OrderListView.swift */; };
@@ -80,6 +81,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0111F7322BCE964A00359C59 /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
 		013054AC2BB6C2ED00199EA3 /* OrdersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersView.swift; sourceTree = "<group>"; };
 		013054AE2BB6C67C00199EA3 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		013054B02BBA047E00199EA3 /* OrderListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderListView.swift; sourceTree = "<group>"; };
@@ -281,6 +283,7 @@
 				A7F9F83A2B97AC20005F9EE3 /* Product.swift */,
 				01FCD7B12BB1ABBB00AEAB76 /* Transaction.swift */,
 				013054AE2BB6C67C00199EA3 /* Order.swift */,
+				0111F7322BCE964A00359C59 /* Entity.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -444,6 +447,7 @@
 				A7E6A2402B024651002F54E2 /* SettingsRowView.swift in Sources */,
 				013054AD2BB6C2ED00199EA3 /* OrdersView.swift in Sources */,
 				A75EC30A2B4B052100D6F0F4 /* AuthViewModel.swift in Sources */,
+				0111F7332BCE964A00359C59 /* Entity.swift in Sources */,
 				01FCD7992B98D99B00AEAB76 /* HomePageView.swift in Sources */,
 				01FCD7B62BB2CADB00AEAB76 /* PaymentFormView.swift in Sources */,
 				01FCD7A52BA07B1000AEAB76 /* ProductManager.swift in Sources */,
