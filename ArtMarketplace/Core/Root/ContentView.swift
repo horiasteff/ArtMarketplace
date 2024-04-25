@@ -29,7 +29,7 @@ struct ContentView: View {
                         .environmentObject(productManager)
                         .tag(Tab.Home)
                     
-                    ExhibitionListView()
+                    ExhibitionListView(viewModel: viewModel)
                         //.environmentObject(productManager)
                         //.environmentObject(viewModel)
                         .tag(Tab.Exhibition)

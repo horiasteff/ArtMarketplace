@@ -12,6 +12,7 @@ struct PaymentFormView: View {
     @State private var name = ""
     @State private var email = ""
     @State private var address = ""
+    @State private var phone = ""
     @State private var paymentType = "Cash" 
     let productManager: ProductManager
     @ObservedObject private var userWalletManager = UserWalletManager.shared
@@ -32,16 +33,17 @@ struct PaymentFormView: View {
                 TextField("Name", text: $name)
                 TextField("Email", text: $email)
                 TextField("Address", text: $address)
+                TextField("Phone", text: $phone)
             }
             
-            Section(header: Text("Payment Details")) {
-                Picker(selection: $paymentType, label: Text("Payment Type")) {
-                    Text("Cash").tag("Cash")
-                    Text("Card").tag("Card")
-                }
-                .pickerStyle(SegmentedPickerStyle())
-            }
-            
+//            Section(header: Text("Payment Details")) {
+//                Picker(selection: $paymentType, label: Text("Payment Type")) {
+//                    Text("Cash").tag("Cash")
+//                    Text("Card").tag("Card")
+//                }
+//                .pickerStyle(SegmentedPickerStyle())
+//            }
+//            
             Section(header: Text("Cart Items")) {
                 ForEach(productManager.userCarts.values.first ?? [], id: \.id) { product in
                     HStack{
@@ -63,7 +65,7 @@ struct PaymentFormView: View {
                 
                 Button(action: {
                     let products = productManager.userCarts.values.flatMap { $0 }
-                    userWalletManager.processPayment(paymentType: paymentType, totalAmount: productManager.total, userWalletBalance: userWalletManager.walletBalance, products: products, address: address, name: name)
+                    userWalletManager.processPayment(paymentType: paymentType, totalAmount: productManager.total, userWalletBalance: userWalletManager.walletBalance, products: products, address: address, name: name, phone: phone)
                 }) {
                     Text("Proceed to Payment")
                         .foregroundColor(.white)

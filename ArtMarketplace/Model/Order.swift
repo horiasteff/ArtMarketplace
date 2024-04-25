@@ -13,10 +13,11 @@ struct Order: Decodable {
     var type: String
     var date: Date
     var address: String
+    var phone: String
     var products: [Product]
     var totalPrice: Double
 }
 
 extension Order {
-    static var MOCK_ORDER = Order(id: NSUUID().uuidString, name: "Theodor Amann", type: "Card", date: Date(), address: "Adresa", products: [Product.MOCK_PRODUCT], totalPrice: 5000.0)
+    static var MOCK_ORDER = Order(id: NSUUID().uuidString, name: "Theodor Amann", type: "Card", date: Date(), address: "Adresa", phone: "+40722123123", products: [Product.MOCK_PRODUCT], totalPrice: 5000.0)
 }

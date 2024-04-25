@@ -237,23 +237,19 @@ class UserWalletManager: ObservableObject {
         }
     }
     
-    func processPayment(paymentType: String, totalAmount: Double, userWalletBalance: Double, products: [Product], address: String, name: String) {
-        if paymentType == "Card" {
+    func processPayment(paymentType: String, totalAmount: Double, userWalletBalance: Double, products: [Product], address: String, name: String, phone: String) {
             if userWalletBalance >= totalAmount {
                 recordTransaction(type: "Order", amount: totalAmount)
                 withdrawWalletBalanceInFirestore(withAmount: totalAmount)
-                recordOrder(totalPrice: totalAmount, products: products, address: address, name: name)
+                recordOrder(totalPrice: totalAmount, products: products, address: address, name: name, phone: phone)
                 ProductManager().clearCart()
                 print("Payment successful!")
             } else {
                 print("Insufficient balance.")
             }
-        } else {
-            print("Payment type: \(paymentType)")
-        }
     }
     
-    func recordOrder(totalPrice: Double, products: [Product], address: String, name: String) {
+    func recordOrder(totalPrice: Double, products: [Product], address: String, name: String, phone: String) {
         guard let currentUser = Auth.auth().currentUser else {
             print("User is not logged in")
             return
@@ -268,6 +264,7 @@ class UserWalletManager: ObservableObject {
             "date": Timestamp(date: Date()),
             "type": "Card",
             "address": address,
+            "phone": phone,
             "products": products.map { product in
                 return [
                     "id": product.id,

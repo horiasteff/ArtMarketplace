@@ -21,9 +21,9 @@ struct OrderDetailsView: View {
                     .padding(.bottom, 16)
                 
                 Text("Total Price: \(String(format: "%.2f", order.totalPrice)) RON")
-                Text("Type: \(order.type)")
                 Text("Address: \(order.address)")
                 Text("Name: \(order.name)")
+                Text("Phone: \(order.phone)")
                 
                 Text("Products:")
                     .font(.headline)

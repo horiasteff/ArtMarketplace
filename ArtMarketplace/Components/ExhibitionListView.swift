@@ -9,34 +9,50 @@ import SwiftUI
 
 struct ExhibitionListView: View {
     @ObservedObject private var productManager = ProductManager()
+    @StateObject private var userWalletManager = UserWalletManager.shared
+    @StateObject var viewModel: AuthViewModel
 
-    var body: some View {
+    var body: some View { 
         
-        NavigationView {
+        NavigationStack {
+            VStack(alignment: .leading) {
+                Text("Exhibition List")
+                    .font(.largeTitle .bold())
+                    .foregroundColor(Color("kPrimary"))
+            }
+            Spacer()
             List(productManager.entities) { entity in
                 NavigationLink{
-                    ExhibitionView(userWalletManager: UserWalletManager(), entityName: entity.entityName)
+                    ExhibitionView(isPaid: .constant(false), entityName: entity.entityName)
                         .navigationBarBackButtonHidden(true)
-                }label: {
+                } label: {
                     VStack(alignment: .leading) {
                         HStack{
                             Spacer()
                             Text("\(entity.entityName)").bold()
                             Spacer()
                         }
-
-                        Text("\(entity.startDate.formattedDate())")
-                        Text("\(entity.endDate.formattedDate())")
+                        HStack{
+                            Spacer()
+                            Text("\(entity.startDate.formattedDate())")
+                            Text(" - ")
+                            Text("\(entity.endDate.formattedDate())")
+                            Spacer()
+                        }
+                        
                     }
+                    .padding()
+                    .background(LinearGradient(gradient: Gradient(colors: [Color("kPrimary").opacity(0.9), Color("kPrimary").opacity(0.2)]), startPoint: .top, endPoint: .bottom))
+                    .cornerRadius(10)
+                    .padding(.vertical, 4)
                 }
                 .disabled(entity.startDate.isDateInFuture(withFormat: "MMMM dd, yyyy 'at' hh:mm:ss a 'UTC'Z") || entity.endDate.isDateInPast(withFormat: "MMMM dd, yyyy 'at' hh:mm:ss a 'UTC'Z"))
-                
             }
             .onAppear {
                 productManager.fetchEntities()
             }
         }
-        
+        .environmentObject(userWalletManager)
     }
 }
 
@@ -73,5 +89,5 @@ extension String {
 }
 
 #Preview {
-    ExhibitionListView()
+    ExhibitionListView(viewModel: AuthViewModel())
 }

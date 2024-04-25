@@ -15,7 +15,6 @@ struct OrdersView: View {
     private let db = Firestore.firestore()
     
     var body: some View {
-
             VStack {
                 if orders.isEmpty {
                     VStack(alignment: .leading) {
@@ -66,7 +65,6 @@ struct OrdersView: View {
             }
             
             self.orders = documents.compactMap { document in
-                // Decode the products array from Firestore
                 let data = document.data()
                 let productsData = data["products"] as? [[String: Any]] ?? []
                 let products = productsData.compactMap { productData -> Product? in
@@ -78,7 +76,6 @@ struct OrdersView: View {
                     }
                 }
                 
-                // Decode other properties of the order
                 let id = document.documentID
                 let name = data["name"] as? String ?? ""
                 let type = data["type"] as? String ?? ""
@@ -86,8 +83,9 @@ struct OrdersView: View {
                 let date = dateTimestamp.dateValue()
                 let totalPrice = data["totalPrice"] as? Double ?? 0.0
                 let address = data["address"] as? String ?? ""
+                let phone = data["phone"] as? String ?? ""
                 
-                return Order(id: id, name: name, type: type, date: date, address: address, products: products, totalPrice: totalPrice)
+                return Order(id: id, name: name, type: type, date: date, address: address, phone: phone, products: products, totalPrice: totalPrice)
             }
         }
     }
