@@ -25,6 +25,7 @@ struct ExhibitionListView: View {
                 NavigationLink{
                     ExhibitionView(isPaid: .constant(false), entityName: entity.entityName)
                         .navigationBarBackButtonHidden(true)
+                        .environmentObject(TicketManager())
                 } label: {
                     VStack(alignment: .leading) {
                         HStack{
