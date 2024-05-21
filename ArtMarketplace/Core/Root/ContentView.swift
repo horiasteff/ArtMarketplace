@@ -30,8 +30,6 @@ struct ContentView: View {
                         .tag(Tab.Home)
                     
                     ExhibitionListView(viewModel: viewModel)
-                        //.environmentObject(productManager)
-                        //.environmentObject(viewModel)
                         .tag(Tab.Exhibition)
                     
                     OrdersView()

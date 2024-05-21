@@ -16,6 +16,7 @@ class ProductManager: ObservableObject {
     @Published var userCarts: [String: [Product]] = [:]
     @Published var total: Double = 0
     @Published var entities = [Entity]()
+    @Published var tickets = [Ticket]()
     private let userWalletManager = UserWalletManager.shared
     
     init() {
@@ -76,11 +77,41 @@ class ProductManager: ObservableObject {
                 let name = data["entityName"] as? String ?? ""
                 let startDate = data["startDate"] as? String ?? ""
                 let endDate = data["endDate"] as? String ?? ""
-
                 
                 return Entity(id: id, entityName: name, startDate: startDate, endDate: endDate)
             }
         }
+    }
+    
+    func fetchTickets() {
+        guard let currentUser = Auth.auth().currentUser else {
+            print("User is not logged in")
+            return
+        }
+        
+        let db = Firestore.firestore()
+        let userTicketsRef = db.collection("users").document(currentUser.uid).collection("tickets")
+        
+        userTicketsRef.addSnapshotListener{(querySnapshot, error) in
+            guard let documents = querySnapshot?.documents else {
+                print("No documents")
+                return
+            }
+            
+            self.tickets = documents.map{ (queryDocumentSnapshot) -> Ticket in
+                let data = queryDocumentSnapshot.data()
+                
+                let id = queryDocumentSnapshot.documentID
+                let entityName = data["entityName"] as? String ?? ""
+                let price = data["price"] as? Double ?? 0.0
+                
+                return Ticket(id: id, entityName: entityName, price: price)
+            }
+        }
+    }
+    
+    func hasTicketForEntity(entityName: String) -> Bool {
+        return tickets.contains { $0.entityName == entityName }
     }
     
     func addToCart(product: Product, documentID: String) {

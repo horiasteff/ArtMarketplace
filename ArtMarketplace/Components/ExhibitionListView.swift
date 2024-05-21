@@ -23,7 +23,7 @@ struct ExhibitionListView: View {
             Spacer()
             List(productManager.entities) { entity in
                 NavigationLink{
-                    ExhibitionView(isPaid: .constant(false), entityName: entity.entityName)
+                    ExhibitionView( userWalletManager: userWalletManager, entityName: entity.entityName)
                         .navigationBarBackButtonHidden(true)
                         .environmentObject(TicketManager())
                 } label: {

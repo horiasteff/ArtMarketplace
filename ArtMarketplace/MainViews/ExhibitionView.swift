@@ -13,48 +13,24 @@ import FirebaseFirestore
 struct ExhibitionView: View {
     @ObservedObject private var productManager = ProductManager()
     @EnvironmentObject var ticketManager: TicketManager
-    @EnvironmentObject var userWalletManager: UserWalletManager
+    @ObservedObject var userWalletManager: UserWalletManager
     @EnvironmentObject var viewModel: AuthViewModel
     @Environment (\.dismiss) var dismiss
     @State private var showToast = false
-    //@StateObject private var isPaidManager = IsPaidManager()
-   // @State private var tickets: [Ticket] = []
-    @Binding var isPaid: Bool // Use a binding for isPaid
+    @State private var entity: Entity?
+    @State var exhibitions: [Entity] = []
+   // @Binding var isPaid: Bool // Use a binding for isPaid
     @State private var isTicketBought = false
     var exhibitionPrice = 20
     var entityName: String
     
-    
-    var hasValidTicket: Bool {
-        guard let userID = viewModel.currentUser?.id else {
-            return false
-        }
-        
-        let db = Firestore.firestore()
-        let userTicketsRef = db.collection("users").document(userID).collection("tickets")
-        
-        var isValid = false
-        
-        userTicketsRef.whereField("entityName", isEqualTo: entityName).getDocuments { snapshot, error in
-            if let error = error {
-                print("Error fetching tickets: \(error)")
-                return
-            }
-            
-            if let documents = snapshot?.documents, !documents.isEmpty {
-                isValid = true
-            }
-        }
-        
-        return isValid
-    }
     
     var body: some View {
         NavigationView{
             ZStack{
                 LinearGradient(gradient: Gradient(colors: [Color("kPrimary").opacity(1), Color("kPrimary").opacity(0.2)]), startPoint: .top, endPoint: .bottom).ignoresSafeArea()
                 
-                if isTicketBought {
+                if productManager.hasTicketForEntity(entityName: entityName) {
                     showExhibitionContent()
                 } else {
                     Button(action: {
@@ -87,35 +63,9 @@ struct ExhibitionView: View {
         )
         .onAppear{
             userWalletManager.fetchWalletBalance(for: viewModel.currentUser?.id ?? "")
-            ticketManager.fetchTickets(forUserID: viewModel.currentUser?.id ?? "")
-                            
-        }
-    }
-    
-    func hasValidTicket(completion: @escaping (Bool) -> Void) {
-        guard let userID = viewModel.currentUser?.id else {
-            // Handle the case where userID is nil
-            completion(false)
-            return
-        }
-
-        let db = Firestore.firestore()
-        let userTicketsRef = db.collection("users").document(userID).collection("tickets")
-
-        userTicketsRef.whereField("entityName", isEqualTo: entityName).getDocuments { snapshot, error in
-            if let error = error {
-                print("Error fetching tickets: \(error)")
-                completion(false)
-                return
-            }
-
-            if let documents = snapshot?.documents, !documents.isEmpty {
-                // User has a ticket for this exhibition
-                completion(true)
-            } else {
-                // User does not have a ticket for this exhibition
-                completion(false)
-            }
+            productManager.fetchEntities()
+            productManager.fetchTickets()
+            
         }
     }
     
@@ -151,9 +101,6 @@ struct ExhibitionView: View {
         
         documentRef.setData(ticketData, merge: true)
     }
-    
-
-    
     
     func showExhibitionContent() -> some View {
         VStack {
@@ -212,15 +159,10 @@ struct ExhibitionView: View {
             Spacer()
         }
     }
-    }
-        
-
-//class IsPaidManager: ObservableObject {
-//    @Published var isPaid: Bool = false
-//}
+}
 
 #Preview {
-    ExhibitionView(isPaid: .constant(false), entityName: Entity.MOCK_ENTITY.entityName)
+    ExhibitionView(userWalletManager: UserWalletManager(), entityName: Entity.MOCK_ENTITY.entityName)
         .environmentObject(AuthViewModel())
         .environmentObject(UserWalletManager())
         .environmentObject(TicketManager())
