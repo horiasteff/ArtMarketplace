@@ -25,7 +25,7 @@ struct ExhibitionView: View {
     var entityName: String
     
     var body: some View {
-        NavigationView{
+        NavigationStack{
             ZStack{
                 LinearGradient(gradient: Gradient(colors: [Color("kPrimary").opacity(1), Color("kPrimary").opacity(0.2)]), startPoint: .top, endPoint: .bottom).ignoresSafeArea()
                 
@@ -65,6 +65,7 @@ struct ExhibitionView: View {
                     }
                 }
             }
+            
         }
         .overlay(
             VStack {
@@ -93,6 +94,7 @@ struct ExhibitionView: View {
             }
         }
     }
+    
     
     func buyTicket() {
         guard let userID = viewModel.currentUser?.id else {
@@ -150,7 +152,9 @@ struct ExhibitionView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
                     ForEach(productManager.productList.filter { $0.entity == entityName }) { product in
-                        NavigationLink(destination: ProductDetailsView(product: product)) {
+                        NavigationLink{
+                            ProductDetailsView(product: product)
+                        }label: {
                             VStack {
                                 URLImage(product.image) { image in
                                     image

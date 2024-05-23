@@ -8,7 +8,6 @@
 import SwiftUI
 struct ImageSliderView: View {
     @State private var currentIndex = 0
- //   @ObservedObject private var productManager = ProductManager()
     var slides: [String] = ["picasso1","picasso2","picasso3"]
     
     var body: some View {
@@ -26,7 +25,8 @@ struct ImageSliderView: View {
                         .fill(self.currentIndex == index ? Color("kPrimary") : Color("kSecondary"))
                         .frame(width: 10, height: 10)
                 }
-            }.padding()
+            }
+            .padding()
         }
         .padding()
         .onAppear{
