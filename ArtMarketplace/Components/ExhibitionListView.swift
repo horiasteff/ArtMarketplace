@@ -25,7 +25,6 @@ struct ExhibitionListView: View {
                 NavigationLink{
                     ExhibitionView( userWalletManager: userWalletManager, entityName: entity.entityName)
                         .navigationBarBackButtonHidden(true)
-                        .environmentObject(TicketManager())
                 } label: {
                     VStack(alignment: .leading) {
                         HStack{
@@ -50,7 +49,7 @@ struct ExhibitionListView: View {
                 .disabled(entity.startDate.isDateInFuture(withFormat: "MMMM dd, yyyy 'at' hh:mm:ss a 'UTC'Z") || entity.endDate.isDateInPast(withFormat: "MMMM dd, yyyy 'at' hh:mm:ss a 'UTC'Z"))
             }
             .onAppear {
-                productManager.fetchEntities()
+                productManager.fetchEntities{}
             }
         }
         .environmentObject(userWalletManager)

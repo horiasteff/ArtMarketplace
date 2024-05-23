@@ -18,7 +18,6 @@ struct ArtMarketplaceApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(AuthViewModel())
-                .environmentObject(TicketManager())
         }
     }
 }

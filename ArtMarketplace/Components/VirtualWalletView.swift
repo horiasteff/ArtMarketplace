@@ -58,7 +58,6 @@ struct VirtualWalletView: View {
             }
             .onAppear {
                 userWalletManager.fetchWalletBalance(for: viewModel.currentUser?.id ?? "")
-              //  userWalletManager.fetchWalletBalance(for: String(User.MOCK_USER.wallet))
             }
                 ForEach(0..<5) { _ in
                        Spacer()
@@ -130,7 +129,6 @@ class UserWalletManager: ObservableObject {
         walletBalance += amount
         
         recordTransaction(type: "Money added", amount: amount)
-        
         updateWalletBalanceInFirestore(withAmount: amount)
     }
     
@@ -138,7 +136,6 @@ class UserWalletManager: ObservableObject {
         walletBalance -= amount
         
         recordTransaction(type: "Money withdrawed", amount: amount)
-        
         withdrawWalletBalanceInFirestore(withAmount: amount)
     }
     

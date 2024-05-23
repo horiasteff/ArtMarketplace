@@ -12,36 +12,56 @@ import FirebaseFirestore
 
 struct ExhibitionView: View {
     @ObservedObject private var productManager = ProductManager()
-    @EnvironmentObject var ticketManager: TicketManager
     @ObservedObject var userWalletManager: UserWalletManager
     @EnvironmentObject var viewModel: AuthViewModel
     @Environment (\.dismiss) var dismiss
     @State private var showToast = false
+    @State private var isLoading = true
+    @State private var isTicketBought = false
     @State private var entity: Entity?
     @State var exhibitions: [Entity] = []
-   // @Binding var isPaid: Bool // Use a binding for isPaid
-    @State private var isTicketBought = false
+    
     var exhibitionPrice = 20
     var entityName: String
-    
     
     var body: some View {
         NavigationView{
             ZStack{
                 LinearGradient(gradient: Gradient(colors: [Color("kPrimary").opacity(1), Color("kPrimary").opacity(0.2)]), startPoint: .top, endPoint: .bottom).ignoresSafeArea()
                 
-                if productManager.hasTicketForEntity(entityName: entityName) {
-                    showExhibitionContent()
+                if isLoading {
+                    ProgressView("Loading...")
                 } else {
-                    Button(action: {
-                        buyTicket()
-                    }) {
-                        Text("Buy Ticket")
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .padding()
-                            .background(Color.red)
-                            .cornerRadius(8)
+                    if isTicketBought {
+                        showExhibitionContent()
+                    } else {
+                        VStack{
+                            Button {
+                                dismiss()
+                            } label: {
+                                HStack{
+                                    Image(systemName: "arrowshape.backward.fill")
+                                        .resizable()
+                                        .foregroundColor(Color("kSecondary"))
+                                        .frame(width: 30, height: 30)
+                                        .padding(15)
+                                    Spacer()
+                                }
+                            }
+                            Spacer()
+                            
+                            Button(action: {
+                                buyTicket()
+                            }) {
+                                Text("Buy Ticket")
+                                    .font(.headline)
+                                    .foregroundColor(.white)
+                                    .padding()
+                                    .background(Color.red)
+                                    .cornerRadius(8)
+                            }
+                            Spacer()
+                        }
                     }
                 }
             }
@@ -63,9 +83,14 @@ struct ExhibitionView: View {
         )
         .onAppear{
             userWalletManager.fetchWalletBalance(for: viewModel.currentUser?.id ?? "")
-            productManager.fetchEntities()
-            productManager.fetchTickets()
             
+            productManager.fetchEntities {
+                productManager.fetchTickets {
+                    isTicketBought = productManager.hasTicketForEntity(entityName: entityName)
+                    entity = productManager.entities.first { $0.entityName == entityName }
+                    isLoading = false
+                }
+            }
         }
     }
     
@@ -82,7 +107,6 @@ struct ExhibitionView: View {
             "id": "",
             "entityName": entityName,
             "price": 20
-            // Add other ticket information as needed
         ]
         
         let documentRef = userTicketsRef.addDocument(data: ticketData) { error in
@@ -92,9 +116,11 @@ struct ExhibitionView: View {
                 return
             } else {
                 print("Ticket added successfully")
-                isTicketBought = true
             }
         }
+        
+        userWalletManager.withdrawWalletBalanceInFirestore(withAmount: 20)
+        userWalletManager.recordTransaction(type: "Ticket", amount: 20)
         
         let ticketID = documentRef.documentID
         ticketData["id"] = ticketID
@@ -164,6 +190,5 @@ struct ExhibitionView: View {
 #Preview {
     ExhibitionView(userWalletManager: UserWalletManager(), entityName: Entity.MOCK_ENTITY.entityName)
         .environmentObject(AuthViewModel())
-        .environmentObject(UserWalletManager())
-        .environmentObject(TicketManager())
+        .environmentObject(ProductManager())
 }

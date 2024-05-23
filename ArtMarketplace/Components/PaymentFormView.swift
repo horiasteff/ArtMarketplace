@@ -24,7 +24,6 @@ struct PaymentFormView: View {
         _name = State(initialValue: currentUser?.fullname ?? "")
         _email = State(initialValue: currentUser?.email ?? "")
         userWalletManager.fetchWalletBalance(for: viewModel.currentUser?.id ?? "")
-
     }
     
     var body: some View {
@@ -35,15 +34,7 @@ struct PaymentFormView: View {
                 TextField("Address", text: $address)
                 TextField("Phone", text: $phone)
             }
-            
-//            Section(header: Text("Payment Details")) {
-//                Picker(selection: $paymentType, label: Text("Payment Type")) {
-//                    Text("Cash").tag("Cash")
-//                    Text("Card").tag("Card")
-//                }
-//                .pickerStyle(SegmentedPickerStyle())
-//            }
-//            
+     
             Section(header: Text("Cart Items")) {
                 ForEach(productManager.userCarts.values.first ?? [], id: \.id) { product in
                     HStack{

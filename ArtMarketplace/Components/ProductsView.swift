@@ -46,7 +46,6 @@ struct ProductsView: View {
                 }
                 .padding()
             }
-            
         }
         .onAppear(){
             self.productManager.fetchData()

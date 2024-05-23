@@ -63,7 +63,7 @@ class ProductManager: ObservableObject {
         }
     }
     
-    func fetchEntities() {
+    func fetchEntities(completion: @escaping () -> Void) {
         db.collection("entities").addSnapshotListener{(querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
                 print("No documents")
@@ -80,10 +80,11 @@ class ProductManager: ObservableObject {
                 
                 return Entity(id: id, entityName: name, startDate: startDate, endDate: endDate)
             }
+            completion()
         }
     }
     
-    func fetchTickets() {
+    func fetchTickets(completion: @escaping () -> Void) {
         guard let currentUser = Auth.auth().currentUser else {
             print("User is not logged in")
             return
@@ -107,6 +108,7 @@ class ProductManager: ObservableObject {
                 
                 return Ticket(id: id, entityName: entityName, price: price)
             }
+            completion()
         }
     }
     

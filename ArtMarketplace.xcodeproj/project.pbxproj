@@ -16,7 +16,6 @@
 		013054B52BBBF65600199EA3 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013054B42BBBF65600199EA3 /* SearchBarView.swift */; };
 		013054B82BBC22DF00199EA3 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 013054B72BBC22DF00199EA3 /* Kingfisher */; };
 		013054BA2BC0866900199EA3 /* OrderDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013054B92BC0866900199EA3 /* OrderDetailsView.swift */; };
-		018F69F52BDF87070086890B /* TicketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018F69F42BDF87070086890B /* TicketManager.swift */; };
 		018F69F72BDF87330086890B /* Ticket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018F69F62BDF87330086890B /* Ticket.swift */; };
 		01FCD7902B98C50200AEAB76 /* ProductCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FCD78F2B98C50200AEAB76 /* ProductCardView.swift */; };
 		01FCD7922B98C51D00AEAB76 /* ExhibitionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FCD7912B98C51D00AEAB76 /* ExhibitionView.swift */; };
@@ -92,7 +91,6 @@
 		013054B22BBA04CB00199EA3 /* ProductListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListItemView.swift; sourceTree = "<group>"; };
 		013054B42BBBF65600199EA3 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		013054B92BC0866900199EA3 /* OrderDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailsView.swift; sourceTree = "<group>"; };
-		018F69F42BDF87070086890B /* TicketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketManager.swift; sourceTree = "<group>"; };
 		018F69F62BDF87330086890B /* Ticket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ticket.swift; sourceTree = "<group>"; };
 		01FCD78F2B98C50200AEAB76 /* ProductCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCardView.swift; sourceTree = "<group>"; };
 		01FCD7912B98C51D00AEAB76 /* ExhibitionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExhibitionView.swift; sourceTree = "<group>"; };
@@ -270,7 +268,6 @@
 				A70534CE2BBF46CA00139EE6 /* PremiumExhibitionView.swift */,
 				013054B92BC0866900199EA3 /* OrderDetailsView.swift */,
 				0111F7342BCEED8400359C59 /* ExhibitionListView.swift */,
-				018F69F42BDF87070086890B /* TicketManager.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -462,7 +459,6 @@
 				01FCD7992B98D99B00AEAB76 /* HomePageView.swift in Sources */,
 				01FCD7B62BB2CADB00AEAB76 /* PaymentFormView.swift in Sources */,
 				01FCD7A52BA07B1000AEAB76 /* ProductManager.swift in Sources */,
-				018F69F52BDF87070086890B /* TicketManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

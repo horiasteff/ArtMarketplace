@@ -30,8 +30,8 @@
             filePath = "ArtMarketplace/Components/VirtualWalletView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
             landmarkName = "UserWalletManager"
             landmarkType = "3">
             <Locations>
@@ -108,8 +108,8 @@
             filePath = "ArtMarketplace/Components/VirtualWalletView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -171,8 +171,8 @@
             filePath = "ArtMarketplace/Components/VirtualWalletView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -187,8 +187,8 @@
             filePath = "ArtMarketplace/Components/PaymentFormView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -452,8 +452,8 @@
             filePath = "ArtMarketplace/Components/VirtualWalletView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "247"
-            endingLineNumber = "247"
+            startingLineNumber = "244"
+            endingLineNumber = "244"
             landmarkName = "processPayment(paymentType:totalAmount:userWalletBalance:products:address:name:phone:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -525,54 +525,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "2D817C28-4CB7-478D-84FE-9AD06BDFB8F8"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ArtMarketplace/MainViews/ExhibitionView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "body"
-            landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "2D817C28-4CB7-478D-84FE-9AD06BDFB8F8 - 8997a51262ce098"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #3 () -&gt; () in ArtMarketplace.ExhibitionView.body.getter : some"
-                  moduleName = "ArtMarketplace"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/hmuntean/Personal/ArtMarketplace/ArtMarketplace/MainViews/ExhibitionView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "92"
-                  endingLineNumber = "92"
-                  offsetFromSymbolStart = "540">
-               </Location>
-               <Location
-                  uuid = "2D817C28-4CB7-478D-84FE-9AD06BDFB8F8 - 8997a51262ce0b9"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #3 () -&gt; () in ArtMarketplace.ExhibitionView.body.getter : some"
-                  moduleName = "ArtMarketplace"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/hmuntean/Personal/ArtMarketplace/ArtMarketplace/MainViews/ExhibitionView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "91"
-                  endingLineNumber = "91"
-                  offsetFromSymbolStart = "572">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "D80F3E26-098D-43DC-982E-F840E4497692"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -580,58 +532,10 @@
             filePath = "ArtMarketplace/MainViews/ExhibitionView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
             landmarkName = "body"
             landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "EC28CD3E-D65D-4B16-AACE-6041A7077049"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ArtMarketplace/MainViews/ExhibitionView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
-            landmarkName = "body"
-            landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "EC28CD3E-D65D-4B16-AACE-6041A7077049 - 8997a51262ce266"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #3 () -&gt; () in ArtMarketplace.ExhibitionView.body.getter : some"
-                  moduleName = "ArtMarketplace"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/hmuntean/Personal/ArtMarketplace/ArtMarketplace/MainViews/ExhibitionView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "70"
-                  endingLineNumber = "70"
-                  offsetFromSymbolStart = "1176">
-               </Location>
-               <Location
-                  uuid = "EC28CD3E-D65D-4B16-AACE-6041A7077049 - 8997a51262c9d87"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #3 () -&gt; () in ArtMarketplace.ExhibitionView.body.getter : some"
-                  moduleName = "ArtMarketplace"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/hmuntean/Personal/ArtMarketplace/ArtMarketplace/MainViews/ExhibitionView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "69"
-                  endingLineNumber = "69"
-                  offsetFromSymbolStart = "1176">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

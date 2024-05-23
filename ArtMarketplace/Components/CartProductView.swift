@@ -39,7 +39,6 @@ struct CartProductView: View {
                         .resizable()
                         .foregroundColor(.red)
                         .frame(width: 25, height: 25)
-                       
                 }
                 
                 HStack{
