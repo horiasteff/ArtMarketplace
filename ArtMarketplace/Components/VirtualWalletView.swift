@@ -14,20 +14,20 @@ struct VirtualWalletView: View {
     @ObservedObject var userWalletManager: UserWalletManager
     @State private var isShowingAddMoneyForm = false
     @State private var isShowingWithdrawMoneyForm = false
-
+    
     var body: some View {
         VStack {
             VStack {
                 Spacer()
-                VStack{
-                Text("Wallet Balance")
+                VStack {
+                    Text("Wallet Balance")
                         .font(.title .bold())
                         .foregroundColor(.white)
                         .padding()
                         .cornerRadius(10)
                         .frame(maxWidth: .infinity)
                     
-                Text("\(String(format: "%.2f", userWalletManager.walletBalance)) RON")
+                    Text("\(String(format: "%.2f", userWalletManager.walletBalance)) RON")
                         .font(.title .bold())
                         .foregroundColor(.white)
                         .padding()
@@ -55,19 +55,20 @@ struct VirtualWalletView: View {
                         
                     }
                     .offset(y: +45)
-            }
-            .onAppear {
-                userWalletManager.fetchWalletBalance(for: viewModel.currentUser?.id ?? "")
-            }
+                }
+                .onAppear {
+                    userWalletManager.fetchWalletBalance(for: viewModel.currentUser?.id ?? "")
+                }
                 ForEach(0..<5) { _ in
-                       Spacer()
-                   }
+                    Spacer()
+                }
             }
-            .background(LinearGradient(gradient: Gradient(colors: [Color("kPrimary").opacity(1), Color("kPrimary").opacity(0.2)]), startPoint: .top, endPoint: .bottom).ignoresSafeArea())
-
+            .background(LinearGradient(gradient: Gradient(colors: [Color("kPrimary").opacity(1),
+                                                                   Color("kPrimary").opacity(0.2)]), startPoint: .top, endPoint: .bottom).ignoresSafeArea())
+            
             VStack {
                 Spacer()
-                HStack{
+                HStack {
                     Spacer()
                     Text("Transactions")
                         .bold()
@@ -78,14 +79,14 @@ struct VirtualWalletView: View {
                 
                 ScrollView(.vertical) {
                     ForEach(userWalletManager.transactions, id: \.id) { transaction in
-                            TransactionView(transaction: transaction, formattedDate: DateFormatter())
-                                .padding(.horizontal)
-                        }
+                        TransactionView(transaction: transaction, formattedDate: DateFormatter())
+                            .padding(.horizontal)
+                    }
                 }
                 .onAppear {
                     userWalletManager.fetchTransactions()
                 }
-            
+                
                 Spacer()
             }
             .background(Color("kSecondary"))
@@ -93,9 +94,8 @@ struct VirtualWalletView: View {
             .offset(y: -70)
         }
         .background(Color("kSecondary"))
-        }
-
     }
+}
 
 #Preview {
     VirtualWalletView(userWalletManager: UserWalletManager())
@@ -139,32 +139,32 @@ class UserWalletManager: ObservableObject {
         withdrawWalletBalanceInFirestore(withAmount: amount)
     }
     
-     func recordTransaction(type: String, amount: Double) {
+    func recordTransaction(type: String, amount: Double) {
         
         guard let currentUser = Auth.auth().currentUser else {
             print("User is not logged in")
             return
         }
-         let transactionCollectionRef = db.collection("users").document(currentUser.uid).collection("transactions")
+        let transactionCollectionRef = db.collection("users").document(currentUser.uid).collection("transactions")
         
-         var transactionData: [String: Any] = [
+        var transactionData: [String: Any] = [
             "id": "",
             "type": type,
             "amount": amount,
             "date": Date()
         ]
         
-         let documentRef = transactionCollectionRef.addDocument(data: transactionData) { error in
+        let documentRef = transactionCollectionRef.addDocument(data: transactionData) { error in
             if let error = error {
                 print("Error adding transaction: \(error.localizedDescription)")
             } else {
                 print("Transaction added successfully")
             }
         }
-         let transactionID = documentRef.documentID
-         transactionData["id"] = transactionID
-         
-         documentRef.setData(transactionData, merge: true)
+        let transactionID = documentRef.documentID
+        transactionData["id"] = transactionID
+        
+        documentRef.setData(transactionData, merge: true)
     }
     
     func updateWalletBalanceInFirestore(withAmount: Double) {
