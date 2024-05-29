@@ -16,13 +16,11 @@ struct LoginView: View {
     var body: some View {
             NavigationStack{
                 VStack{
-                    //image
                     Image("art-logo")
                         .resizable()
                         .scaledToFill()
                         .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: 120)
                         .padding(.vertical, 32)
-                    //form fields
                     VStack(spacing: 24){
                         InputView(text: $email,
                                   title: "Email Address",
@@ -36,9 +34,7 @@ struct LoginView: View {
                     }
                     .padding(.horizontal)
                     .padding(.top, 12)
-                    
-                    //sign in button
-                    
+                                        
                     Button{
                         Task{
                             try await viewModel.singIn(withEmail: email, password: password)
@@ -68,9 +64,7 @@ struct LoginView: View {
                     .padding(.top, 24)
                     
                     Spacer()
-                    
-                    //sign up button
-                    
+                                        
                     NavigationLink{
                         RegistrationView()
                             .navigationBarBackButtonHidden(true)
@@ -102,7 +96,7 @@ struct LoginView: View {
                     showToast = newValue
                 }
                 .onChange(of: viewModel.toastMessage) { newValue in
-                    // Optionally handle the toast message content
+                    
                 }
             }
     }

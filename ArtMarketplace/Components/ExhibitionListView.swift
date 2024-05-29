@@ -21,30 +21,60 @@ struct ExhibitionListView: View {
                     .foregroundColor(Color("kPrimary"))
             }
             Spacer()
-            List(productManager.entities) { entity in
+            List(sortedEntities) { entity in
                 NavigationLink{
                     ExhibitionView( userWalletManager: userWalletManager, entityName: entity.entityName)
                         .navigationBarBackButtonHidden(true)
                 } label: {
-                    VStack(alignment: .leading) {
-                        HStack{
-                            Spacer()
-                            Text("\(entity.entityName)").bold()
-                            Spacer()
+                    ZStack{
+                        VStack(alignment: .leading) {
+                            HStack{
+                                Spacer()
+                                Text("\(entity.entityName)").bold()
+                                Spacer()
+                            }
+                            HStack{
+                                Spacer()
+                                Text("\(entity.startDate.formattedDate())")
+                                Text(" - ")
+                                Text("\(entity.endDate.formattedDate())")
+                                Spacer()
+                            }
+                            
                         }
-                        HStack{
-                            Spacer()
-                            Text("\(entity.startDate.formattedDate())")
-                            Text(" - ")
-                            Text("\(entity.endDate.formattedDate())")
-                            Spacer()
+                        .padding()
+                        .background(LinearGradient(gradient: Gradient(colors: [Color("kPrimary").opacity(0.9), Color("kPrimary").opacity(0.2)]), startPoint: .top, endPoint: .bottom))
+                        .cornerRadius(10)
+                        .padding(.vertical, 4)
+                        if entity.startDate.isDateInFuture(withFormat: "MMMM dd, yyyy 'at' hh:mm:ss a 'UTC'Z") {
+                            Color.black
+                                .cornerRadius(10)
+                                .padding(.vertical, 10)
+                            
+                            Text("Coming soon")
+                                .font(.title2)
+                                .bold()
+                                .foregroundColor(.yellow)
+                                .padding(8)
+                                .background(Color.black)
+                                .cornerRadius(10)
+                                .padding(.vertical, 4)
                         }
                         
+                        if entity.endDate.isDateInPast(withFormat: "MMMM dd, yyyy 'at' hh:mm:ss a 'UTC'Z") {
+                            Color.black
+                                .cornerRadius(10)
+                                .padding(.vertical, 10)
+                            Text("Expired")
+                                .font(.title2)
+                                .foregroundColor(.red)
+                                .bold()
+                                .padding(8)
+                                .background(Color.black)
+                                .cornerRadius(10)
+                                .padding(.vertical, 4)
+                        }
                     }
-                    .padding()
-                    .background(LinearGradient(gradient: Gradient(colors: [Color("kPrimary").opacity(0.9), Color("kPrimary").opacity(0.2)]), startPoint: .top, endPoint: .bottom))
-                    .cornerRadius(10)
-                    .padding(.vertical, 4)
                 }
                 .disabled(entity.startDate.isDateInFuture(withFormat: "MMMM dd, yyyy 'at' hh:mm:ss a 'UTC'Z") || entity.endDate.isDateInPast(withFormat: "MMMM dd, yyyy 'at' hh:mm:ss a 'UTC'Z"))
             }
@@ -53,6 +83,22 @@ struct ExhibitionListView: View {
             }
         }
         .environmentObject(userWalletManager)
+    }
+    
+    private var sortedEntities: [Entity] {
+        productManager.entities.sorted {
+            if $0.startDate.isDateInFuture(withFormat: "MMMM dd, yyyy 'at' hh:mm:ss a 'UTC'Z") && !$1.startDate.isDateInFuture(withFormat: "MMMM dd, yyyy 'at' hh:mm:ss a 'UTC'Z") {
+                return false
+            } else if !$0.startDate.isDateInFuture(withFormat: "MMMM dd, yyyy 'at' hh:mm:ss a 'UTC'Z") && $1.startDate.isDateInFuture(withFormat: "MMMM dd, yyyy 'at' hh:mm:ss a 'UTC'Z") {
+                return true
+            } else if $0.endDate.isDateInPast(withFormat: "MMMM dd, yyyy 'at' hh:mm:ss a 'UTC'Z") && !$1.endDate.isDateInPast(withFormat: "MMMM dd, yyyy 'at' hh:mm:ss a 'UTC'Z") {
+                return false
+            } else if !$0.endDate.isDateInPast(withFormat: "MMMM dd, yyyy 'at' hh:mm:ss a 'UTC'Z") && $1.endDate.isDateInPast(withFormat: "MMMM dd, yyyy 'at' hh:mm:ss a 'UTC'Z") {
+                return true
+            } else {
+                return $0.startDate < $1.startDate
+            }
+        }
     }
 }
 

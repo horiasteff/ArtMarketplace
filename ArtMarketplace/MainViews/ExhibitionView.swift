@@ -131,67 +131,6 @@ struct ExhibitionView: View {
         documentRef.setData(ticketData, merge: true)
     }
     
-//    func showExhibitionContent2() -> some View {
-//        VStack {
-//            Spacer()
-//            Button {
-//                dismiss()
-//            } label: {
-//                HStack{
-//                    Image(systemName: "arrowshape.backward.fill")
-//                        .resizable()
-//                        .foregroundColor(Color("kSecondary"))
-//                        .frame(width: 30, height: 30)
-//                        .padding(15)
-//                    Spacer()
-//                }
-//            }
-//            Spacer()
-//            Spacer()
-//            Spacer()
-//            
-//            ScrollView(.horizontal, showsIndicators: false) {
-//                HStack {
-//                    ForEach(productManager.productList.filter { $0.entity == entityName }) { product in
-//                        NavigationLink{
-//                            ProductDetailsView(product: product)
-//                        }label: {
-//                            VStack {
-//                                URLImage(product.image) { image in
-//                                    image
-//                                        .resizable()
-//                                        .cornerRadius(15)
-//                                        .aspectRatio(contentMode: .fit)
-//                                        .shadow(radius: 10, y: 10)
-//                                        .scrollTransition(topLeading: .interactive, bottomTrailing: .interactive, axis: .horizontal) { effect, phase in
-//                                            effect
-//                                                .scaleEffect(1 - abs(phase.value))
-//                                                .opacity(1 - abs(phase.value))
-//                                                .rotation3DEffect(.degrees(phase.value * 90), axis: (x: 0, y: -1, z: 0))
-//                                        }
-//                                }
-//                                .frame(width: 300, height: 300)
-//                                Text(product.name)
-//                                    .font(.headline)
-//                                    .padding(.horizontal, 40)
-//                            }
-//                        }
-//                    }
-//                }
-//                .scrollTargetLayout()
-//            }
-//            .frame(height: 200)
-//            .safeAreaPadding(.horizontal, 52)
-//            .scrollClipDisabled()
-//            .scrollTargetBehavior(.viewAligned)
-//            Spacer()
-//            Spacer()
-//            Spacer()
-//            Spacer()
-//        }
-//    }
-    
-    
     func showExhibitionContent() -> some View {
         VStack {
             Spacer()

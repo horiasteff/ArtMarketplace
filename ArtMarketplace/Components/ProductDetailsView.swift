@@ -63,9 +63,14 @@ struct ProductDetailsView: View {
                         Text("Description")
                             .font(.title2)
                             .fontWeight(.medium)
+                        
                         Spacer()
                         
                         Text(product.description)
+                            .multilineTextAlignment(.leading)
+                            .lineLimit(nil)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .truncationMode(.tail)
                         Spacer()
                         Spacer()
                         
