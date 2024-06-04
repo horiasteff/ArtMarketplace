@@ -9,7 +9,6 @@ import SwiftUI
 import URLImage
 import FirebaseFirestore
 
-
 struct ExhibitionView: View {
     @ObservedObject private var productManager = ProductManager()
     @ObservedObject var userWalletManager: UserWalletManager
@@ -190,11 +189,11 @@ struct ExhibitionView: View {
                                     .padding(.horizontal, 40)
                             }
                         }
-                    }
+                    }               
                 }
                 .scrollTargetLayout()
             }
-            .frame(height: 400) 
+            .frame(height: 400)
             .safeAreaPadding(.horizontal, 52)
             .scrollClipDisabled()
             .scrollTargetBehavior(.viewAligned)
