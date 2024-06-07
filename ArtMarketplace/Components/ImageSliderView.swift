@@ -8,7 +8,7 @@
 import SwiftUI
 struct ImageSliderView: View {
     @State private var currentIndex = 0
-    var slides: [String] = ["picasso1","picasso2","picasso3"]
+    var slides: [String] = ["art1", "art2", "art3"]
     
     var body: some View {
         ZStack(alignment: .bottomLeading){
